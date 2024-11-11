@@ -9,7 +9,7 @@ import static java.lang.String.format;
 
 
 public class FeedbackImpl extends TaskBase implements Feedback {
-    public static final String RATING_ERR = "%d is an invalid number! Rating must be a positive number!";
+    private static final String RATING_ERR = "%d is an invalid number! Rating must be a positive number!";
 
     private int rating;
     private FeedbackStatus feedbackStatus;
@@ -21,7 +21,7 @@ public class FeedbackImpl extends TaskBase implements Feedback {
         this.feedbackStatus = FeedbackStatus.NEW;
     }
 
-    public void setRating(int rating) {
+    private void setRating(int rating) {
         validatePositive(rating, (format(RATING_ERR, rating)));
         this.rating = rating;
     }
