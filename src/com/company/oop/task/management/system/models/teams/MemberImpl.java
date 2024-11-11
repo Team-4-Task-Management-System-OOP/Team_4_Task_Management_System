@@ -1,4 +1,3 @@
-
 package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
@@ -13,13 +12,12 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public class MemberImpl implements Member {
-
     private static final int MEMBER_NAME_MIN_LENGTH = 5;
     private static final int MEMBER_NAME_MAX_LENGTH = 15;
 
     private static final String NAME_ERR = "%s is an invalid member name! " +
             "Name must be a between %d and %d characters!";
-    // Fields
+
     private String name;
     private final List<Task> tasks;
     private final List<String> activityHistory;
@@ -43,12 +41,12 @@ public class MemberImpl implements Member {
 
         @Override
         public List<Task> getTasks () {
-            return tasks;
+            return new ArrayList<>(tasks);
         }
 
         @Override
         public List<String> getActivityHistory () {
-            return activityHistory;
+            return new ArrayList<>(activityHistory);
         }
 
         @Override

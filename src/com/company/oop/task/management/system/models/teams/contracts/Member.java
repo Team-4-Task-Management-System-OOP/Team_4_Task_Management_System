@@ -1,9 +1,14 @@
 package com.company.oop.task.management.system.models.teams.contracts;
+
 import java.util.List;
+
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
-public interface Member {
-    String getName();
+import com.company.oop.task.management.system.models.tasks.contracts.Task;
+
+import java.util.List;
+
+public interface Member extends Nameble {
 
     List<Task> getTasks();
 
@@ -12,4 +17,5 @@ public interface Member {
     void addTask(Task task);
 
     void addActivity(String activity);
+
 }
