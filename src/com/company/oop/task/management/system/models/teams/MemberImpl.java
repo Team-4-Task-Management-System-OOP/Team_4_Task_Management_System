@@ -14,28 +14,20 @@ import static java.lang.String.format;
 
 public class MemberImpl implements Member {
 
-    // Constants
-    private static final String MEMBER_NAME_LENGTH_ERR = format(
-            "Member must be between %d and %d!",
-            NAME_MIN_LENGTH,
-            NAME_MAX_LENGTH);
+    private static final int MEMBER_NAME_MIN_LENGTH = 5;
+    private static final int MEMBER_NAME_MAX_LENGTH = 15;
 
+    private static final String NAME_ERR = "%s is an invalid member name! " +
+            "Name must be a between %d and %d characters!";
     // Fields
     private String name;
-    private List<Task> tasks;
-    private List<String> activityHistory;
+    private final List<Task> tasks;
+    private final List<String> activityHistory;
 
     public MemberImpl(String name) {
         setName(name);
-        this.name = name;
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
-    }
-
-    private void setName(String name) {
-        validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, MEMBER_NAME_LENGTH_ERR);
-        // TODO - Consider checking for unique name in the CommandFactory (eventually)
-        this.name = name;
     }
 
     @Override
@@ -43,24 +35,31 @@ public class MemberImpl implements Member {
         return name;
     }
 
-    @Override
-    public List<Task> getTasks() {
-        return tasks;
-    }
+    public void setName(String name) {
+        validateStringLength(name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH,
+                format(NAME_ERR, name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH));
+        // TODO - Consider checking for unique name in the CommandFactory (eventually)
+        this.name = name;
 
-    @Override
-    public List<String> getActivityHistory() {
-        return activityHistory;
-    }
+        @Override
+        public List<Task> getTasks () {
+            return tasks;
+        }
 
-    @Override
-    public void addTask(Task task) {
-        tasks.add(task);
-        addActivity("The following task has been assigned: " + task.getTitle());
-    }
+        @Override
+        public List<String> getActivityHistory () {
+            return activityHistory;
+        }
 
-    @Override
-    public void addActivity(String activity) {
-        activityHistory.add(activity);
+        @Override
+        public void addTask (Task task){
+            tasks.add(task);
+            addActivity("The following task has been assigned: " + task.getTitle());
+        }
+
+        @Override
+        public void addActivity (String activity){
+            activityHistory.add(activity);
+        }
     }
 }

@@ -20,4 +20,6 @@ public interface Task extends Commentable, Identifable {
 
     void addComment(Comment comment);
 
+    //void removeComment(Comment comment);
+
 }
