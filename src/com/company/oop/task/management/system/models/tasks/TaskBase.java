@@ -34,7 +34,7 @@ public abstract class TaskBase implements Task {
     private static final String NO_COMMENTS_TO_REMOVE = "No comments available to remove.";
     private static final String NULL_COMMENT = "Cannot remove a null comment.";
 
-    //ToDo dali e final, moje da e static - V agency workshop ne e static, moje i taka da stane spored men - ivan
+    //ToDo repositoryto shte se griji za id-to zatova go ostavqme da ne e static
     private final int id;
     private String title;
     private String description;
