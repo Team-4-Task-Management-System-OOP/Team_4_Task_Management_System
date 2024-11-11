@@ -10,6 +10,10 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
+    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add a null comment.";
+    public static final String NO_SUCH_COMMENT = "Comment not found.";
+    public static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add a null history.";
+
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
     public static final int DESCRIPTION_MIN_LENGTH = 10;
@@ -75,13 +79,30 @@ public abstract class TaskBase implements Task {
 
     @Override
     public void addComment(Comment comment) {
-        comments.add(comment);
-        historyLogger(String.format("A comment was added to item with ID: %d.", getId()));
+        if (comment != null) {
+            comments.add(comment);
+            historyLogger(String.format("A comment was added to item with ID: %d.", getId()));
+        } else {
+            throw new IllegalArgumentException(CANNOT_ADD_A_NULL_COMMENT);
+        }
+
+    }
+
+    public void removeComment(Comment comment) {
+        if (comments.contains(comment)) {
+            this.comments.remove(comment);
+        } else {
+            throw new IllegalArgumentException(NO_SUCH_COMMENT);
+        }
     }
 
     @Override
     public void historyLogger (String log){
-        history.add(log);
+        if (log != null) {
+            history.add(log);
+        } else {
+            throw new IllegalArgumentException(CANNOT_ADD_A_NULL_HISTORY);
+        }
     }
 
     @Override
