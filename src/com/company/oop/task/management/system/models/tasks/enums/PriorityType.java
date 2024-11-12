@@ -1,6 +1,6 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
-public enum Priority {
+public enum PriorityType {
     HIGH, MEDIUM, LOW;
 
     @Override
