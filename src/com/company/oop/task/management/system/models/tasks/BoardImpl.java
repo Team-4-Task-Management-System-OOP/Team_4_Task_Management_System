@@ -25,14 +25,17 @@ public class BoardImpl implements Board {
         this.activityHistory = new ArrayList<>();
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public List<String> getTasks() {
         return tasks;
     }
 
+    @Override
     public List<String> getActivityHistory() {
         return activityHistory;
     }
@@ -42,6 +45,7 @@ public class BoardImpl implements Board {
         this.name = name;
     }
 
+    @Override
     public void addTask(String task) {
         if (task != null){
             tasks.add(task);

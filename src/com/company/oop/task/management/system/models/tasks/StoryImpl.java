@@ -21,10 +21,12 @@ public class StoryImpl extends TaskBase implements Story {
         this.assignee = assignee;
     }
 
+    @Override
     public Priority getPriority() {
         return priority;
     }
 
+    @Override
     public StorySize getSize() {
         return size;
     }
@@ -34,6 +36,7 @@ public class StoryImpl extends TaskBase implements Story {
         return status;
     }
 
+    @Override
     public String getAssignee() {
         return assignee;
     }
