@@ -10,9 +10,9 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
-    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add a null comment.";
+    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
     public static final String NO_SUCH_COMMENT = "Comment not found.";
-    public static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add a null history.";
+    public static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
 
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
@@ -88,6 +88,7 @@ public abstract class TaskBase implements Task {
 
     }
 
+    // TODO - To consider if this functionality is going to be useful
     public void removeComment(Comment comment) {
         if (comments.contains(comment)) {
             this.comments.remove(comment);
