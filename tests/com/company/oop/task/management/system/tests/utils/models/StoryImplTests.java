@@ -77,3 +77,4 @@ public class StoryImplTests {
         assertEquals(currentStatus, story.getStatus());
     }
 }
+
