@@ -11,7 +11,8 @@ public class StoryImpl extends TaskBase implements Story {
     private Member assignee;
     private TaskType taskType;
 
-    public StoryImpl(int id, String title, String description, PriorityType priorityType, StorySize size, StoryStatus status, Member assignee) {
+    public StoryImpl(int id, String title, String description, PriorityType priorityType,
+                     StorySize size, StoryStatus status, Member assignee) {
         super(id, title, description);
         this.priorityType = priorityType;
         this.size = size;

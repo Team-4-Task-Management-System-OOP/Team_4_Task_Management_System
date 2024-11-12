@@ -5,7 +5,8 @@ import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
-import com.company.oop.task.management.system.models.teams.contracts.Assignable;
+import com.company.oop.task.management.system.models.teams.MemberImpl;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StoryImplTests {
     private StoryImpl story;
     //ToDo
+    private static Member DEFAULT_MEMBER = new MemberImpl("unassigned");
+
     @BeforeEach
     void setUp() {
         story = new StoryImpl(1, "Implement login feature",
                 "Allow users to log in", PriorityType.HIGH,
-                StorySize.LARGE, StoryStatus.NOTDONE, Assignable.defaultMember);
+                StorySize.LARGE, StoryStatus.NOTDONE, DEFAULT_MEMBER);
     }
 
     @Test
