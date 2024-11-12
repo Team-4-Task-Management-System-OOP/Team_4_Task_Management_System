@@ -1,9 +1,15 @@
 package com.company.oop.task.management.system.utils;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ParsingHelpers {
     private static final String NO_SUCH_ENUM = "There is no %s in %ss.";
     private static final int NEGATIVE_NUMBER = 0;
-    private static final String NEGATIVE_INT_ERROR = "%s should be non negative.";
+    private static final String NEGATIVE_INT_ERROR = "%s should be a positive number.";
+    private static final String INVALID_BOOLEAN_ERR = "Invalid value for %s. Should be either true or false.";
 
     public static double tryParseDouble(String valueToParse, String errorMessage) {
         try {
@@ -21,6 +27,15 @@ public class ParsingHelpers {
         }
     }
 
+    public static boolean tryParseBoolean(String valueToParse, String parameterName) {
+        if (!valueToParse.equalsIgnoreCase("true") &&
+                !valueToParse.equalsIgnoreCase("false")) {
+            throw new InvalidUserInputException(String.format(INVALID_BOOLEAN_ERR, parameterName));
+        }
+
+        return Boolean.parseBoolean(valueToParse);
+    }
+
     public static void validatePositiveDouble(double value, String type) {
         if (value < NEGATIVE_NUMBER) {
             throw new IllegalArgumentException(String.format(NEGATIVE_INT_ERROR, type));
@@ -33,5 +48,11 @@ public class ParsingHelpers {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
         }
+    }
+    //ToDo Possibly will be needed in many cases in the future
+    public static String formatTime(LocalDateTime dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
+
+        return dateTime.format(formatter);
     }
 }

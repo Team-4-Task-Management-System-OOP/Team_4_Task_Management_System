@@ -1,8 +1,6 @@
 package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
-import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
-import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
@@ -28,14 +26,10 @@ public abstract class TaskBase implements Task {
             TITLE_MIN_LENGTH,
             TITLE_MAX_LENGTH);
     private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
-    private static final String NO_SUCH_COMMENT = "Comment not found.";
     private static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
-    private static final String COMMENT_REMOVED = "A comment was removed from item with ID: %d.";
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY---";
     private static final String NO_COMMENTS = "---NO COMMENTS---";
-    private static final String NO_COMMENTS_TO_REMOVE = "No comments available to remove.";
-    private static final String NULL_COMMENT = "Cannot remove a null comment.";
 
     private final int id;
     private String title;
@@ -95,23 +89,6 @@ public abstract class TaskBase implements Task {
             historyLogger(format(COMMENT_ADDED, getId()));
         }
     }
-
-    // TODO - To consider if this functionality is going to be useful
-//    @Override
-//    public void removeComment(Comment comment) {
-//        if (comment == null) {
-//            throw new IllegalArgumentException(NULL_COMMENT);
-//        }
-//        if (comments == null || comments.isEmpty()) {
-//            throw new InvalidUserInputException(NO_COMMENTS_TO_REMOVE);
-//        }
-//        if (comments.contains(comment)) {
-//            comments.remove(comment);
-//            historyLogger(format(COMMENT_REMOVED, getId()));
-//        } else {
-//            throw new InvalidUserInputException(NO_SUCH_COMMENT);
-//        }
-//    }
 
     @Override
     public void historyLogger (String log){

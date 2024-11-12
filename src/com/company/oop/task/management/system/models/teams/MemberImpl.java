@@ -1,7 +1,9 @@
 package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.models.teams.contracts.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,26 +40,42 @@ public class MemberImpl implements Member {
                 format(NAME_ERR, name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH));
         // TODO - Consider checking for unique name in the CommandFactory (eventually)
         this.name = name;
+    }
 
-        @Override
-        public List<Task> getTasks () {
-            return new ArrayList<>(tasks);
-        }
+    @Override
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
 
-        @Override
-        public List<String> getActivityHistory () {
-            return new ArrayList<>(activityHistory);
-        }
+    @Override
+    public List<String> getActivityHistory() {
+        return new ArrayList<>(activityHistory);
+    }
+    //ToDo
+    @Override
+    public Team getTeam() {
+        return null;
+    }
+    //ToDo
+    @Override
+    public Team setTeam() {
+        return null;
+    }
 
-        @Override
-        public void addTask (Task task){
-            tasks.add(task);
-            addActivity("The following task has been assigned: " + task.getTitle());
-        }
+    @Override
+    public void addTask(Task task) {
+        tasks.add(task);
+        addActivity("The following task has been assigned: " + task.getTitle());
+    }
+    //ToDo
+    @Override
+    public void removeTask(Task task) {
 
-        @Override
-        public void addActivity (String activity){
-            activityHistory.add(activity);
-        }
+    }
+
+    @Override
+    public void addActivity(String activity) {
+        activityHistory.add(activity);
     }
 }
+

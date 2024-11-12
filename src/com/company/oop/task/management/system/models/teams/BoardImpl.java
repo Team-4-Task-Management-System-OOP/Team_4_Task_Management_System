@@ -40,17 +40,17 @@ public class BoardImpl implements Board {
 
     @Override
     public String getName() {
-        return  name;
+        return name;
     }
 
     @Override
     public List<Task> getTasks() {
-        return  tasks;
+        return new ArrayList<>(tasks);
     }
 
     @Override
     public List<String> getHistory() {
-        return activityHistory;
+        return new ArrayList<>(activityHistory);
     }
 
     @Override

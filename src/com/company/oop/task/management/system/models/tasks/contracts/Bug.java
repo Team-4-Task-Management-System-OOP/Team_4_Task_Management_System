@@ -1,23 +1,21 @@
 package com.company.oop.task.management.system.models.tasks.contracts;
 
 import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
-import com.company.oop.task.management.system.models.tasks.enums.Priority;
-import com.company.oop.task.management.system.models.tasks.enums.Severity;
+import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
+import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 
 import java.util.List;
 
-public interface Bug extends Task {
+public interface Bug extends Task, Assignable {
 
     List<String> getReproducibleSteps();
 
-    Priority getPriority();
-
-    void changePriority(Priority priority);
-
-    Severity getSeverityType();
+    BugSeverity getSeverityType();
 
     BugStatus getBugStatus();
 
     void changeBugStatus(BugStatus bugstatus);
+
+    void changeSeverity(BugSeverity bugSeverity);
 
 }
