@@ -45,6 +45,14 @@ public class BoardImpl implements Board {
         this.name = name;
     }
 
+    public void AddActivity(String activity){
+        if (activity != null){
+            activityHistory.add(activity);
+        } else {
+            throw new IllegalArgumentException(NO_SUCH_TASK);
+        }
+    }
+
     @Override
     public void addTask(String task) {
         if (task != null){
