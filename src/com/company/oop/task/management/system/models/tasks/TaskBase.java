@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
@@ -12,10 +13,11 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
-    private static final int TITLE_MIN_LENGTH = 10;
-    private static final int TITLE_MAX_LENGTH = 100;
-    private static final int DESCRIPTION_MIN_LENGTH = 10;
-    private static final int DESCRIPTION_MAX_LENGTH = 500;
+
+    public static final int TITLE_MIN_LENGTH = 10;
+    public static final int TITLE_MAX_LENGTH = 100;
+    public static final int DESCRIPTION_MIN_LENGTH = 10;
+    public static final int DESCRIPTION_MAX_LENGTH = 500;
 
     private static final String TITLE_VAL_ERR = format(
             "Title must be between %d and %d!",
@@ -25,19 +27,15 @@ public abstract class TaskBase implements Task {
             "Description must be between %d and %d!",
             TITLE_MIN_LENGTH,
             TITLE_MAX_LENGTH);
-    private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add a null comment.";
+    private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
     private static final String NO_SUCH_COMMENT = "Comment not found.";
-    private static final String CANNOT_ADD_A_NULL_LOG = "Cannot add a null log.";
+    private static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
     private static final String COMMENT_REMOVED = "A comment was removed from item with ID: %d.";
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY---";
     private static final String NO_COMMENTS = "---NO COMMENTS---";
     private static final String NO_COMMENTS_TO_REMOVE = "No comments available to remove.";
     private static final String NULL_COMMENT = "Cannot remove a null comment.";
-
-    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
-    public static final String NO_SUCH_COMMENT = "Comment not found.";
-    public static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
 
     private final int id;
     private String title;
@@ -118,7 +116,7 @@ public abstract class TaskBase implements Task {
     @Override
     public void historyLogger (String log){
         if (log == null || log.isEmpty()) {
-            throw new InvalidUserInputException(CANNOT_ADD_A_NULL_LOG);
+            throw new InvalidUserInputException(CANNOT_ADD_A_NULL_HISTORY);
         }
         history.add(log);
     }
