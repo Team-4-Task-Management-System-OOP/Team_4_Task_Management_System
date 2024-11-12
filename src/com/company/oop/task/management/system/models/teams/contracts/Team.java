@@ -1,16 +1,14 @@
 package com.company.oop.task.management.system.models.teams.contracts;
 
-import com.company.oop.task.management.system.models.teams.MemberImpl;
-
 import java.util.List;
 
-public interface Team {
-
-    String getName();
+public interface Team extends Nameable {
 
     List<Member> getMembers();
 
     List<Board> getBoards();
+
+    void addActivity(String description);
 
     void addMember(Member member);
 

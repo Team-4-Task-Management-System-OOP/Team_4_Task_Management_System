@@ -1,6 +1,6 @@
 package com.company.oop.task.management.system.models.teams.contracts;
 
-public interface Nameble {
+public interface Nameable {
 
     String getName();
 

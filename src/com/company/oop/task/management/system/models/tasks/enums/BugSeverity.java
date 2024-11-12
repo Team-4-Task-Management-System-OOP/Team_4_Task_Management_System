@@ -1,6 +1,6 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
-public enum Severity {
+public enum BugSeverity {
     CRITICAL, MAJOR, MINOR;
 
     @Override

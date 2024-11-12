@@ -4,7 +4,7 @@ import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 
 import java.util.List;
 
-public interface Task extends Commentable, Identifable {
+public interface Task extends Commentable, Identifiable {
 
     String getTitle();
 
@@ -19,7 +19,5 @@ public interface Task extends Commentable, Identifable {
     void historyLogger (String log);
 
     void addComment(Comment comment);
-
-    //void removeComment(Comment comment);
 
 }
