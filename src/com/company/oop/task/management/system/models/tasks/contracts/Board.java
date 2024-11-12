@@ -10,6 +10,8 @@ public interface Board {
 
     List<String> getActivityHistory();
 
+    void AddActivity(String activity);
+
     void addTask(String task);
 
 }
