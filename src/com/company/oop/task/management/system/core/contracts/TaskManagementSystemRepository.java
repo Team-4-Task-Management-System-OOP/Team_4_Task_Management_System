@@ -5,6 +5,7 @@ import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.*;
+import com.company.oop.task.management.system.models.teams.TeamImpl;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -49,7 +50,5 @@ public interface TaskManagementSystemRepository {
     void login(Member member);
 
     void logout();
-
-
 
 }
