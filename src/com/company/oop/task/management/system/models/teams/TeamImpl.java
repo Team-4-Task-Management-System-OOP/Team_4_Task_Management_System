@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.models.teams;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -37,7 +38,7 @@ public class TeamImpl implements Team {
         setName(name);
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERR);
         // TODO - Consider checking for unique name in the CommandFactory (eventually)
         this.name = name;
@@ -50,18 +51,23 @@ public class TeamImpl implements Team {
 
     @Override
     public List<Member> getMembers() {
-        return members;
+        return new ArrayList<>(members);
     }
 
     @Override
     public List<Board> getBoards() {
-        return boards;
+        return new ArrayList<>(boards);
+    }
+    //ToDo
+    @Override
+    public void addActivity(String description) {
+
     }
 
     @Override
     public void addMember(Member member) {
         if (members.stream().anyMatch(m -> m.getName().equals(member.getName()))) {
-            throw new IllegalArgumentException(NAME_UNIQUE_MESSAGE);
+            throw new InvalidUserInputException(NAME_UNIQUE_MESSAGE);
         }
         members.add(member);
     }
@@ -71,14 +77,14 @@ public class TeamImpl implements Team {
         if (members.stream().anyMatch(m -> m.getName().equals(member.getName()))) {
             members.remove(member);
         } else {
-            throw new IllegalArgumentException(NOT_EXISTING_MEMBER_MESSAGE);
+            throw new InvalidUserInputException(NOT_EXISTING_MEMBER_MESSAGE);
         }
     }
 
     @Override
     public void addBoard(Board board) {
         if (boards.stream().anyMatch(b -> b.getName().equals(board.getName()))) {
-            throw new IllegalArgumentException(BOARD_UNIQUE_MESSAGE);
+            throw new InvalidUserInputException(BOARD_UNIQUE_MESSAGE);
         }
         boards.add(board);
     }
@@ -88,6 +94,6 @@ public class TeamImpl implements Team {
         if (boards.stream().anyMatch(b -> b.getName().equals(board.getName()))) {
             boards.remove(board);
         }
-        throw new IllegalArgumentException(NOT_EXISTING_BOARD_MESSAGE);
+        throw new InvalidUserInputException(NOT_EXISTING_BOARD_MESSAGE);
     }
 }

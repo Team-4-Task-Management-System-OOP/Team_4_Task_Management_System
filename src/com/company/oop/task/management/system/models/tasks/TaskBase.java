@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.models.tasks;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
@@ -10,9 +11,6 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
-    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
-    public static final String NO_SUCH_COMMENT = "Comment not found.";
-    public static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
 
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
@@ -27,6 +25,11 @@ public abstract class TaskBase implements Task {
             "Description must be between %d and %d!",
             TITLE_MIN_LENGTH,
             TITLE_MAX_LENGTH);
+    private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
+    private static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
+    private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
+    private static final String NO_LOG_HISTORY = "---NO LOG HISTORY---";
+    private static final String NO_COMMENTS = "---NO COMMENTS---";
 
     private final int id;
     private String title;
@@ -69,60 +72,59 @@ public abstract class TaskBase implements Task {
 
     @Override
     public List<Comment> getComments() {
-        return comments;
+        return new ArrayList<>(comments);
     }
 
     @Override
     public List<String> getHistory() {
-        return history;
+        return new ArrayList<>(history);
     }
 
     @Override
     public void addComment(Comment comment) {
-        if (comment != null) {
+        if (comment == null || comment.getContent() == null || comment.getContent().isEmpty()) {
+            throw new InvalidUserInputException(CANNOT_ADD_A_NULL_COMMENT);
+        } else {
             comments.add(comment);
-            historyLogger(String.format("A comment was added to item with ID: %d.", getId()));
-        } else {
-            throw new IllegalArgumentException(CANNOT_ADD_A_NULL_COMMENT);
-        }
-
-    }
-
-    // TODO - To consider if this functionality is going to be useful
-    public void removeComment(Comment comment) {
-        if (comments.contains(comment)) {
-            this.comments.remove(comment);
-        } else {
-            throw new IllegalArgumentException(NO_SUCH_COMMENT);
+            historyLogger(format(COMMENT_ADDED, getId()));
         }
     }
 
     @Override
     public void historyLogger (String log){
-        if (log != null) {
-            history.add(log);
-        } else {
-            throw new IllegalArgumentException(CANNOT_ADD_A_NULL_HISTORY);
+        if (log == null || log.isEmpty()) {
+            throw new InvalidUserInputException(CANNOT_ADD_A_NULL_HISTORY);
         }
+        history.add(log);
     }
 
     @Override
     public String printInfo(){
-        return String.format("Id: %d%n" +
+        return format("Id: %d%n" +
                 "Title: %s%n", getId(), getTitle());
     }
 
     private String printComments() {
-
-        if (getComments().isEmpty()) {
-            return "---NO COMMENTS---";
+        if (getComments().isEmpty() || getComments() == null) {
+            return NO_COMMENTS;
         } else {
-
-            StringBuilder result = new StringBuilder();
+            StringBuilder printComments = new StringBuilder();
             for (Comment comment : comments) {
-                result.append(comment).append(System.lineSeparator());
+                printComments.append(comment.toString()).append(System.lineSeparator());
             }
-            return result.toString();
+            return printComments.toString();
+        }
+    }
+
+    private String printLogHistory() {
+        if (getHistory().isEmpty() || getHistory() == null) {
+            return NO_LOG_HISTORY;
+        } else {
+            StringBuilder logHistory = new StringBuilder();
+            for (String log : history) {
+                logHistory.append(log).append(System.lineSeparator());
+            }
+            return logHistory.toString();
         }
     }
 
@@ -131,8 +133,8 @@ public abstract class TaskBase implements Task {
         return String.format("%s" +
                         "Description: %s%n" +
                         "Comments: %s%n" +
-                        "History: %s",
-                printInfo(), getDescription(), printComments(), getHistory());
+                        "History: %s%n",
+                printInfo(), getDescription(), printComments(), printLogHistory());
     }
 
 }

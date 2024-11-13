@@ -1,10 +1,11 @@
 package com.company.oop.task.management.system.tests.utils.models;
 
 import com.company.oop.task.management.system.models.tasks.StoryImpl;
-import com.company.oop.task.management.system.models.tasks.enums.Priority;
+import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
+import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StoryImplTests {
     private StoryImpl story;
-
+    //ToDo
     @BeforeEach
     void setUp() {
-        story = new StoryImpl(1, "Implement login feature", "Allow users to log in", Priority.HIGH, StorySize.LARGE, StoryStatus.NOTDONE, "JohnDoe");
+        story = new StoryImpl(1, "Implement login feature",
+                "Allow users to log in", PriorityType.HIGH,
+                StorySize.LARGE, StoryStatus.NOTDONE, Assignable.defaultMember);
     }
 
     @Test
@@ -24,7 +27,7 @@ public class StoryImplTests {
         assertEquals(1, story.getId());
         assertEquals("Implement login feature", story.getTitle());
         assertEquals("Allow users to log in", story.getDescription());
-        assertEquals(Priority.HIGH, story.getPriority());
+        assertEquals(PriorityType.HIGH, story.getPriority());
         assertEquals(StorySize.LARGE, story.getSize());
         assertEquals(StoryStatus.NOTDONE, story.getStatus());
         assertEquals("JohnDoe", story.getAssignee());
@@ -33,7 +36,7 @@ public class StoryImplTests {
 
     @Test
     void testGetPriority() {
-        assertEquals(Priority.HIGH, story.getPriority());
+        assertEquals(PriorityType.HIGH, story.getPriority());
     }
 
     @Test

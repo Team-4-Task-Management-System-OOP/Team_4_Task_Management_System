@@ -1,19 +1,20 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
-public enum Severity {
-    CRITICAL, MAJOR, MINOR;
+public enum PriorityType {
+    HIGH, MEDIUM, LOW;
 
     @Override
     public String toString() {
         switch (this) {
-            case CRITICAL:
-                return "Critical";
-            case MAJOR:
-                return "Major";
-            case MINOR:
-                return "Minor";
+            case HIGH:
+                return "High";
+            case MEDIUM:
+                return "Medium";
+            case LOW:
+                return "Low";
             default:
                 throw new IllegalArgumentException("Invalid Priority. Priority can be: High, Medium, Low.");
         }
     }
+
 }

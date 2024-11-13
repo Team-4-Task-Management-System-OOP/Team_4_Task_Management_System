@@ -2,30 +2,38 @@ package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.*;
-
-import javax.xml.stream.events.Comment;
-import java.util.List;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
 
 public class StoryImpl extends TaskBase implements Story {
-    private Priority priority;
+    private PriorityType priorityType;
     private StorySize size;
     private StoryStatus status;
-    private String assignee;
+    private Member assignee;
     private TaskType taskType;
 
-    public StoryImpl(int id, String title, String description, Priority priority, StorySize size, StoryStatus status, String assignee) {
+    public StoryImpl(int id, String title, String description, PriorityType priorityType, StorySize size, StoryStatus status, Member assignee) {
         super(id, title, description);
-        this.priority = priority;
+        this.priorityType = priorityType;
         this.size = size;
         this.status = status;
         this.assignee = assignee;
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
+    public PriorityType getPriority() {
+        return priorityType;
     }
+    //ToDo
+    @Override
+    public void changePriority(PriorityType priority) {
 
+    }
+    //ToDo
+    @Override
+    public void setAssignee(Member assignee) {
+
+    }
+    //ToDo
     @Override
     public StorySize getSize() {
         return size;
@@ -36,8 +44,7 @@ public class StoryImpl extends TaskBase implements Story {
         return status;
     }
 
-    @Override
-    public String getAssignee() {
+    public Member getAssignee() {
         return assignee;
     }
 
@@ -46,11 +53,18 @@ public class StoryImpl extends TaskBase implements Story {
         return TaskType.STORY;
     }
 
+    //ToDo changeStatus implementation
     @Override
     public void changeStatus(StoryStatus status) {
         if (status.toString() != StoryStatus.DONE.toString()){
 
         }
     }
-    // todo print methods
+    //ToDo
+    @Override
+    public void changeSize(StorySize size) {
+
+    }
+
+    //ToDo Possibly a printing method
 }

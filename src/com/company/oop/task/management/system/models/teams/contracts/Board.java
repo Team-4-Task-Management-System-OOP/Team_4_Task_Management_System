@@ -4,8 +4,7 @@ import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
 import java.util.List;
 
-public interface Board {
-    String getName();
+public interface Board extends Nameable {
 
     List<Task> getTasks();
 

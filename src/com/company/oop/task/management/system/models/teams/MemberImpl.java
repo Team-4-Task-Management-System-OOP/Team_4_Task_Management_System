@@ -1,8 +1,9 @@
-
 package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.models.teams.contracts.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,29 +14,20 @@ import static com.company.oop.task.management.system.utils.ValidationHelpers.val
 import static java.lang.String.format;
 
 public class MemberImpl implements Member {
+    private static final int MEMBER_NAME_MIN_LENGTH = 5;
+    private static final int MEMBER_NAME_MAX_LENGTH = 15;
 
-    // Constants
-    private static final String MEMBER_NAME_LENGTH_ERR = format(
-            "Member must be between %d and %d!",
-            NAME_MIN_LENGTH,
-            NAME_MAX_LENGTH);
+    private static final String NAME_ERR = "%s is an invalid member name! " +
+            "Name must be a between %d and %d characters!";
 
-    // Fields
     private String name;
-    private List<Task> tasks;
-    private List<String> activityHistory;
+    private final List<Task> tasks;
+    private final List<String> activityHistory;
 
     public MemberImpl(String name) {
         setName(name);
-        this.name = name;
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
-    }
-
-    private void setName(String name) {
-        validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, MEMBER_NAME_LENGTH_ERR);
-        // TODO - Consider checking for unique name in the CommandFactory (eventually)
-        this.name = name;
     }
 
     @Override
@@ -43,14 +35,31 @@ public class MemberImpl implements Member {
         return name;
     }
 
+    public void setName(String name) {
+        validateStringLength(name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH,
+                format(NAME_ERR, name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH));
+        // TODO - Consider checking for unique name in the CommandFactory (eventually)
+        this.name = name;
+    }
+
     @Override
     public List<Task> getTasks() {
-        return tasks;
+        return new ArrayList<>(tasks);
     }
 
     @Override
     public List<String> getActivityHistory() {
-        return activityHistory;
+        return new ArrayList<>(activityHistory);
+    }
+    //ToDo
+    @Override
+    public Team getTeam() {
+        return null;
+    }
+    //ToDo
+    @Override
+    public Team setTeam() {
+        return null;
     }
 
     @Override
@@ -58,9 +67,15 @@ public class MemberImpl implements Member {
         tasks.add(task);
         addActivity("The following task has been assigned: " + task.getTitle());
     }
+    //ToDo
+    @Override
+    public void removeTask(Task task) {
+
+    }
 
     @Override
     public void addActivity(String activity) {
         activityHistory.add(activity);
     }
 }
+
