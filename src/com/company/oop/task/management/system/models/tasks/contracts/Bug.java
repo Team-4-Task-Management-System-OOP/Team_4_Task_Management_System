@@ -2,7 +2,6 @@ package com.company.oop.task.management.system.models.tasks.contracts;
 
 import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
 import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
-import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 
 import java.util.List;
 
