@@ -15,7 +15,8 @@ public enum FeedbackStatus {
             case DONE:
                 return "Done";
             default:
-                throw new IllegalArgumentException("Invalid Status. Status can be: New, Unscheduled, Scheduled, Done.");
+                throw new IllegalArgumentException("Invalid Feedback Status. Feedback Status can be:" +
+                        " New, Unscheduled, Scheduled, Done.");
         }
     }
 }

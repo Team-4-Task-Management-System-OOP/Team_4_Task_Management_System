@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.models.tasks.enums;
 
 public enum BugStatus {
     ACTIVE, DONE;
+
     @Override
     public String toString() {
         switch (this) {
@@ -10,7 +11,8 @@ public enum BugStatus {
             case DONE:
                 return "Done";
             default:
-                throw new IllegalArgumentException("Invalid Priority. Priority can be: High, Medium, Low.");
+                throw new IllegalArgumentException("Invalid Bug Status. Bug Status can be either" +
+                        " ''Active'' or ''Done''");
         }
     }
 }

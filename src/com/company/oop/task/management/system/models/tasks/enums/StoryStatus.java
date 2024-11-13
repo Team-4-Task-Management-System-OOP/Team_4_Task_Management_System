@@ -15,7 +15,8 @@ public enum StoryStatus {
             case DONE:
                 return "Done";
             default:
-                return "";
+                throw new IllegalArgumentException("Invalid Story Status. " +
+                        "Story Status can be: Not Done, In Progress, Low.");
         }
     }
 }

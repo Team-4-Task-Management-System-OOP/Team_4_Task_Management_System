@@ -8,7 +8,9 @@ public interface Team extends Nameable {
 
     List<Board> getBoards();
 
-    void addActivity(String description);
+    List<String> getHistory();
+
+    void addActivityHistory(String description);
 
     void addMember(Member member);
 

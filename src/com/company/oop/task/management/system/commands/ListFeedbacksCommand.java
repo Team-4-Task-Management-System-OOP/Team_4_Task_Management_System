@@ -3,7 +3,7 @@ package com.company.oop.task.management.system.commands;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
-public class ListFeedbackCommand implements Command {
-    public ListFeedbackCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+public class ListFeedbacksCommand implements Command {
+    public ListFeedbacksCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
     }
 }

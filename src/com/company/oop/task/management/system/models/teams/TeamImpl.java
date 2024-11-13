@@ -17,33 +17,36 @@ public class TeamImpl implements Team {
     public static final int NAME_MIN_LENGTH = 5;
     public static final int NAME_MAX_LENGTH = 15;
     private static final String NAME_LENGTH_ERR = format(
-            "The name must be between %d and %d!",
+            "Team's name must be between %d and %d!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
-
-    private static final String NAME_UNIQUE_MESSAGE = "Member name must be unique";
-    private static final String BOARD_UNIQUE_MESSAGE = "Board name must be unique";
-    private static final String NOT_EXISTING_MEMBER_MESSAGE = "The member doesn't exist";
-    private static final String NOT_EXISTING_BOARD_MESSAGE = "The board doesn't exist";
-
+    private static final String NAME_UNIQUE_MESSAGE = "Member name must be unique!";
+    private static final String BOARD_UNIQUE_MESSAGE = "Board name must be unique!";
+    private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member doesn't exist!";
+    private static final String NOT_EXISTING_BOARD_MESSAGE = "Board doesn't exist!";
 
     // Fields
     private String name;
-    private List<Member> members;
-    private List<Board> boards;
+    private final List<Member> members;
+    private final List<Board> boards;
+    private final List<String> history;
 
+    //Constructor
     public TeamImpl(String name) {
+        setName(name);
         this.members = new ArrayList<>();
         this.boards = new ArrayList<>();
-        setName(name);
+        this.history = new ArrayList<>();
     }
 
+    //Setters
     private void setName(String name) {
         validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERR);
         // TODO - Consider checking for unique name in the CommandFactory (eventually)
         this.name = name;
     }
 
+    //Getters
     @Override
     public String getName() {
         return name;
@@ -58,10 +61,16 @@ public class TeamImpl implements Team {
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
-    //ToDo
-    @Override
-    public void addActivity(String description) {
 
+    public List<String> getHistory() {
+        return new ArrayList<>(history);
+    }
+
+    //Methods
+    //ToDo current time might be need - ParsingHelpers.formatTime
+    @Override
+    public void addActivityHistory(String description) {
+        history.add(description);
     }
 
     @Override
@@ -96,4 +105,14 @@ public class TeamImpl implements Team {
         }
         throw new InvalidUserInputException(NOT_EXISTING_BOARD_MESSAGE);
     }
+
+    //Print
+    @Override
+    public String toString() {
+        return format("---Team---%n" +
+                "%nName: %s" +
+                "%n---Members---%n%s" +
+                "%n---Boards---%n%s", getName(), members.toString(), boards.toString());
+    }
+
 }

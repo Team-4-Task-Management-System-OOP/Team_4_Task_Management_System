@@ -13,7 +13,8 @@ public enum BugSeverity {
             case MINOR:
                 return "Minor";
             default:
-                throw new IllegalArgumentException("Invalid Priority. Priority can be: High, Medium, Low.");
+                throw new IllegalArgumentException("Invalid Bug Severity. " +
+                        "Bug Severity can be: Critical, Major or Minor");
         }
     }
 }

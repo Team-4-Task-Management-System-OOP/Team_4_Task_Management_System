@@ -2,22 +2,22 @@ package com.company.oop.task.management.system.models.teams.contracts;
 
 import java.util.List;
 
-import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 
 public interface Member extends Nameable {
 
-    List<Task> getTasks();
+    List<Assignable> getTasks();
 
     List<String> getActivityHistory();
 
     Team getTeam();
 
-    Team setTeam();
+    void setTeam(Team team);
 
-    void addTask(Task task);
+    void addTask(Assignable task);
 
-    void removeTask(Task task);
+    void removeTask(Assignable task);
 
-    void addActivity(String activity);
+    void addActivityHistory(String history);
 
 }

@@ -5,5 +5,7 @@ import com.company.oop.task.management.system.core.contracts.TaskManagementSyste
 
 public class CreateTeamCommand implements Command {
     public CreateTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+
+
     }
 }
