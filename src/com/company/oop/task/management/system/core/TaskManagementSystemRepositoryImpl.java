@@ -63,6 +63,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Feedback createFeedback(String title, String description, int rating) {
         FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating);
         this.tasks.add(feedback);
+        this.feedbacks.add(feedback);
         return feedback;
     }
 
@@ -73,6 +74,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         StoryImpl story = new StoryImpl(++nextId, title, description,
                 priorityType, size, status, assignee);
         this.tasks.add(story);
+        this.stories.add(story);
+        this.assignableTasks.add(story);
         return story;
     }
 
@@ -83,6 +86,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         BugImpl bug = new BugImpl(++nextId, title, description, reproducibleSteps,
                 priority, bugSeverity, bugStatus, assignee);
         this.tasks.add(bug);
+        this.bugs.add(bug);
+        this.assignableTasks.add(bug);
         return null;
     }
 
