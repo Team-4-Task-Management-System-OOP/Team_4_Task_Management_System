@@ -1,15 +1,12 @@
 package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
-import com.company.oop.task.management.system.models.teams.contracts.Assignable;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.oop.task.management.system.models.teams.TeamImpl.NAME_MAX_LENGTH;
-import static com.company.oop.task.management.system.models.teams.TeamImpl.NAME_MIN_LENGTH;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
