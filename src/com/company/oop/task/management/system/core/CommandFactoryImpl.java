@@ -4,85 +4,85 @@ import com.company.oop.task.management.system.commands.*;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.commands.enums.CommandType;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
-import com.company.oop.task.management.system.core.contracts.TaskManagementRepository;
+import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.task.management.system.utils.ParsingHelpers;
 
 public class CommandFactoryImpl implements CommandFactory {
 
     @Override
-    public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
+    public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementSystemRepository taskManagementSystemRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
         switch (commandType) {
             case CREATEPERSON:
-                return new CreatePersonCommand(taskManagementRepository);
+                return new CreatePersonCommand(taskManagementSystemRepository);
             case SHOWALLPEOPLE:
-                return new ShowAllPeopleCommand(taskManagementRepository);
+                return new ShowAllPeopleCommand(taskManagementSystemRepository);
             case SHOWPERSONACTIVITY:
-                return new ShowPersonActivityCommand(taskManagementRepository);
+                return new ShowPersonActivityCommand(taskManagementSystemRepository);
             case CREATETEAM:
-                return new CreateTeamCommand(taskManagementRepository);
+                return new CreateTeamCommand(taskManagementSystemRepository);
             case SHOWALLTEAM:
-                return new ShowAllTeamCommand(taskManagementRepository);
+                return new ShowAllTeamCommand(taskManagementSystemRepository);
             case SHOWTEAMACTIVITY:
-                return new ShowTeamActivityCommand(taskManagementRepository);
+                return new ShowTeamActivityCommand(taskManagementSystemRepository);
             case ADDPERSONTOTEAM:
-                return new AddPersonToTeamCommand(taskManagementRepository);
+                return new AddPersonToTeamCommand(taskManagementSystemRepository);
             case SHOWALLTEAMMEMBERS:
-                return new ShowAllTeamMembersCommand(taskManagementRepository);
+                return new ShowAllTeamMembersCommand(taskManagementSystemRepository);
             case CREATENEWBOARDINTEAM:
-                return new CreateNewBoardInTeamCommand(taskManagementRepository);
+                return new CreateNewBoardInTeamCommand(taskManagementSystemRepository);
             case SHOWALLTEAMBOARDS:
-                return new ShowAllTeamBoardsCommand(taskManagementRepository);
+                return new ShowAllTeamBoardsCommand(taskManagementSystemRepository);
             case SHOWBOARDACTIVITY:
-                return new ShowBoardActivityCommand(taskManagementRepository);
+                return new ShowBoardActivityCommand(taskManagementSystemRepository);
             case CREATEBUGINBOARD:
-                return new CreateBugInBoardCommand(taskManagementRepository);
+                return new CreateBugInBoardCommand(taskManagementSystemRepository);
             case CREATESTORYINBOARD:
-                return new CreateStoryInBoardCommand(taskManagementRepository);
+                return new CreateStoryInBoardCommand(taskManagementSystemRepository);
             case CREATEFEEDBACKINBOARD:
-                return new CreateFeedbackInBoardCommand(taskManagementRepository);
+                return new CreateFeedbackInBoardCommand(taskManagementSystemRepository);
             case CHANGEPRIORITYOFBUG:
-                return new ChangePriorityOfBugCommand(taskManagementRepository);
+                return new ChangePriorityOfBugCommand(taskManagementSystemRepository);
             case CHAGESEVERITYOGBUG:
-                return new ChangeSeverityOfBugCommand(taskManagementRepository);
+                return new ChangeSeverityOfBugCommand(taskManagementSystemRepository);
             case CHAGESTATUSOFBUG:
-                return new ChangeStatusOfBugCommand(taskManagementRepository);
+                return new ChangeStatusOfBugCommand(taskManagementSystemRepository);
             case CHANGEPRIORITYOFSTORY:
-                return new ChangePriorityOfStoryCommand(taskManagementRepository);
+                return new ChangePriorityOfStoryCommand(taskManagementSystemRepository);
             case CHAGESIZEOFSTORY:
-                return new ChangeSizeOfStoryCommand(taskManagementRepository);
+                return new ChangeSizeOfStoryCommand(taskManagementSystemRepository);
             case CHAGESTATUSOFSTORY:
-                return new ChangeStatusOfStoryCommand(taskManagementRepository);
+                return new ChangeStatusOfStoryCommand(taskManagementSystemRepository);
             case CHAGERATINGOFFEEDBACK:
-                return new ChangeRatingOfFeedbackCommand(taskManagementRepository);
+                return new ChangeRatingOfFeedbackCommand(taskManagementSystemRepository);
             case CHAGESTATUSOFFEEDBACK:
-                return new ChangeStatusOfFeedbackCommand(taskManagementRepository);
+                return new ChangeStatusOfFeedbackCommand(taskManagementSystemRepository);
             case ASSIGNTASK:
-                return new AssignTaskCommand(taskManagementRepository);
+                return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
-                return new UnassignTaskCommand(taskManagementRepository);
+                return new UnassignTaskCommand(taskManagementSystemRepository);
             case ADDCOMMENTTOTASK:
-                return new AddCommentToTaskCommand(taskManagementRepository);
+                return new AddCommentToTaskCommand(taskManagementSystemRepository);
             case LISTALLTASKS:
-                return new ListAllTasksCommand(taskManagementRepository);
+                return new ListAllTasksCommand(taskManagementSystemRepository);
             case FILTERTASKSBYTITLE:
-                return new FilterTasksByTitleCommand(taskManagementRepository);
+                return new FilterTasksByTitleCommand(taskManagementSystemRepository);
             case SORTTASKBYTITLE:
-                return new SortTasksByTitleCommand(taskManagementRepository);
+                return new SortTasksByTitleCommand(taskManagementSystemRepository);
             case LISTBUGS:
-                return new ListBugsCommand(taskManagementRepository);
+                return new ListBugsCommand(taskManagementSystemRepository);
             case LISTSTORIES:
-                return new ListStoriesCommand(taskManagementRepository);
+                return new ListStoriesCommand(taskManagementSystemRepository);
             case LISTFEEDBACK:
-                return new ListFeedbackCommand(taskManagementRepository);
+                return new ListFeedbackCommand(taskManagementSystemRepository);
             case FILTERTASKSBYSTATUS:
-                return new FilterTasksByStatusCommand(taskManagementRepository);
+                return new FilterTasksByStatusCommand(taskManagementSystemRepository);
             case FILTERTASKSBYASSIGNEE:
-                return new FilterTasksByAssigneeCommand(taskManagementRepository);
+                return new FilterTasksByAssigneeCommand(taskManagementSystemRepository);
             case SORTTASKS:
-                return new SortTasksCommand(taskManagementRepository);
+                return new SortTasksCommand(taskManagementSystemRepository);
             default:
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("todo");
         }
     }
 }

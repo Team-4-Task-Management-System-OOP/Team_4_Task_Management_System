@@ -20,6 +20,14 @@ public interface TaskManagementSystemRepository {
 
     List<Team> getTeams();
 
+    public void addTeam(Team teamToAdd);
+
+    public Team findTeamByName(String name);
+
+    public void addMemberToTeam(String teamName, Member memberToAdd);
+
+    public void addBoardToTeam(String teamName, Board boardToAdd);
+
     Comment createComment(String content, String author);
 
     Feedback createFeedback(String title, String description, int rating);
