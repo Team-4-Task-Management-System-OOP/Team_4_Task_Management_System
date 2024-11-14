@@ -16,9 +16,10 @@ public class BoardImpl implements Board {
     public static final int BOARD_NAME_MIN_LENGTH = 5;
     public static final int BOARD_NAME_MAX_LENGTH = 10;
     private static final String BOARD_NAME_LENGTH_ERR = format(
-            "Title must be between %d and %d!",
+            "Board name must be between %d and %d!",
             BOARD_NAME_MIN_LENGTH,
             BOARD_NAME_MAX_LENGTH);
+    private static final String ADD_TASK_SUCCESSFUL_MESSAGE = "The following task has been added: ";
 
     private static final String ACTIVITY_NULL_MESSAGE = "You should provide some `Activity` message";
     // Fields
@@ -65,6 +66,6 @@ public class BoardImpl implements Board {
     @Override
     public void addTask(Task task) {
         tasks.add(task);
-        addActivity("The following task has been added: " + task.getTitle());
+        addActivity(ADD_TASK_SUCCESSFUL_MESSAGE + task.getTitle());
     }
 }
