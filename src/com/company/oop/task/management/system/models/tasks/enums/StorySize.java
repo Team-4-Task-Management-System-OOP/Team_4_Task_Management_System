@@ -1,5 +1,7 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+
 public enum StorySize {
     LARGE,
     MEDIUM,
@@ -15,7 +17,7 @@ public enum StorySize {
             case SMALL:
                 return "Small";
             default:
-                throw new IllegalArgumentException("Invalid Story Size. Story size" +
+                throw new InvalidUserInputException("Invalid Story Size. Story size" +
                         " can be: Large, Medium, small.");
         }
     }

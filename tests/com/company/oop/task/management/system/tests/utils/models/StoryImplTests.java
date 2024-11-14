@@ -21,7 +21,7 @@ public class StoryImplTests {
     void setUp() {
         story = new StoryImpl(1, "Implement login feature",
                 "Allow users to log in", PriorityType.HIGH,
-                StorySize.LARGE, StoryStatus.NOTDONE, DEFAULT_MEMBER);
+                StorySize.LARGE, StoryStatus.NOT_DONE, DEFAULT_MEMBER);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class StoryImplTests {
         assertEquals("Allow users to log in", story.getDescription());
         assertEquals(PriorityType.HIGH, story.getPriority());
         assertEquals(StorySize.LARGE, story.getSize());
-        assertEquals(StoryStatus.NOTDONE, story.getStatus());
+        assertEquals(StoryStatus.NOT_DONE, story.getStatus());
         assertEquals("JohnDoe", story.getAssignee());
         assertEquals(TaskType.STORY, story.getType());
     }
@@ -49,7 +49,7 @@ public class StoryImplTests {
 
     @Test
     void testGetStatus() {
-        assertEquals(StoryStatus.NOTDONE, story.getStatus());
+        assertEquals(StoryStatus.NOT_DONE, story.getStatus());
     }
 
     @Test
@@ -64,8 +64,8 @@ public class StoryImplTests {
 
     @Test
     void testChangeStatus() {
-        story.changeStatus(StoryStatus.INPROGESS);
-        assertEquals(StoryStatus.INPROGESS, story.getStatus());
+        story.changeStatus(StoryStatus.IN_PROGRESS);
+        assertEquals(StoryStatus.IN_PROGRESS, story.getStatus());
 
         story.changeStatus(StoryStatus.DONE);
         assertEquals(StoryStatus.DONE, story.getStatus());

@@ -1,8 +1,12 @@
 package com.company.oop.task.management.system.core;
 
-import com.company.oop.task.management.system.commands.*;
 import com.company.oop.task.management.system.commands.contracts.Command;
+import com.company.oop.task.management.system.commands.creation.*;
 import com.company.oop.task.management.system.commands.enums.CommandType;
+import com.company.oop.task.management.system.commands.listing.*;
+import com.company.oop.task.management.system.commands.modification.*;
+import com.company.oop.task.management.system.commands.security.LoginCommand;
+import com.company.oop.task.management.system.commands.security.LogoutCommand;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
@@ -16,8 +20,8 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementSystemRepository taskManagementSystemRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
         switch (commandType) {
-            case CREATEPERSON:
-                return new CreatePersonCommand(taskManagementSystemRepository);
+            case CREATEMEMBER:
+                return new CreateMemberCommand(taskManagementSystemRepository);
             case SHOWALLPEOPLE:
                 return new ShowAllPeopleCommand(taskManagementSystemRepository);
             case SHOWPERSONACTIVITY:

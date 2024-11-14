@@ -75,7 +75,7 @@ public class BoardImpl implements Board {
             throw new InvalidUserInputException("Cannot add an empty task!");
         }
         tasks.add(task);
-        addActivity(ADD_TASK_SUCCESSFUL_MESSAGE + task.getTitle());
+        addActivityHistory(ADD_TASK_SUCCESSFUL_MESSAGE + task.getTitle());
     }
 
     //Print

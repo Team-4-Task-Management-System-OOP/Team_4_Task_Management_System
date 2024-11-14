@@ -1,5 +1,7 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+
 public enum FeedbackStatus {
     NEW, UNSCHEDULED, SCHEDULED, DONE;
 
@@ -15,7 +17,7 @@ public enum FeedbackStatus {
             case DONE:
                 return "Done";
             default:
-                throw new IllegalArgumentException("Invalid Feedback Status. Feedback Status can be:" +
+                throw new InvalidUserInputException("Invalid Feedback Status. Feedback Status can be:" +
                         " New, Unscheduled, Scheduled, Done.");
         }
     }

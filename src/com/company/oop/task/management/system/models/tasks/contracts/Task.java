@@ -1,10 +1,11 @@
 package com.company.oop.task.management.system.models.tasks.contracts;
 
+import com.company.oop.task.management.system.models.contracts.Printable;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 
 import java.util.List;
 
-public interface Task extends Commentable, Identifiable {
+public interface Task extends Commentable, Identifiable, Printable {
 
     String getTitle();
 

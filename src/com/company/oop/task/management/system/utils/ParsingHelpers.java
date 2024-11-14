@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.utils;
 
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class ParsingHelpers {
         try {
             return Double.parseDouble(valueToParse);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 
@@ -23,7 +24,7 @@ public class ParsingHelpers {
         try {
             return Integer.parseInt(valueToParse);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 
@@ -38,7 +39,7 @@ public class ParsingHelpers {
 
     public static void validatePositiveDouble(double value, String type) {
         if (value < NEGATIVE_NUMBER) {
-            throw new IllegalArgumentException(String.format(NEGATIVE_INT_ERROR, type));
+            throw new InvalidUserInputException(String.format(NEGATIVE_INT_ERROR, type));
         }
     }
 
@@ -46,9 +47,10 @@ public class ParsingHelpers {
         try {
             return Enum.valueOf(type, valueToParse.replace(" ", "_").toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
+            throw new InvalidUserInputException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
         }
     }
+
     //ToDo Possibly will be needed in many cases in the future
     public static String formatTime(LocalDateTime dateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");

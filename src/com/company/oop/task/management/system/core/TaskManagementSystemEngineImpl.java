@@ -27,10 +27,9 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         this.taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
     }
 
-
-
     @Override
     public void start() {
+       // System.out.println("Please provide one of the following commands:"); //ToDo
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
@@ -83,10 +82,10 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
         int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
-//        if (indexOfOpenComment >= 0) {
-//            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-//            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
-//        }
+        if (indexOfOpenComment >= 0) {
+            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
+            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+       }
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
         result.removeAll(Arrays.asList(" ", "", null));
         parameters.addAll(result);

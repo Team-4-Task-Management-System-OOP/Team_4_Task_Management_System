@@ -1,5 +1,7 @@
 package com.company.oop.task.management.system.models.tasks.enums;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+
 public enum BugStatus {
     ACTIVE, DONE;
 
@@ -11,7 +13,7 @@ public enum BugStatus {
             case DONE:
                 return "Done";
             default:
-                throw new IllegalArgumentException("Invalid Bug Status. Bug Status can be either" +
+                throw new InvalidUserInputException("Invalid Bug Status. Bug Status can be either" +
                         " ''Active'' or ''Done''");
         }
     }

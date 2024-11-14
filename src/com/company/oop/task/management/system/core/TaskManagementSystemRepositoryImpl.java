@@ -65,6 +65,27 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(teams);
     }
 
+    public List<Task> getTasks() {
+        return new ArrayList<>(tasks);
+    }
+
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugs);
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
+
+    public List<Story> getStories() {
+        return new ArrayList<>(stories);
+    }
+
+    public List<Assignable> getAssignedTasks() {
+        return new ArrayList<>(assignableTasks);
+    }
+
+
     //ToDo не съм сигурен дали тези 3 метода отдолу са нужни
     @Override
     public void addTeam(Team teamToAdd) {

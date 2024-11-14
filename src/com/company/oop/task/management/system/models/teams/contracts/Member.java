@@ -2,11 +2,13 @@ package com.company.oop.task.management.system.models.teams.contracts;
 
 import java.util.List;
 
+import com.company.oop.task.management.system.models.contracts.Printable;
 import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
+import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
-public interface Member extends Nameable {
+public interface Member extends Nameable, Printable {
 
-    List<Assignable> getTasks();
+    List<Task> getTasks();
 
     List<String> getActivityHistory();
 

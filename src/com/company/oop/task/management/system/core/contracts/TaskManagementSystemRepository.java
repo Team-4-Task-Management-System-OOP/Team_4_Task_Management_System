@@ -19,6 +19,16 @@ public interface TaskManagementSystemRepository {
 
     List<Team> getTeams();
 
+    List<Task> getTasks();
+
+    List<Bug> getBugs();
+
+    List<Feedback> getFeedbacks();
+
+    List<Story> getStories();
+
+    List<Assignable> getAssignedTasks();
+
     public void addTeam(Team teamToAdd);
 
     public Team findTeamByName(String name);

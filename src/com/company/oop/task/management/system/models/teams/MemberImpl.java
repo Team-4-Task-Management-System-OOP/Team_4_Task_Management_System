@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
+import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 
@@ -21,7 +22,7 @@ public class MemberImpl implements Member {
     //Fields
     private String name;
     private Team team;
-    private final List<Assignable> tasks;
+    private final List<Task> tasks;
     private final List<String> activityHistory;
 
     //Constructor
@@ -52,7 +53,7 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public List<Assignable> getTasks() {
+    public List<Task> getTasks() {
         return new ArrayList<>(tasks);
     }
 
@@ -68,7 +69,7 @@ public class MemberImpl implements Member {
 
     //Methods
     @Override
-    public void addTask(Assignable task) {
+    public void addTask(Task task) {
         if (task == null) {
             throw new InvalidUserInputException("Cannot add an empty task.");
         }
@@ -77,7 +78,7 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public void removeTask(Assignable task) {
+    public void removeTask(Task task) {
         if (task == null) {
             throw new InvalidUserInputException("Cannot remove an empty task.");
         }
