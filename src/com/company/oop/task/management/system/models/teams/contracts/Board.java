@@ -12,6 +12,6 @@ public interface Board extends Nameable {
 
     void addTask(Task task);
 
-    void addActivity(String activity);
+    void addActivityHistory(String activity);
 
 }

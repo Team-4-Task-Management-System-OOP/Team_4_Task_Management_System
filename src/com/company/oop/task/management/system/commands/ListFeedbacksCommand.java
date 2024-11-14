@@ -5,9 +5,9 @@ import com.company.oop.task.management.system.core.contracts.TaskManagementSyste
 
 import java.util.List;
 
-public class ListFeedbackCommand extends BaseCommand {
+public class ListFeedbacksCommand extends BaseCommand {
 
-    public ListFeedbackCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ListFeedbacksCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

@@ -15,7 +15,8 @@ public enum StorySize {
             case SMALL:
                 return "Small";
             default:
-                return "";
+                throw new IllegalArgumentException("Invalid Story Size. Story size" +
+                        " can be: Large, Medium, small.");
         }
     }
 }

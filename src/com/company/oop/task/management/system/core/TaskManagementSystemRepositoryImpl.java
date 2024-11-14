@@ -1,6 +1,8 @@
 package com.company.oop.task.management.system.core;
 
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.BugImpl;
 import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
@@ -12,6 +14,7 @@ import com.company.oop.task.management.system.models.teams.MemberImpl;
 import com.company.oop.task.management.system.models.teams.TeamImpl;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.models.teams.contracts.Nameable;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String BOARD_ALREADY_EXISTS = "Board %s already exists in team %s!";
 
     private int nextId;
+    //Todo security checks with login - how to be implemented? - I think I have done it - Ivan
     private Member loggedMember;
 
     private final List<Member> members;
@@ -61,20 +65,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(teams);
     }
 
+    //ToDo не съм сигурен дали тези 3 метода отдолу са нужни
     @Override
     public void addTeam(Team teamToAdd) {
         if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
             throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
         }
         this.teams.add(teamToAdd);
-    }
-
-    @Override
-    public Team findTeamByName(String name) {
-        return teams.stream()
-                .filter(t -> t.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_SUCH_TEAM, name)));
     }
 
     @Override
@@ -95,15 +92,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         team.addBoard(boardToAdd);
     }
 
-
     @Override
     public Comment createComment(String content, String author) {
         return new CommentImpl(content, author);
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, int rating) {
-        FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating);
+    public Feedback createFeedback(String title, String description, int rating, FeedbackStatus feedbackStatus) {
+        FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating, feedbackStatus);
         this.tasks.add(feedback);
         this.feedbacks.add(feedback);
         return feedback;
@@ -130,22 +126,91 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         this.tasks.add(bug);
         this.bugs.add(bug);
         this.assignableTasks.add(bug);
-        return null;
+        return bug;
     }
 
     @Override
     public Member createMember(String name) {
+        Member member = new MemberImpl(name);
+
+        if(!getMembers().contains(member)){
+            getMembers().add(member);
+        }
+        else {
+            throw new InvalidUserInputException("A member with this name already exists and cannot be created! " +
+                    "Please, provide a different member name!");
+        }
         return new MemberImpl(name);
     }
 
     @Override
     public Team createTeam(String name) {
-        return new TeamImpl(name);
+        Team team = new TeamImpl(name);
+
+        if(!getTeams().contains(team)){
+            getTeams().add(team);
+        }
+        else {
+            throw new InvalidUserInputException("A team with this name already exists and cannot be created!" +
+                    "Please, provide a different team name!");
+        }
+        return team;
     }
 
     @Override
     public Board createBoard(String name) {
-        return new BoardImpl(name);
+        Board board = new BoardImpl(name);
+        if (!getBoards().contains(board)){
+            getBoards().add(board);
+        }
+        else {
+            throw new InvalidUserInputException("A board with this name already exists and cannot be created!" +
+                    "Please, provide a different board name!");
+        }
+        return board;
+    }
+
+    @Override
+    public Member findMemberByName(String memberName) {
+        return findElementByName(getMembers(), memberName);
+    }
+
+    @Override
+    public Board findBoardByName(String boardName) {
+        return findElementByName(getBoards(), boardName);
+    }
+
+    @Override
+    public Team findTeamByName(String teamName) {
+        return findElementByName(getTeams(), teamName);
+    }
+
+    @Override
+    public <T extends Identifiable> T findTaskById(List<T> elements, int id) {
+        for (T element : elements) {
+            if (element.getId() == id) {
+                return element;
+            }
+        }
+        throw new ElementNotFoundException(String.format("No task with ID %d", id));
+    }
+
+    @Override
+    public <T extends Nameable> T findElementByName(List<T> elements, String name) {
+        return elements
+                .stream()
+                .filter(element -> element.getName().equalsIgnoreCase(name))
+                .findAny()
+                .orElseThrow(() -> new ElementNotFoundException(
+                        String.format("No %s with name %s exists!",elements.getClass().getSimpleName(), name)));
+    }
+
+    @Override
+    public Member getLoggedInMember() {
+        if (loggedMember == null) {
+            throw new IllegalArgumentException("There is no logged in member.");
+        }
+        return loggedMember;
     }
 
     @Override

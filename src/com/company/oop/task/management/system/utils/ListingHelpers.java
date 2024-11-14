@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListingHelpers {
-//ToDo
+
+
+//ToDo to optimize printing, possible can add Printable interface if need
+
 //    public static <T extends Printable> String elementsToString(List<T> elements) {
 //        List<String> stringElements = new ArrayList<>();
 //        for (T element : elements) {

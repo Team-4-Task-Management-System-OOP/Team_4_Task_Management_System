@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.commands;
 
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 
 import java.util.List;
 
@@ -21,13 +22,14 @@ public abstract class BaseCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-//        if (requiresLogin() && !taskManagementSystemRepository.hasLoggedInMember()) {
-//            throw new IllegalArgumentException(MEMBER_NOT_LOGGED);
-//        }
+        if (requiresLogin() && !taskManagementSystemRepository.hasLoggedInMember()) {
+            throw new InvalidUserInputException(MEMBER_NOT_LOGGED);
+        }
         return executeCommand(parameters);
     }
 
-//    protected abstract boolean requiresLogin();
+    protected abstract boolean requiresLogin();
 
     protected abstract String executeCommand(List<String> parameters);
+
 }
