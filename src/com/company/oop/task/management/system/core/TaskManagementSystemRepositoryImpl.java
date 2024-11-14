@@ -65,6 +65,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(teams);
     }
 
+    //ToDo не съм сигурен дали тези 3 метода отдолу са нужни
     @Override
     public void addTeam(Team teamToAdd) {
         if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
