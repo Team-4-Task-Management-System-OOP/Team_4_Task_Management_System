@@ -27,6 +27,8 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         this.taskManagementSystemRepository = new TaskManagementSystemRepositoryImpl();
     }
 
+
+
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -53,6 +55,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
+        // CreatePerson Dimitar
         List<String> parameters = extractCommandParameters(inputLine);
         Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementSystemRepository);
         String executionResult = command.execute(parameters);
@@ -80,10 +83,10 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
         int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
-        if (indexOfOpenComment >= 0) {
-            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
-        }
+//        if (indexOfOpenComment >= 0) {
+//            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
+//            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+//        }
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
         result.removeAll(Arrays.asList(" ", "", null));
         parameters.addAll(result);
