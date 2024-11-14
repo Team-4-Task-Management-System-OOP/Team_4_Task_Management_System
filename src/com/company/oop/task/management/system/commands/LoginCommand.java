@@ -37,12 +37,12 @@ public class LoginCommand extends BaseCommand{
         Member memberFound = getTaskManagementSystemRepository().findMemberByName(foundMember);
 
         //ToDo
-//findteambyname and findmemberbyname check before checking them if they are in the team!!!!
+        //findteambyname and findmemberbyname check before checking them if they are in the team!!!!
 
         if (!teamFound.getMembers().contains(memberFound)) {
             throw new InvalidUserInputException(WRONG_MEMBER_OR_TEAM);
         }
-// Login Java Pesho
+        // Login Java Pesho
         getTaskManagementSystemRepository().login(memberFound);
         return String.format(MEMBER_LOGGED_IN, memberFound.getName());
     }
