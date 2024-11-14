@@ -3,7 +3,16 @@ package com.company.oop.task.management.system.commands;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
-public class FilterTasksByStatusCommand implements Command {
+import java.util.List;
+
+public class FilterTasksByStatusCommand extends BaseCommand {
+
     public FilterTasksByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+        super(taskManagementSystemRepository);
+    }
+
+    @Override
+    protected String executeCommand(List<String> parameters) {
+        return "";
     }
 }

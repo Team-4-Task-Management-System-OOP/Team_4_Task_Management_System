@@ -3,7 +3,16 @@ package com.company.oop.task.management.system.commands;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
-public class ChangeStatusOfBugCommand implements Command {
+import java.util.List;
+
+public class ChangeStatusOfBugCommand extends BaseCommand {
+
     public ChangeStatusOfBugCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+        super(taskManagementSystemRepository);
+    }
+
+    @Override
+    protected String executeCommand(List<String> parameters) {
+        return "";
     }
 }

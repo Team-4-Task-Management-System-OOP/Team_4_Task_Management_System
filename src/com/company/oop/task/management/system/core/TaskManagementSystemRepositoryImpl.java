@@ -42,9 +42,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private final List<Feedback> feedbacks;
 
     public TaskManagementSystemRepositoryImpl() {
-        this.members = new ArrayList<>();
+        this.members = new ArrayList<>(); // ALL MEMBERS
         this.boards = new ArrayList<>();
-        this.teams = new ArrayList<>();
+        this.teams = new ArrayList<>(); // ALL TEAMS
         this.tasks = new ArrayList<>();
         this.bugs = new ArrayList<>();
         this.stories = new ArrayList<>();

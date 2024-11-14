@@ -19,6 +19,7 @@ public class BoardImpl implements Board {
             "Board's name must be between %d and %d symbols long!",
             BOARD_NAME_MIN_LENGTH,
             BOARD_NAME_MAX_LENGTH);
+    private static final String ADD_TASK_SUCCESSFUL_MESSAGE = "The following task has been added: ";
     private static final String ACTIVITY_NULL_MESSAGE = "Activity message cannot be empty! " +
             "You should provide some `Activity` message";
 
@@ -74,7 +75,7 @@ public class BoardImpl implements Board {
             throw new InvalidUserInputException("Cannot add an empty task!");
         }
         tasks.add(task);
-        addActivityHistory("The following task has been added to the board: " + task.getTitle());
+        addActivity(ADD_TASK_SUCCESSFUL_MESSAGE + task.getTitle());
     }
 
     //Print

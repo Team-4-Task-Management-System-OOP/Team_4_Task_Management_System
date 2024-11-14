@@ -6,8 +6,13 @@ import com.company.oop.task.management.system.core.contracts.TaskManagementSyste
 import java.util.List;
 
 public class CreateTeamCommand extends BaseCommand {
+
     public CreateTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+        super(taskManagementSystemRepository);
+    }
 
-
+    @Override
+    protected String executeCommand(List<String> parameters) {
+        return "";
     }
 }

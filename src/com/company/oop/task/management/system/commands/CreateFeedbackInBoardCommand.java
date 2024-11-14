@@ -3,7 +3,16 @@ package com.company.oop.task.management.system.commands;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
-public class CreateFeedbackInBoardCommand implements Command {
+import java.util.List;
+
+public class CreateFeedbackInBoardCommand extends BaseCommand {
+
     public CreateFeedbackInBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+        super(taskManagementSystemRepository);
+    }
+
+    @Override
+    protected String executeCommand(List<String> parameters) {
+        return "";
     }
 }
