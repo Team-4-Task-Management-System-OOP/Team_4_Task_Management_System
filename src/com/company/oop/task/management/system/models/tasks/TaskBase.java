@@ -115,7 +115,8 @@ public abstract class TaskBase implements Task {
             return printComments.toString();
         }
     }
-
+//important info - title, description, task type
+    // optional info - comments, history
     private String printLogHistory() {
         if (getHistory().isEmpty() || getHistory() == null) {
             return NO_LOG_HISTORY;

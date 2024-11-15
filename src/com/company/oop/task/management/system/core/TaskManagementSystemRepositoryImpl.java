@@ -120,7 +120,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Feedback createFeedback(String title, String description, int rating, FeedbackStatus feedbackStatus) {
-        FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating, feedbackStatus);
+        FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating);
         this.tasks.add(feedback);
         this.feedbacks.add(feedback);
         return feedback;
@@ -153,11 +153,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Member createMember(String name) {
         Member member = new MemberImpl(name);
-
-        if(!getMembers().contains(member)){
-            getMembers().add(member);
-        }
-        else {
+        if (!getMembers().contains(member)) {
+            members.add(member);
+        } else {
             throw new InvalidUserInputException("A member with this name already exists and cannot be created! " +
                     "Please, provide a different member name!");
         }
@@ -169,7 +167,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         Team team = new TeamImpl(name);
 
         if(!getTeams().contains(team)){
-            getTeams().add(team);
+            teams.add(team);
         }
         else {
             throw new InvalidUserInputException("A team with this name already exists and cannot be created!" +
@@ -182,7 +180,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         if (!getBoards().contains(board)){
-            getBoards().add(board);
+            boards.add(board);
         }
         else {
             throw new InvalidUserInputException("A board with this name already exists and cannot be created!" +

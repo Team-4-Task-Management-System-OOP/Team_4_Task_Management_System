@@ -8,6 +8,7 @@ import com.company.oop.task.management.system.models.teams.contracts.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
@@ -96,6 +97,15 @@ public class MemberImpl implements Member {
         activityHistory.add(history);
     }
 
+    @Override
+    public String printHistory() {
+        StringBuilder printHistory = new StringBuilder();
+        for (String history : activityHistory) {
+            printHistory.append(history).append(System.lineSeparator());
+        }
+        return printHistory.toString();
+    }
+
     //Print
     @Override
     public String toString() {
@@ -103,7 +113,15 @@ public class MemberImpl implements Member {
                 "%n---Tasks---%n%s" +
                 "%n---History---%n%s"+
                 "%nTeam: %s" +
-                "%n", getName(), tasks.toString(), activityHistory.toString(), team.getName());
+                "%n", getName(), tasks.toString(), printHistory(), team.getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemberImpl member = (MemberImpl) o;
+        return Objects.equals(name, member.name);
     }
 
 }

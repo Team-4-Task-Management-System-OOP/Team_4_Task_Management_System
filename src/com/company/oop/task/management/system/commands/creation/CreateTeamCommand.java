@@ -2,17 +2,33 @@ package com.company.oop.task.management.system.commands.creation;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.models.teams.contracts.Team;
+import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
 public class CreateTeamCommand extends BaseCommand {
+
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    public static final String MEMBER_CREATION_SUCCESSFUL_MESSAGE = "A member with name %s has been created!";
 
     public CreateTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
     @Override
-    protected String executeCommand(List<String> parameters) {
-        return "";
+    public String executeCommand(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        String teamName = parameters.get(0);
+        Team currentMember = getTaskManagementSystemRepository().createTeam(teamName);
+        currentMember.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, teamName));
+        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, teamName);
+    }
+
+    @Override
+    protected boolean requiresLogin() {
+        return false;
     }
 }
+

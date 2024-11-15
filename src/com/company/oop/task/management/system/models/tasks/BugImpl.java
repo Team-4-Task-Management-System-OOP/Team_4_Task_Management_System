@@ -109,4 +109,6 @@ public class BugImpl extends TaskBase implements Bug {
         return TaskType.BUG;
     }
 //ToDo Possibly a printing method
+    //important info
+    //optional info
 }

@@ -1,6 +1,9 @@
 package com.company.oop.task.management.system.core;
 
 import com.company.oop.task.management.system.commands.contracts.Command;
+import com.company.oop.task.management.system.commands.utils.CommandsConstants;
+import com.company.oop.task.management.system.commands.utils.HelpCommand;
+import com.company.oop.task.management.system.commands.utils.UserCommandsGuide;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemEngine;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
@@ -29,7 +32,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     @Override
     public void start() {
-       // System.out.println("Please provide one of the following commands:"); //ToDo
+       System.out.println(UserCommandsGuide.ENGINE_START_MESSAGE); //ToDo
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {

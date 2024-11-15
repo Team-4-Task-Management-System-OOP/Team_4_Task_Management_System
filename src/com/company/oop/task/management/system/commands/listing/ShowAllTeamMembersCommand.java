@@ -29,7 +29,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand implements Command {
         if (parameters.isEmpty()) {
             return PLEASE_SPECIFY_A_TEAM_NAME;
         }
-        String teamName = parameters.getFirst();
+        String teamName = parameters.get(0);
         Optional<Team> optionalTeam = getTaskManagementSystemRepository()
                 .getTeams()
                 .stream()

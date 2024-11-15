@@ -12,6 +12,11 @@ public class FilterTasksByTitleCommand extends BaseCommand {
     }
 
     @Override
+    protected boolean requiresLogin() {
+        return false;
+    }
+
+    @Override
     protected String executeCommand(List<String> parameters) {
         return "";
     }

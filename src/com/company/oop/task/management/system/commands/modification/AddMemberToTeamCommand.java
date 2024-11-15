@@ -1,13 +1,13 @@
-package com.company.oop.task.management.system.commands.listing;
+package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
 import java.util.List;
 
-public class ShowBoardActivityCommand extends BaseCommand {
+public class AddMemberToTeamCommand extends BaseCommand {
 
-    public ShowBoardActivityCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public AddMemberToTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 

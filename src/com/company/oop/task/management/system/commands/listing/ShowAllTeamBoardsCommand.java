@@ -3,6 +3,7 @@ package com.company.oop.task.management.system.commands.listing;
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.models.teams.TeamImpl;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 
@@ -28,18 +29,15 @@ public class ShowAllTeamBoardsCommand extends BaseCommand implements Command {
         if (parameters.isEmpty()) {
             return SPECIFY_A_TEAM_NAME_TO_SHOW_ITS_BOARDS;
         }
-        String teamName = parameters.getFirst();
+        String teamName = parameters.get(0);
 
-        Team team = null;
+        Team team = new TeamImpl(teamName);
         for (Team t : getTaskManagementSystemRepository().getTeams()) {
             if (t.getName().equalsIgnoreCase(teamName)) {
                 team = t;
                 break;
             }
-        }
-
-        if (team == null) {
-            return String.format(TEAM_NOT_FOUND, teamName);
+            else return String.format(TEAM_NOT_FOUND, teamName);
         }
 
         List<Board> boards = team.getBoards();

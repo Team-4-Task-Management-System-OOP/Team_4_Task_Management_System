@@ -1,4 +1,4 @@
-package com.company.oop.task.management.system.commands;
+package com.company.oop.task.management.system.commands.utils;
 
 public class CommandsConstants {
 
@@ -6,13 +6,19 @@ public class CommandsConstants {
 
     public static final String TASK_CREATED = "Task with ID %d was created.";
 
-    public static final String COMMENT_ADDED = "Comment %s was added successfully to task %s by member %s";
+    public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
+            "Please enter valid task ID.";
+
+    public static final String COMMENT_ADDED = "Comment was added successfully to task %s by %s";
 
     public static final String TASK_ASSIGNED = "Task with ID %d was assigned to %s";
 
     public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from %s";
 
     public static final String ENUM_CHANGED = "The %s of task ID %d was changed from %s to %s successfully.";
+
+    public static final String NO_PERSONS_FOUND_IN_THE_MEMBERS = "There are no people to be shown. " +
+            "Please add a person first.";
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 

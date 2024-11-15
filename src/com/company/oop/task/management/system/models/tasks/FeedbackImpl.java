@@ -15,10 +15,10 @@ public class FeedbackImpl extends TaskBase implements Feedback {
     private FeedbackStatus feedbackStatus;
     private TaskType taskType;
 
-    public FeedbackImpl(int id, String title, String description, int rating, FeedbackStatus feedbackStatus) {
+    public FeedbackImpl(int id, String title, String description, int rating) {
         super(id, title, description);
         setRating(rating);
-        this.feedbackStatus = feedbackStatus;
+        this.feedbackStatus = FeedbackStatus.NEW;
     }
 
     private void setRating(int rating) {

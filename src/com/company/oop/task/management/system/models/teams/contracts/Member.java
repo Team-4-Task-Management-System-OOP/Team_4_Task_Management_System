@@ -16,10 +16,12 @@ public interface Member extends Nameable, Printable {
 
     void setTeam(Team team);
 
-    void addTask(Assignable task);
+    void addTask(Task task);
 
-    void removeTask(Assignable task);
+    void removeTask(Task task);
 
     void addActivityHistory(String history);
+
+    String printHistory();
 
 }

@@ -10,11 +10,13 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.COMMENT_ADDED;
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.INVALID_INPUT_MESSAGE;
+import static java.lang.String.format;
+
 public class CreateCommentCommand extends BaseCommand{
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-    public static final String INVALID_INPUT_MESSAGE = "Invalid input. Please enter valid data.";
-    public static final String COMMENT_ADDED_SUCCESSFULLY = "Comment added successfully by %s!";
 
     public CreateCommentCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -31,10 +33,11 @@ public class CreateCommentCommand extends BaseCommand{
         String content = parameters.get(0);
         String authorName = parameters.get(1);
         int taskId = ParsingHelpers.tryParseInt(parameters.get(2), INVALID_INPUT_MESSAGE);
-        Task task = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getTasks(), taskId);
+        Task task = getTaskManagementSystemRepository()
+                .findTaskById(getTaskManagementSystemRepository().getTasks(), taskId);
         Comment comment = new CommentImpl(content, authorName);
         task.addComment(comment);
 
-        return COMMENT_ADDED_SUCCESSFULLY;
+        return format(COMMENT_ADDED, task.getTitle(), authorName);
     }
 }

@@ -20,19 +20,12 @@ public class CreateMemberCommand extends BaseCommand {
     @Override
     public String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
-        String name = parameters.getFirst();
-
-        createPerson(name);
-
-        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, name);
+        String memberName = parameters.get(0);
+        Member currentMember = getTaskManagementSystemRepository().createMember(memberName);
+        currentMember.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
+        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName);
     }
 
-    private void createPerson(String name) {
-        Member currentMember = getTaskManagementSystemRepository().createMember(name);
-        currentMember.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, name));
-    }
-    // you dont need to be logged in to create a member
     @Override
     protected boolean requiresLogin() {
         return false;

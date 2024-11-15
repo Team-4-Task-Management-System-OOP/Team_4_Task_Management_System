@@ -7,6 +7,7 @@ import com.company.oop.task.management.system.commands.listing.*;
 import com.company.oop.task.management.system.commands.modification.*;
 import com.company.oop.task.management.system.commands.security.LoginCommand;
 import com.company.oop.task.management.system.commands.security.LogoutCommand;
+import com.company.oop.task.management.system.commands.utils.HelpCommand;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
@@ -22,8 +23,8 @@ public class CommandFactoryImpl implements CommandFactory {
         switch (commandType) {
             case CREATEMEMBER:
                 return new CreateMemberCommand(taskManagementSystemRepository);
-            case SHOWALLPEOPLE:
-                return new ShowAllPeopleCommand(taskManagementSystemRepository);
+            case SHOWALLMEMBERS:
+                return new ShowAllMembersCommand(taskManagementSystemRepository);
             case SHOWPERSONACTIVITY:
                 return new ShowPersonActivityCommand(taskManagementSystemRepository);
             case CREATETEAM:
@@ -34,8 +35,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllTeamCommand(taskManagementSystemRepository);
             case SHOWTEAMACTIVITY:
                 return new ShowTeamActivityCommand(taskManagementSystemRepository);
-            case ADDPERSONTOTEAM:
-                return new AddPersonToTeamCommand(taskManagementSystemRepository);
+            case ADDMEMBERTOTEAM:
+                return new AddMemberToTeamCommand(taskManagementSystemRepository);
             case SHOWALLTEAMMEMBERS:
                 return new ShowAllTeamMembersCommand(taskManagementSystemRepository);
             case CREATEBOARD:
@@ -70,8 +71,6 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
                 return new UnassignTaskCommand(taskManagementSystemRepository);
-            case ADDCOMMENTTOTASK:
-                return new AddCommentToTaskCommand(taskManagementSystemRepository);
             case LISTALLTASKS:
                 return new ListAllTasksCommand(taskManagementSystemRepository);
             case FILTERTASKSBYTITLE:
@@ -96,6 +95,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new LoginCommand(taskManagementSystemRepository);
             case LOGOUT:
                 return new LogoutCommand(taskManagementSystemRepository);
+            case HELP:
+                return new HelpCommand(taskManagementSystemRepository);
             default:
                 throw new InvalidUserInputException(String.format(INVALID_COMMAND, commandType));
         }
