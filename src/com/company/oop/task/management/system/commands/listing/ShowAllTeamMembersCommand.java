@@ -23,7 +23,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand implements Command {
     protected boolean requiresLogin() {
         return false;
     }
-
+//ToDo
     @Override
     protected String executeCommand(List<String> parameters) {
         if (parameters.isEmpty()) {
