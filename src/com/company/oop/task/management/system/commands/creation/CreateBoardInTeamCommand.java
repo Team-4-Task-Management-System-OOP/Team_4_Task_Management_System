@@ -26,9 +26,8 @@ public class CreateBoardInTeamCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String boardName = parameters.get(0);
         String teamName = parameters.get(1);
-        Board boardNew = getTaskManagementSystemRepository().createBoard(boardName);
         Team teamToAddBoardTo = getTaskManagementSystemRepository().findTeamByName(teamName);
-
+        Board boardNew = getTaskManagementSystemRepository().createBoard(boardName, teamToAddBoardTo);
 
 
         return "";

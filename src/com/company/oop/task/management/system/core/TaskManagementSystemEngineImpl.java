@@ -57,7 +57,6 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
-        // CreatePerson Dimitar
         List<String> parameters = extractCommandParameters(inputLine);
         Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementSystemRepository);
         String executionResult = command.execute(parameters);
@@ -79,7 +78,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         }
         return parameters;
     }
-
+//Todo dali shte grumne s opisanie na bug
     private List<String> extractCommentParameters(String fullCommand) {
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);

@@ -127,6 +127,8 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Comment createComment(String content, String author) {
+       // findTaskById(task id);
+        findMemberByName(author);
         return new CommentImpl(content, author);
     }
 
@@ -197,8 +199,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Board createBoard(String name) {
-        Board board = new BoardImpl(name);
+    public Board createBoard(String boardName, Team teamName) {
+        Team team = findTeamByName(teamName.getName());
+        Board board = new BoardImpl(boardName);
         if (!getBoards().contains(board)){
             boards.add(board);
         }

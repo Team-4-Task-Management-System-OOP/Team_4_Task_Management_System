@@ -79,7 +79,7 @@ public class StoryImplTests {
             story.changeStoryStatus(null);
             fail("Expected an InvalidUserInputException for null status.");
         } catch (InvalidUserInputException e) {
-            assertEquals("Status cannot be null", e.getMessage());
+            assertEquals("Story's Status cannot be empty!", e.getMessage());
         }
         assertEquals(currentStatus, story.getStoryStatus());
     }

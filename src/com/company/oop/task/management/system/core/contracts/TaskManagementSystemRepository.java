@@ -29,7 +29,7 @@ public interface TaskManagementSystemRepository {
 
     List<Assignable> getAssignedTasks();
 
-   // public void addTeam(Team teamToAdd);
+    // public void addTeam(Team teamToAdd);
 
     Team findTeamByName(String name);
 
@@ -55,7 +55,7 @@ public interface TaskManagementSystemRepository {
 
     Team createTeam(String name);
 
-    Board createBoard(String name);
+    Board createBoard(String name, Team team);
 
     <T extends Identifiable> T findTaskById(List<T> elements, int id);
 
