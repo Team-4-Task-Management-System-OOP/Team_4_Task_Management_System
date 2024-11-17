@@ -6,7 +6,7 @@ import com.company.oop.task.management.system.models.teams.contracts.Member;
 
 public interface Assignable extends Task{
 
-    Member DEFAULT_ASSIGNEE = new MemberImpl("unassigned");
+    Member DEFAULT_ASSIGNEE = new MemberImpl("Unassigned");
 
     Member getAssignee();
 

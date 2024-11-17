@@ -8,7 +8,6 @@ import com.company.oop.task.management.system.models.teams.contracts.Team;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
@@ -23,14 +22,14 @@ public class TeamImpl implements Team {
             "Team's name must be between %d and %d!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
-    private static final String NAME_ALREADY_EXISTS = "Member with name ''%s'' is already added to team %s!" +
+    private static final String MEMBER_ALREADY_EXISTS = "Member with name ''%s'' is already added to team %s!" +
             "Please, provide a different member to add to the team.";
     private static final String BOARD_ALREADY_EXISTS = "Board with name ''%s'' is added to team %s! " +
             "Please, provide a different board to add to the team.";
     private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member with name ''%s''" +
             " doesn't exist in team %s!";
     private static final String NOT_EXISTING_BOARD_MESSAGE = "Board with name ''%s''" +
-            " doesn't exist!";
+            " doesn't exist in team %s!";
     private static final String NO_MEMBERS = "---NO MEMBERS TO DISPLAY---%nAdd a member first!";
     private static final String NO_BOARDS = "---NO BOARDS TO DISPLAY---%nAdd a board first!";
     private static final String NO_HISTORY = "---NO TEAM HISTORY TO DISPLAY---%nDo some activities first!";
@@ -38,6 +37,10 @@ public class TeamImpl implements Team {
     private static final String BOARD_ADDED = "Board %s was successfully added to team %s.";
     private static final String MEMBER_REMOVED = "Member %s was successfully removed from team %s.";
     private static final String MEMBER_ADDED = "Member %s was successfully added to team %s.";
+    public static final String CANNOT_ADD_AN_EMPTY_MEMBER = "Cannot add an empty member!";
+    public static final String CANNOT_REMOVE_AN_EMPTY_MEMBER = "Cannot remove an empty member!";
+    public static final String CANNOT_ADD_AN_EMPTY_BOARD = "Cannot add an empty board!";
+    public static final String CANNOT_REMOVE_AN_EMPTY_BOARD = "Cannot remove an empty board!";
 
     //Fields
     private String name;
@@ -56,7 +59,6 @@ public class TeamImpl implements Team {
     //Setters
     private void setName(String name) {
         validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERR);
-        // TODO - Consider checking for unique name in the CommandFactory (eventually)
         this.name = name;
     }
 
@@ -88,8 +90,11 @@ public class TeamImpl implements Team {
 
     @Override
     public void addMember(Member member) {
+        if (member == null) {
+            throw new InvalidUserInputException(CANNOT_ADD_AN_EMPTY_MEMBER);
+        }
         if (members.stream().anyMatch(m -> m.getName().equalsIgnoreCase(member.getName()))) {
-            throw new InvalidUserInputException(format(NAME_ALREADY_EXISTS, member.getName(), getName()));
+            throw new InvalidUserInputException(format(MEMBER_ALREADY_EXISTS, member.getName(), getName()));
         }
         members.add(member);
         addActivityHistory(format(MEMBER_ADDED, member.getName(), getName()));
@@ -97,6 +102,9 @@ public class TeamImpl implements Team {
 
     @Override
     public void removeMember(Member member) {
+        if (member == null) {
+            throw new InvalidUserInputException(CANNOT_REMOVE_AN_EMPTY_MEMBER);
+        }
         if (members.stream().anyMatch(m -> m.getName().equalsIgnoreCase(member.getName()))) {
             members.remove(member);
             addActivityHistory(format(MEMBER_REMOVED, member.getName(), getName()));
@@ -107,8 +115,11 @@ public class TeamImpl implements Team {
 
     @Override
     public void addBoard(Board board) {
+        if (board == null) {
+            throw new InvalidUserInputException(CANNOT_ADD_AN_EMPTY_BOARD);
+        }
         if (boards.stream().anyMatch(b -> b.getName().equalsIgnoreCase(board.getName()))) {
-            throw new InvalidUserInputException(format(BOARD_ALREADY_EXISTS, board, getName()));
+            throw new InvalidUserInputException(format(BOARD_ALREADY_EXISTS, board.getName(), getName()));
         }
         boards.add(board);
         addActivityHistory(format(BOARD_ADDED, board.getName(), getName()));
@@ -116,11 +127,16 @@ public class TeamImpl implements Team {
 
     @Override
     public void removeBoard(Board board) {
+        if (board == null) {
+            throw new InvalidUserInputException(CANNOT_REMOVE_AN_EMPTY_BOARD);
+        }
         if (boards.stream().anyMatch(b -> b.getName().equalsIgnoreCase(board.getName()))) {
             boards.remove(board);
             addActivityHistory(format(BOARD_REMOVED, board.getName(), getName()));
         }
-        throw new InvalidUserInputException(format(NOT_EXISTING_BOARD_MESSAGE, board));
+        else {
+            throw new InvalidUserInputException(format(NOT_EXISTING_BOARD_MESSAGE, board.getName(), getName()));
+        }
     }
 
     //Print

@@ -8,7 +8,6 @@ import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
@@ -28,8 +27,8 @@ public abstract class TaskBase implements Task {
             TITLE_MAX_LENGTH);
     private static final String DESCRIPTION_VAL_ERR = format(
             "Description must be between %d and %d!",
-            TITLE_MIN_LENGTH,
-            TITLE_MAX_LENGTH);
+            DESCRIPTION_MIN_LENGTH,
+            DESCRIPTION_MAX_LENGTH);
     private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";

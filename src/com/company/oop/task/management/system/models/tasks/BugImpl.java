@@ -164,7 +164,7 @@ public class BugImpl extends TaskBase implements Bug {
                         "Severity: %s%n" +
                         "Bug Status: %s%n" +
                         "Assignee: %s%n" +
-                        "Reproducible steps: %s%n",
+                        "---Reproducible steps---%n%s%n",
                 super.printImportantInfo(), getPriority(), getBugSeverity(),
                 getBugStatus(), getAssignee().getName(), printReproducibleSteps());
     }

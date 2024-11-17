@@ -8,7 +8,6 @@ import com.company.oop.task.management.system.models.teams.contracts.Team;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
@@ -54,9 +53,15 @@ public class MemberImpl implements Member {
 
     @Override
     public void setTeam(Team teamName) {
-        if (!team.getName().equalsIgnoreCase(teamName.getName())) {
-
+        if (team.getName() == null) {
+            this.team = teamName;
+            addActivityHistory(format("Member %s assigned to team %s.", getName(), teamName.getName()));
         }
+        if (this.team != null && this.team.getName().equalsIgnoreCase(teamName.getName())) {
+            throw new InvalidUserInputException(format("Member %s is already part of this team!", getName()));
+        }
+        addActivityHistory(format("Member %s reassigned to team %s from team %s.",
+                getName(), teamName.getName(), this.team.getName()));
         this.team = teamName;
     }
 

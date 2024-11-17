@@ -49,7 +49,7 @@ public class BoardImpl implements Board {
 
     //Setters
     private void setName(String name) {
-        validateStringLength(name,BOARD_NAME_MIN_LENGTH, BOARD_NAME_MIN_LENGTH, BOARD_NAME_LENGTH_ERR);
+        validateStringLength(name,BOARD_NAME_MIN_LENGTH, BOARD_NAME_MAX_LENGTH, BOARD_NAME_LENGTH_ERR);
         this.name = name;
     }
 
