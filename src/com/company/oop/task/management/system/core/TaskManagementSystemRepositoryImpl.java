@@ -21,13 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private static final String NO_SUCH_TEAM = "There is no team with name %s!";
     private static final String TEAM_ALREADY_EXISTS = "Team %s already exists. Choose a different name!";
     private static final String MEMBER_ALREADY_EXISTS = "Member %s already exists. Choose a different name!";
     private static final String BOARD_ALREADY_EXISTS = "Board %s already exists in team %s!";
+    public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
+    public static final String NO_ELEMENT_NAME_FOUND = "No %s with name %s exists!";
+    public static final String NO_TASK_WITH_ID_FOUND = "No task with ID %d";
+    public static final String BOARD_ALREADY_EXISTS_IN_REPO = "A board with this name already exists and cannot be created!" +
+            "Please, provide a different board name!";
+    public static final String TEAM_ALREADY_EXISTS_IN_REPO = "A team with this name already exists and cannot be created!" +
+            "Please, provide a different team name!";
+    public static final String MEMBER_ALREADY_EXISTS_IN_REPO = "A member with this name already exists and cannot be created! " +
+            "Please, provide a different member name!";
+    public static final String BUG_ALREADY_EXISTS_IN_REPO = "A task with the same title already exists and cannot be created! " +
+            "Please, provide a different task title!";
+    public static final String STORY_ALREADY_EXISTS_IN_REPO = "A task with the same title already exists and cannot be created! " +
+            "Please, provide a different task title!";
+    public static final String FEEDBACK_ALREADY_EXISTS_IN_REPO = "A task with the same title already exists and cannot be created! " +
+            "Please, provide a different task title!";
 
     private int nextId;
-    //Todo security checks with login - how to be implemented? - I think I have done it - Ivan
     private Member loggedMember;
 
     private final List<Member> members;
@@ -123,8 +136,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             this.tasks.add(feedback);
             this.feedbacks.add(feedback);
         } else {
-            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
-                    "Please, provide a different task title!");
+            throw new InvalidUserInputException(FEEDBACK_ALREADY_EXISTS_IN_REPO);
         }
         return feedback;
     }
@@ -139,8 +151,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             this.stories.add(story);
             this.assignableTasks.add(story);
         } else {
-            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
-                    "Please, provide a different task title!");
+            throw new InvalidUserInputException(STORY_ALREADY_EXISTS_IN_REPO);
         }
         return story;
     }
@@ -156,8 +167,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             this.bugs.add(bug);
             this.assignableTasks.add(bug);
         } else {
-            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
-                    "Please, provide a different task title!");
+            throw new InvalidUserInputException(BUG_ALREADY_EXISTS_IN_REPO);
         }
         return bug;
     }
@@ -168,8 +178,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         if (!getMembers().contains(member)) {
             members.add(member);
         } else {
-            throw new InvalidUserInputException("A member with this name already exists and cannot be created! " +
-                    "Please, provide a different member name!");
+            throw new InvalidUserInputException(MEMBER_ALREADY_EXISTS_IN_REPO);
         }
         return new MemberImpl(name);
     }
@@ -181,8 +190,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             teams.add(team);
         }
         else {
-            throw new InvalidUserInputException("A team with this name already exists and cannot be created!" +
-                    "Please, provide a different team name!");
+            throw new InvalidUserInputException(TEAM_ALREADY_EXISTS_IN_REPO);
         }
         return team;
     }
@@ -194,8 +202,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
             boards.add(board);
         }
         else {
-            throw new InvalidUserInputException("A board with this name already exists and cannot be created!" +
-                    "Please, provide a different board name!");
+            throw new InvalidUserInputException(BOARD_ALREADY_EXISTS_IN_REPO);
         }
         return board;
     }
@@ -222,7 +229,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 return element;
             }
         }
-        throw new ElementNotFoundException(String.format("No task with ID %d", id));
+        throw new ElementNotFoundException(String.format(NO_TASK_WITH_ID_FOUND, id));
     }
 
     @Override
@@ -232,13 +239,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
                 .filter(element -> element.getName().equalsIgnoreCase(name))
                 .findAny()
                 .orElseThrow(() -> new ElementNotFoundException(
-                        String.format("No %s with name %s exists!",elements.getClass().getSimpleName(), name)));
+                        String.format(NO_ELEMENT_NAME_FOUND, elements.getClass().getSimpleName(), name)));
     }
 
     @Override
     public Member getLoggedInMember() {
         if (loggedMember == null) {
-            throw new InvalidUserInputException("There is no logged in member.");
+            throw new InvalidUserInputException(NO_LOGGED_IN_MEMBER);
         }
         return loggedMember;
     }
