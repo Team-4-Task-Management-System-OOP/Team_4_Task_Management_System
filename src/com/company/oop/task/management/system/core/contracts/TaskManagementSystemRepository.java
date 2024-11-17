@@ -31,15 +31,15 @@ public interface TaskManagementSystemRepository {
 
    // public void addTeam(Team teamToAdd);
 
-    public Team findTeamByName(String name);
+    Team findTeamByName(String name);
 
     Member findMemberByName(String memberName);
 
     Board findBoardByName(String boardName);
 
-    public void addMemberToTeam(String teamName, Member memberToAdd);
+    void addMemberToTeam(String teamName, Member memberToAdd);
 
-    public void addBoardToTeam(String teamName, Board boardToAdd);
+    void addBoardToTeam(String teamName, Board boardToAdd);
 
     Comment createComment(String content, String author);
 

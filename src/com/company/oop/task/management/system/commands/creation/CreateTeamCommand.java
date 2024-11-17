@@ -22,7 +22,7 @@ public class CreateTeamCommand extends BaseCommand {
         String teamName = parameters.get(0);
         Team currentTeam = getTaskManagementSystemRepository().createTeam(teamName);
         currentTeam.addActivityHistory(String.format(TEAM_CREATION_SUCCESSFUL_MESSAGE, teamName));
-        return String.format(TEAM_CREATION_SUCCESSFUL_MESSAGE, teamName);
+        return String.format(TEAM_CREATION_SUCCESSFUL_MESSAGE, currentTeam.getName());
     }
 
     @Override

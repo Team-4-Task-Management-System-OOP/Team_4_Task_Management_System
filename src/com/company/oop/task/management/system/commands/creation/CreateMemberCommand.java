@@ -24,7 +24,7 @@ public class CreateMemberCommand extends BaseCommand {
         String memberName = parameters.get(0);
         Member currentMember = getTaskManagementSystemRepository().createMember(memberName);
         currentMember.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
-        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName);
+        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, currentMember.getName());
     }
 
     @Override

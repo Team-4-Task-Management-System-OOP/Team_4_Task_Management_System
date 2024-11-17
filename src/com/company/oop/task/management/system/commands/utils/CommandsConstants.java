@@ -7,12 +7,16 @@ public class CommandsConstants {
     public static final String TASK_CREATED = "Task with ID %d was created.";
 
     public static final String TEAM_HEADLINE = "---Team №%d---%n";
+
     public static final String MEMBER_HEADLINE = "---Member №%d---%n";
+
     public static final String BOARD_HEADLINE = "---Board №%d---%n";
 
     public static final String ALL_MEMBERS_MESSAGE = "---ALL MEMBERS---\n";
 
     public static final String ALL_TEAMS_MESSAGE = "---ALL TEAMS---\n";
+
+    public static final String ALL_TEAM_BOARDS_MESSAGE = "---ALL TEAM BOARDS---\n";
 
     public static final String MEMBER_CREATION_SUCCESSFUL_MESSAGE = "A member with name ''%s'' has been created!";
 
@@ -32,6 +36,9 @@ public class CommandsConstants {
 
     public static final String NO_TEAMS_FOUND = "There are no teams to be shown. " +
             "Please add a team first.";
+
+    public static final String NO_BOARDS_FOUND = "There are no boards in team ''%s'' to be shown. " +
+            "Please add a board to team ''%s'' first.";
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 

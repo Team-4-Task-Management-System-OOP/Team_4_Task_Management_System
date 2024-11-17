@@ -7,7 +7,6 @@ import com.company.oop.task.management.system.models.teams.contracts.Board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
