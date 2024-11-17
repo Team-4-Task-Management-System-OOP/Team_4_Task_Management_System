@@ -13,9 +13,13 @@ public interface Task extends Commentable, Identifiable, Printable {
 
     List<String> getHistory();
 
-    TaskType getType();
+    TaskType getTaskType();
 
-    String printInfo();
+    String printImportantInfo();
+
+    String printComments();
+
+    String printLogHistory();
 
     void historyLogger (String log);
 

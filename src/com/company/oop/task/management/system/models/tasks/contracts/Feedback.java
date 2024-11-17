@@ -4,11 +4,11 @@ import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 
 public interface Feedback extends Task {
 
-    int getRating();
+    int getFeedbackRating();
 
-    FeedbackStatus getStatus();
+    FeedbackStatus getFeedbackStatus();
 
-    void changeRating(int rating);
+    void changeFeedbackRating(int rating);
 
-    void changeStatus(FeedbackStatus status);
+    void changeFeedbackStatus(FeedbackStatus status);
 }

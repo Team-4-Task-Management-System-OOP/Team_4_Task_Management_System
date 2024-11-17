@@ -5,11 +5,12 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 import java.util.List;
 
 public class ValidationHelpers {
-    private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
+    private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. " +
+            "Expected: %d; received: %d.";
 
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {
-            throw new IllegalArgumentException(message);
+            throw new InvalidUserInputException(message);
         }
     }
 
@@ -19,12 +20,12 @@ public class ValidationHelpers {
 
     public static void validateDecimalRange(double value, double min, double max, String message) {
         if (value < min || value > max) {
-            throw new IllegalArgumentException(message);
+            throw new InvalidUserInputException(message);
         }
     }
 
     public static void validatePositive(int value, String errorMessage) {
-        if (value < 0) {
+        if (value <= 0) {
             throw new InvalidUserInputException(errorMessage);
         }
     }

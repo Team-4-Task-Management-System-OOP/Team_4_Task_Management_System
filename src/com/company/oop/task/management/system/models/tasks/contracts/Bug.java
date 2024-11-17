@@ -9,12 +9,14 @@ public interface Bug extends Task, Assignable {
 
     List<String> getReproducibleSteps();
 
-    BugSeverity getSeverityType();
+    BugSeverity getBugSeverity();
 
     BugStatus getBugStatus();
 
     void changeBugStatus(BugStatus bugstatus);
 
     void changeSeverity(BugSeverity bugSeverity);
+
+    String printReproducibleSteps();
 
 }

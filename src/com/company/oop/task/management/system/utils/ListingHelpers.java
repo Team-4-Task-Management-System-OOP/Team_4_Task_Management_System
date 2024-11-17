@@ -10,6 +10,7 @@ public class ListingHelpers {
 
 
 //ToDo to optimize printing, possible can add Printable interface if need
+    //Somehow have to find a way to optimize all printElement methods in all models
 
     public static <T extends Printable> String elementsToString(List<T> elements) {
         List<String> stringElements = new ArrayList<>();

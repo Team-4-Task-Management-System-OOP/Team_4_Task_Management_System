@@ -5,12 +5,12 @@ import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
 
 public interface Story extends Task, Assignable {
 
-    StoryStatus getStatus();
+    StoryStatus getStoryStatus();
 
-    StorySize getSize();
+    StorySize getStorySize();
 
-    void changeStatus(StoryStatus status);
+    void changeStoryStatus(StoryStatus status);
 
-    void changeSize(StorySize size);
+    void changeStorySize(StorySize size);
 
 }

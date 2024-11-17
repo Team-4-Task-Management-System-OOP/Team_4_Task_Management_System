@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.models.tasks;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
@@ -9,62 +10,80 @@ import static java.lang.String.format;
 
 
 public class FeedbackImpl extends TaskBase implements Feedback {
-    private static final String RATING_ERR = "%d is an invalid number! Rating must be a positive number!";
 
-    private int rating;
+    //Constants
+    public static final String RATING_ERR = "%d is an invalid number! Rating must be a positive number!";
+    public static final String FEEDBACK_STATUS_CHANGED = "Feedback Status changed from %s to %s successfully.";
+    public static final String RATING_CHANGED = "Feedback's feedbackRating changed from %d to %d successfully.";
+    public static final String FEEDBACK_STATUS_ALREADY_SET = "Feedback status is already set to %s!";
+    public static final String RATING_ALREADY_SET = "Feedback's feedbackRating is already set to %s!";
+    public static final String FEEDBACK_STATUS_CANNOT_BE_EMPTY = "Feedback Status cannot be empty.";
+
+    //Fields
+    private int feedbackRating;
     private FeedbackStatus feedbackStatus;
-    private TaskType taskType;
 
-    public FeedbackImpl(int id, String title, String description, int rating) {
+    //Constructor
+    public FeedbackImpl(int id, String title, String description, int feedbackRating) {
         super(id, title, description);
-        setRating(rating);
+        setFeedbackRating(feedbackRating);
         this.feedbackStatus = FeedbackStatus.NEW;
     }
 
-    private void setRating(int rating) {
-        validatePositive(rating, (format(RATING_ERR, rating)));
-        this.rating = rating;
+    //Setters
+    private void setFeedbackRating(int feedbackRating) {
+        validatePositive(feedbackRating, (format(RATING_ERR, feedbackRating)));
+        this.feedbackRating = feedbackRating;
+    }
+
+    //Getters
+    @Override
+    public int getFeedbackRating() {
+        return feedbackRating;
     }
 
     @Override
-    public int getRating() {
-        return rating;
-    }
-
-    @Override
-    public FeedbackStatus getStatus() {
+    public FeedbackStatus getFeedbackStatus() {
         return feedbackStatus;
     }
 
-    //ToDo
     @Override
-    public void changeRating(int rating) {
-
+    public TaskType getTaskType() {
+        return TaskType.FEEDBACK;
     }
 
-    //ToDo
+    //Methods
     @Override
-    public void changeStatus(FeedbackStatus status) {
-        if (status.toString() != FeedbackStatus.DONE.toString()){
-
+    public void changeFeedbackRating(int ratingNew) {
+        validatePositive(ratingNew, (format(RATING_ERR, ratingNew)));
+        if (getFeedbackRating() != ratingNew){
+            super.historyLogger(format(RATING_CHANGED, getFeedbackRating(), ratingNew));
+            feedbackRating = ratingNew;
+        }
+        else {
+            throw new InvalidUserInputException(format(RATING_ALREADY_SET, getFeedbackRating()));
         }
     }
 
     @Override
-    public TaskType getType() {
-        return TaskType.FEEDBACK;
+    public void changeFeedbackStatus(FeedbackStatus feedbackStatusNew) {
+        if (feedbackStatusNew == null) {
+            throw new InvalidUserInputException(FEEDBACK_STATUS_CANNOT_BE_EMPTY);
+        }
+        if (feedbackStatusNew != getFeedbackStatus()){
+            super.historyLogger(format(FEEDBACK_STATUS_CHANGED, getFeedbackStatus(), feedbackStatusNew));
+            feedbackStatus = feedbackStatusNew;
+        }
+        else {
+            throw new InvalidUserInputException(format(FEEDBACK_STATUS_ALREADY_SET, getFeedbackStatus()));
+        }
     }
 
-    //ToDo
+    //Print
     @Override
-    public String printInfo() {
-        return "";
+    public String printImportantInfo() {
+        return format("%s" +
+                "Rating: %d%n" +
+                "Feedback Status: %s%n", super.printImportantInfo(), getFeedbackRating(), getFeedbackStatus());
     }
-
-    @Override
-    public String toString() {
-        return String.format("%s",super.toString());
-    }
-
-
 }

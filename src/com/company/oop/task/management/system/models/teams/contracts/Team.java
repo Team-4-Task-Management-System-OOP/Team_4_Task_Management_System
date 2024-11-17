@@ -10,9 +10,9 @@ public interface Team extends Nameable, Printable {
 
     List<Board> getBoards();
 
-    List<String> getHistory();
+    List<String> getActivityHistory();
 
-    void addActivityHistory(String description);
+    void addActivityHistory(String history);
 
     void addMember(Member member);
 
@@ -21,4 +21,10 @@ public interface Team extends Nameable, Printable {
     void addBoard(Board board);
 
     void removeBoard(Board board);
+
+    String printHistory();
+
+    String printBoards();
+
+    String printMembers();
 }

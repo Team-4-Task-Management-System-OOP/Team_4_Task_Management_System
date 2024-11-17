@@ -1,6 +1,5 @@
 package com.company.oop.task.management.system.utils;
 
-import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 
 import java.time.LocalDateTime;
@@ -51,7 +50,6 @@ public class ParsingHelpers {
         }
     }
 
-    //ToDo Possibly will be needed in many cases in the future
     public static String formatTime(LocalDateTime dateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
 

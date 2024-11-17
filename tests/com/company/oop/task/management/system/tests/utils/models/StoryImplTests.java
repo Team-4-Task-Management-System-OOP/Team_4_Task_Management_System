@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.tests.utils.models;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.StoryImpl;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.StorySize;
@@ -21,7 +22,7 @@ public class StoryImplTests {
     void setUp() {
         story = new StoryImpl(1, "Implement login feature",
                 "Allow users to log in", PriorityType.HIGH,
-                StorySize.LARGE, StoryStatus.NOT_DONE, DEFAULT_MEMBER);
+                StorySize.LARGE);
     }
 
     @Test
@@ -31,10 +32,10 @@ public class StoryImplTests {
         assertEquals("Implement login feature", story.getTitle());
         assertEquals("Allow users to log in", story.getDescription());
         assertEquals(PriorityType.HIGH, story.getPriority());
-        assertEquals(StorySize.LARGE, story.getSize());
-        assertEquals(StoryStatus.NOT_DONE, story.getStatus());
+        assertEquals(StorySize.LARGE, story.getStorySize());
+        assertEquals(StoryStatus.NOT_DONE, story.getStoryStatus());
         assertEquals("JohnDoe", story.getAssignee());
-        assertEquals(TaskType.STORY, story.getType());
+        assertEquals(TaskType.STORY, story.getTaskType());
     }
 
     @Test
@@ -43,13 +44,13 @@ public class StoryImplTests {
     }
 
     @Test
-    void testGetSize() {
-        assertEquals(StorySize.LARGE, story.getSize());
+    void testGetStorySize() {
+        assertEquals(StorySize.LARGE, story.getStorySize());
     }
 
     @Test
-    void testGetStatus() {
-        assertEquals(StoryStatus.NOT_DONE, story.getStatus());
+    void testGetStoryStatus() {
+        assertEquals(StoryStatus.NOT_DONE, story.getStoryStatus());
     }
 
     @Test
@@ -58,29 +59,29 @@ public class StoryImplTests {
     }
 
     @Test
-    void testGetType() {
-        assertEquals(TaskType.STORY, story.getType());
+    void testGetTaskType() {
+        assertEquals(TaskType.STORY, story.getTaskType());
     }
 
     @Test
-    void testChangeStatus() {
-        story.changeStatus(StoryStatus.IN_PROGRESS);
-        assertEquals(StoryStatus.IN_PROGRESS, story.getStatus());
+    void testChangeStoryStatus() {
+        story.changeStoryStatus(StoryStatus.IN_PROGRESS);
+        assertEquals(StoryStatus.IN_PROGRESS, story.getStoryStatus());
 
-        story.changeStatus(StoryStatus.DONE);
-        assertEquals(StoryStatus.DONE, story.getStatus());
+        story.changeStoryStatus(StoryStatus.DONE);
+        assertEquals(StoryStatus.DONE, story.getStoryStatus());
     }
 
     @Test
-    void testChangeStatusInvalid() {
-        StoryStatus currentStatus = story.getStatus();
+    void testChangeStoryStatusInvalid() {
+        StoryStatus currentStatus = story.getStoryStatus();
         try {
-            story.changeStatus(null);
-            fail("Expected an IllegalArgumentException for null status.");
-        } catch (IllegalArgumentException e) {
+            story.changeStoryStatus(null);
+            fail("Expected an InvalidUserInputException for null status.");
+        } catch (InvalidUserInputException e) {
             assertEquals("Status cannot be null", e.getMessage());
         }
-        assertEquals(currentStatus, story.getStatus());
+        assertEquals(currentStatus, story.getStoryStatus());
     }
 }
 

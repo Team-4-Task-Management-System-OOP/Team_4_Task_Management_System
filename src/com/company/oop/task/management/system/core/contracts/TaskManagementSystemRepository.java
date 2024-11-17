@@ -43,13 +43,13 @@ public interface TaskManagementSystemRepository {
 
     Comment createComment(String content, String author);
 
-    Feedback createFeedback(String title, String description, int rating, FeedbackStatus feedbackStatus);
+    Feedback createFeedback(String title, String description, int rating);
 
     Story createStory(String title, String description, PriorityType priorityType,
-                      StorySize size, StoryStatus status, Member assignee);
+                      StorySize size);
 
     Bug createBug(String title, String description, List<String> reproducibleSteps,
-                  PriorityType priority, BugSeverity bugSeverity, BugStatus bugStatus, Member assignee);
+                  PriorityType priority, BugSeverity bugSeverity);
 
     Member createMember(String name);
 

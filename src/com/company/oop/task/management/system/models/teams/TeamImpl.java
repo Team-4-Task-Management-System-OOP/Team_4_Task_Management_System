@@ -5,9 +5,12 @@ import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
@@ -20,23 +23,34 @@ public class TeamImpl implements Team {
             "Team's name must be between %d and %d!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
-    private static final String NAME_UNIQUE_MESSAGE = "Member name must be unique!";
-    private static final String BOARD_UNIQUE_MESSAGE = "Board name must be unique!";
-    private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member doesn't exist!";
-    private static final String NOT_EXISTING_BOARD_MESSAGE = "Board doesn't exist!";
+    private static final String NAME_ALREADY_EXISTS = "Member with name ''%s'' is already added to team %s!" +
+            "Please, provide a different member to add to the team.";
+    private static final String BOARD_ALREADY_EXISTS = "Board with name ''%s'' is added to team %s! " +
+            "Please, provide a different board to add to the team.";
+    private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member with name ''%s''" +
+            " doesn't exist in team %s!";
+    private static final String NOT_EXISTING_BOARD_MESSAGE = "Board with name ''%s''" +
+            " doesn't exist!";
+    private static final String NO_MEMBERS = "---NO MEMBERS TO DISPLAY---%nAdd a member first!";
+    private static final String NO_BOARDS = "---NO BOARDS TO DISPLAY---%nAdd a board first!";
+    private static final String NO_HISTORY = "---NO TEAM HISTORY TO DISPLAY---%nDo some activities first!";
+    private static final String BOARD_REMOVED = "Board %s was successfully removed from team %s.";
+    private static final String BOARD_ADDED = "Board %s was successfully added to team %s.";
+    private static final String MEMBER_REMOVED = "Member %s was successfully removed from team %s.";
+    private static final String MEMBER_ADDED = "Member %s was successfully added to team %s.";
 
-    // Fields
+    //Fields
     private String name;
     private final List<Member> members;
     private final List<Board> boards;
-    private final List<String> history;
+    private final List<String> activityHistory;
 
     //Constructor
     public TeamImpl(String name) {
         setName(name);
         this.members = new ArrayList<>();
         this.boards = new ArrayList<>();
-        this.history = new ArrayList<>();
+        this.activityHistory = new ArrayList<>();
     }
 
     //Setters
@@ -62,57 +76,108 @@ public class TeamImpl implements Team {
         return new ArrayList<>(boards);
     }
 
-    public List<String> getHistory() {
-        return new ArrayList<>(history);
+    public List<String> getActivityHistory() {
+        return new ArrayList<>(activityHistory);
     }
 
     //Methods
-    //ToDo current time might be need - ParsingHelpers.formatTime
     @Override
-    public void addActivityHistory(String description) {
-        history.add(description);
+    public void addActivityHistory(String history) {
+        activityHistory.add(format("[%s] - %s", formatTime(LocalDateTime.now()), history));
     }
 
     @Override
     public void addMember(Member member) {
-        if (members.stream().anyMatch(m -> m.getName().equals(member.getName()))) {
-            throw new InvalidUserInputException(NAME_UNIQUE_MESSAGE);
+        if (members.stream().anyMatch(m -> m.getName().equalsIgnoreCase(member.getName()))) {
+            throw new InvalidUserInputException(format(NAME_ALREADY_EXISTS, member.getName(), getName()));
         }
         members.add(member);
+        addActivityHistory(format(MEMBER_ADDED, member.getName(), getName()));
     }
 
     @Override
     public void removeMember(Member member) {
-        if (members.stream().anyMatch(m -> m.getName().equals(member.getName()))) {
+        if (members.stream().anyMatch(m -> m.getName().equalsIgnoreCase(member.getName()))) {
             members.remove(member);
+            addActivityHistory(format(MEMBER_REMOVED, member.getName(), getName()));
         } else {
-            throw new InvalidUserInputException(NOT_EXISTING_MEMBER_MESSAGE);
+            throw new InvalidUserInputException(format(NOT_EXISTING_MEMBER_MESSAGE, member.getName(), getName()));
         }
     }
 
     @Override
     public void addBoard(Board board) {
-        if (boards.stream().anyMatch(b -> b.getName().equals(board.getName()))) {
-            throw new InvalidUserInputException(BOARD_UNIQUE_MESSAGE);
+        if (boards.stream().anyMatch(b -> b.getName().equalsIgnoreCase(board.getName()))) {
+            throw new InvalidUserInputException(format(BOARD_ALREADY_EXISTS, board, getName()));
         }
         boards.add(board);
+        addActivityHistory(format(BOARD_ADDED, board.getName(), getName()));
     }
 
     @Override
     public void removeBoard(Board board) {
-        if (boards.stream().anyMatch(b -> b.getName().equals(board.getName()))) {
+        if (boards.stream().anyMatch(b -> b.getName().equalsIgnoreCase(board.getName()))) {
             boards.remove(board);
+            addActivityHistory(format(BOARD_REMOVED, board.getName(), getName()));
         }
-        throw new InvalidUserInputException(NOT_EXISTING_BOARD_MESSAGE);
+        throw new InvalidUserInputException(format(NOT_EXISTING_BOARD_MESSAGE, board));
     }
 
     //Print
     @Override
-    public String toString() {
-        return format("---Team---%n" +
-                "%nName: %s" +
-                "%n---Members---%n%s" +
-                "%n---Boards---%n%s", getName(), members.toString(), boards.toString());
+    public String printHistory() {
+        if (getActivityHistory().isEmpty() || getActivityHistory() == null) {
+            return NO_HISTORY;
+        }
+        StringBuilder printHistory = new StringBuilder();
+        for (String history : activityHistory) {
+            printHistory.append(history).append(System.lineSeparator());
+        }
+        return printHistory.toString();
     }
 
+    @Override
+    public String printMembers() {
+        if (getMembers().isEmpty() || getMembers() == null) {
+            return NO_MEMBERS;
+        } else {
+            StringBuilder printMembers = new StringBuilder();
+            for (Member member : members) {
+                printMembers.append(member.getName()).append(System.lineSeparator());
+            }
+            return printMembers.toString();
+        }
+
+    }
+
+    @Override
+    public String printBoards() {
+        if (getBoards().isEmpty() || getBoards() == null) {
+            return NO_BOARDS;
+        } else {
+            StringBuilder printBoards = new StringBuilder();
+            for (Board board : boards) {
+                printBoards.append(board.getName()).append(System.lineSeparator());
+            }
+            return printBoards.toString();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return format("---Team---%n" +
+                "%nTeam Name: %s" +
+                "%n---Team Members---%n%s" +
+                "%n---Team Boards---%n%s" +
+                "%n---Team History---%n%s", getName(), printMembers(), printBoards(), printHistory());
+    }
+
+    //Equals Override in order to make contains method work properly in repo
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TeamImpl team = (TeamImpl) o;
+        return name.equalsIgnoreCase(team.name);
+    }
 }

@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.tests.utils.models;
 
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.teams.BoardImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ public class BoardImplTests {
 //        board.addTask(task);
 //
 //        List<Task> tasks = board.getTasks();
-//        List<String> history = board.getHistory();
+//        List<String> history = board.getActivityHistory();
 //
 //        assertEquals(1, tasks.size());
 //        assertEquals(task, tasks.getFirst());
@@ -41,7 +42,7 @@ public class BoardImplTests {
 
     @Test
     void testAddTask_NullTask_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> board.addTask(null));
+        InvalidUserInputException exception = assertThrows(InvalidUserInputException.class, () -> board.addTask(null));
         assertEquals("Task not found", exception.getMessage());
     }
 
@@ -63,6 +64,6 @@ public class BoardImplTests {
 //        assertEquals(2, board.getTasks().size());
 //        assertEquals("Task 1", board.getTasks().get(0));
 //        assertEquals("Task 2", board.getTasks().get(1));
-//        assertEquals(2, board.getHistory().size());
+//        assertEquals(2, board.getActivityHistory().size());
 //    }
 }

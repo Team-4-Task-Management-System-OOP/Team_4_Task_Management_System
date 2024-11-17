@@ -3,15 +3,20 @@ package com.company.oop.task.management.system.models.tasks;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
 
+    //Constants
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
     public static final int DESCRIPTION_MIN_LENGTH = 10;
@@ -26,18 +31,19 @@ public abstract class TaskBase implements Task {
             TITLE_MIN_LENGTH,
             TITLE_MAX_LENGTH);
     private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
-    private static final String CANNOT_ADD_A_NULL_HISTORY = "Cannot add an empty history.";
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
-    private static final String NO_LOG_HISTORY = "---NO LOG HISTORY---";
-    private static final String NO_COMMENTS = "---NO COMMENTS---";
+    private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";
+    private static final String NO_COMMENTS = "---NO COMMENTS ADDED TO TASK TO DISPLAY---";
 
+    //Fields
     private final int id;
     private String title;
     private String description;
     private final List<Comment> comments;
     private final List<String> history;
 
-    public TaskBase(int id, String title, String description){
+    //Constructor
+    public TaskBase(int id, String title, String description) {
         this.id = id;
         setTitle(title);
         setDescription(description);
@@ -45,6 +51,7 @@ public abstract class TaskBase implements Task {
         this.history = new ArrayList<>();
     }
 
+    //Getters and Setters
     @Override
     public int getId() {
         return id;
@@ -80,6 +87,9 @@ public abstract class TaskBase implements Task {
         return new ArrayList<>(history);
     }
 
+    public abstract TaskType getTaskType();
+
+    //Methods
     @Override
     public void addComment(Comment comment) {
         if (comment == null || comment.getContent() == null || comment.getContent().isEmpty()) {
@@ -91,20 +101,22 @@ public abstract class TaskBase implements Task {
     }
 
     @Override
-    public void historyLogger (String log){
-        if (log == null || log.isEmpty()) {
-            throw new InvalidUserInputException(CANNOT_ADD_A_NULL_HISTORY);
-        }
-        history.add(log);
+    public void historyLogger(String log) {
+        history.add(format("[%s] - %s", formatTime(LocalDateTime.now()), log));
+    }
+
+    //Print
+    //important info - title, description, task type
+    // optional info - comments, history
+    @Override
+    public String printImportantInfo() {
+        return format("Id: %d%n" +
+                "Task Type: %s%n"+
+                "Title: %s%n", getId(), getTaskType(), getTitle());
     }
 
     @Override
-    public String printInfo(){
-        return format("Id: %d%n" +
-                "Title: %s%n", getId(), getTitle());
-    }
-
-    private String printComments() {
+    public String printComments() {
         if (getComments().isEmpty() || getComments() == null) {
             return NO_COMMENTS;
         } else {
@@ -115,9 +127,9 @@ public abstract class TaskBase implements Task {
             return printComments.toString();
         }
     }
-//important info - title, description, task type
-    // optional info - comments, history
-    private String printLogHistory() {
+
+    @Override
+    public String printLogHistory() {
         if (getHistory().isEmpty() || getHistory() == null) {
             return NO_LOG_HISTORY;
         } else {
@@ -135,7 +147,15 @@ public abstract class TaskBase implements Task {
                         "Description: %s%n" +
                         "Comments: %s%n" +
                         "History: %s%n",
-                printInfo(), getDescription(), printComments(), printLogHistory());
+                printImportantInfo(), getDescription(), printComments(), printLogHistory());
     }
 
+    //Equals Override in order to make contains method work properly in repo
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskBase taskBase = (TaskBase) o;
+        return title.equalsIgnoreCase(taskBase.title);
+    }
 }

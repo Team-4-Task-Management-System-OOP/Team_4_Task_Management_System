@@ -7,16 +7,15 @@ public enum TaskType {
     STORY,
     FEEDBACK;
 
-
     @Override
     public String toString() {
         switch (this) {
             case BUG:
-                return "Bug";
+                return "BUG";
             case STORY:
-                return "Story";
+                return "STORY";
             case FEEDBACK:
-                return "Feedback";
+                return "FEEDBACK";
             default:
                 throw new InvalidUserInputException("Invalid Task Type. " +
                         "Task Type can be: Bug, Story, Feedback.");

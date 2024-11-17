@@ -85,12 +85,10 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(assignableTasks);
     }
 
-
-    //ToDo не съм сигурен дали тези 3 метода отдолу са нужни
     @Override
     public void addTeam(Team teamToAdd) {
         if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
-            throw new IllegalArgumentException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
+            throw new InvalidUserInputException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
         }
         this.teams.add(teamToAdd);
     }
@@ -99,7 +97,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public void addMemberToTeam(String teamName, Member memberToAdd) {
         Team team = findTeamByName(teamName);
         if (team.getMembers().stream().anyMatch(m -> m.getName().equalsIgnoreCase(memberToAdd.getName()))) {
-            throw new IllegalArgumentException(String.format(MEMBER_ALREADY_EXISTS, memberToAdd.getName()));
+            throw new InvalidUserInputException(String.format(MEMBER_ALREADY_EXISTS, memberToAdd.getName()));
         }
         team.addMember(memberToAdd);
     }
@@ -108,7 +106,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public void addBoardToTeam(String teamName, Board boardToAdd) {
         Team team = findTeamByName(teamName);
         if (team.getBoards().stream().anyMatch(b -> b.getName().equalsIgnoreCase(boardToAdd.getName()))) {
-            throw new IllegalArgumentException(String.format(BOARD_ALREADY_EXISTS, boardToAdd.getName(), teamName));
+            throw new InvalidUserInputException(String.format(BOARD_ALREADY_EXISTS, boardToAdd.getName(), teamName));
         }
         team.addBoard(boardToAdd);
     }
@@ -119,34 +117,48 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, int rating, FeedbackStatus feedbackStatus) {
+    public Feedback createFeedback(String title, String description, int rating) {
         FeedbackImpl feedback = new FeedbackImpl(++nextId, title, description, rating);
-        this.tasks.add(feedback);
-        this.feedbacks.add(feedback);
+        if (!getTasks().contains(feedback)) {
+            this.tasks.add(feedback);
+            this.feedbacks.add(feedback);
+        } else {
+            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
+                    "Please, provide a different task title!");
+        }
         return feedback;
     }
 
     @Override
     public Story createStory(String title, String description,
-                             PriorityType priorityType, StorySize size,
-                             StoryStatus status, Member assignee) {
+                             PriorityType priorityType, StorySize size) {
         StoryImpl story = new StoryImpl(++nextId, title, description,
-                priorityType, size, status, assignee);
-        this.tasks.add(story);
-        this.stories.add(story);
-        this.assignableTasks.add(story);
+                priorityType, size);
+        if (!getTasks().contains(story)) {
+            this.tasks.add(story);
+            this.stories.add(story);
+            this.assignableTasks.add(story);
+        } else {
+            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
+                    "Please, provide a different task title!");
+        }
         return story;
     }
 
     @Override
     public Bug createBug(String title, String description,
                          List<String> reproducibleSteps, PriorityType priority,
-                         BugSeverity bugSeverity, BugStatus bugStatus, Member assignee) {
+                         BugSeverity bugSeverity) {
         BugImpl bug = new BugImpl(++nextId, title, description, reproducibleSteps,
-                priority, bugSeverity, bugStatus, assignee);
-        this.tasks.add(bug);
-        this.bugs.add(bug);
-        this.assignableTasks.add(bug);
+                priority, bugSeverity);
+        if (!getTasks().contains(bug)) {
+            this.tasks.add(bug);
+            this.bugs.add(bug);
+            this.assignableTasks.add(bug);
+        } else {
+            throw new InvalidUserInputException("A task with the same title already exists and cannot be created! " +
+                    "Please, provide a different task title!");
+        }
         return bug;
     }
 
@@ -165,7 +177,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Team createTeam(String name) {
         Team team = new TeamImpl(name);
-
         if(!getTeams().contains(team)){
             teams.add(team);
         }
@@ -227,7 +238,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     @Override
     public Member getLoggedInMember() {
         if (loggedMember == null) {
-            throw new IllegalArgumentException("There is no logged in member.");
+            throw new InvalidUserInputException("There is no logged in member.");
         }
         return loggedMember;
     }

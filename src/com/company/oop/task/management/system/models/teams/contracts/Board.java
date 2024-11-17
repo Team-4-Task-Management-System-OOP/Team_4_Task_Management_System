@@ -13,6 +13,11 @@ public interface Board extends Nameable, Printable {
 
     void addTask(Task task);
 
-    void addActivityHistory(String activity);
+    void removeTask(Task task);
 
+    void addActivityHistory(String history);
+
+    String printHistory();
+
+    String printTasks();
 }

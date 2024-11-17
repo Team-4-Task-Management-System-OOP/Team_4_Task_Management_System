@@ -24,4 +24,6 @@ public interface Member extends Nameable, Printable {
 
     String printHistory();
 
+    String printTasks();
+
 }
