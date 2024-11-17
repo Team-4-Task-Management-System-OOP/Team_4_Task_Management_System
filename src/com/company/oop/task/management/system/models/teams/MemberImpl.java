@@ -18,18 +18,19 @@ public class MemberImpl implements Member {
     //Constants
     private static final int MEMBER_NAME_MIN_LENGTH = 5;
     private static final int MEMBER_NAME_MAX_LENGTH = 15;
-    private static final String NAME_ERR = "%s is an invalid member name! " +
-            "Name must be a between %d and %d characters!";
+    private static final String NAME_ERR = "''%s'' is an invalid member name! " +
+            "Name must be between %d and %d characters!";
     private static final String TASK_ADDED_TO_MEMBER_TASK_LIST = "The following task with title ''%s'' " +
-            "has been added to the tasks of member %s";
+            "has been added to the tasks of member ''%s''";
     private static final String TASK_REMOVED_FROM_MEMBER_TASK_LIST = "The following task with title ''%s'' " +
             "has been removed from the tasks of member %s:";
     private static final String TASK_REMOVE_ERR = "Task cannot be removed! It has not been created yet";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";
-    private static final String ALREADY_ADDED = "Task with title %s is already added to the tasks of member %s";
+    private static final String ALREADY_ADDED = "Task with title ''%s'' is already added to the tasks of member ''%s''";
     private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";;
-    private static final String NO_TASKS = "---NO TASKS IN MEMBER'S LIST TO DISPLAY---%nAdd a task first!";
-    private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---%nDo some activities first!";
+    private static final String NO_TASKS = "---NO TASKS IN MEMBER'S LIST TO DISPLAY---\nAdd a task first!\n";
+    private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---\nDo some activities first!\n";
+    private static final Team DEFAULT_TEAM = new TeamImpl("Unassigned");
 
     //Fields
     private String name;
@@ -42,6 +43,7 @@ public class MemberImpl implements Member {
         setName(name);
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
+        this.team = DEFAULT_TEAM;
     }
 
     //Setters
@@ -53,7 +55,7 @@ public class MemberImpl implements Member {
 
     @Override
     public void setTeam(Team teamName) {
-        if (team.getName() == null) {
+        if (team.getName() == null || team.getName().equalsIgnoreCase(DEFAULT_TEAM.getName())) {
             this.team = teamName;
             addActivityHistory(format("Member %s assigned to team %s.", getName(), teamName.getName()));
         }
@@ -150,12 +152,10 @@ public class MemberImpl implements Member {
     //Print
     @Override
     public String toString() {
-        return  format("---Member---%n" +
-                "%nMember Name: %s" +
+        return  format("%nMember Name: %s" +
                 "%nMember Team: %s" +
                 "%n---Member Tasks---%n%s" +
-                "%n---Member History---%n%s"+
-                "%n", getName(), team.getName(), printTasks(), printHistory());
+                "%n---Member History---%n%s", getName(), team.getName(), printTasks(), printHistory());
     }
 
     //Equals Override in order to make contains method work properly in repo

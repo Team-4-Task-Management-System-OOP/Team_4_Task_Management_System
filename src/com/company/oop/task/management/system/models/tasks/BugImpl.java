@@ -151,8 +151,10 @@ public class BugImpl extends TaskBase implements Bug {
     public String printReproducibleSteps() {
         StringBuilder printReproducibleSteps = new StringBuilder();
         for (int i = 0; i < reproducibleSteps.size(); i++) {
-            printReproducibleSteps.append(i + 1).append(". ");
-            printReproducibleSteps.append(reproducibleSteps.get(i)).append(System.lineSeparator());
+            printReproducibleSteps.append(i + 1).append(". ").append(reproducibleSteps.get(i));
+            if (i < reproducibleSteps.size() - 1) {
+                printReproducibleSteps.append(System.lineSeparator());
+            }
         }
         return printReproducibleSteps.toString();
     }

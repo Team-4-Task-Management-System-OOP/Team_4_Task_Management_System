@@ -27,9 +27,9 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
     public static final String NO_ELEMENT_NAME_FOUND = "No %s with name %s exists!";
     public static final String NO_TASK_WITH_ID_FOUND = "No task with ID %d";
-    public static final String BOARD_ALREADY_EXISTS_IN_REPO = "A board with this name already exists and cannot be created!" +
+    public static final String BOARD_ALREADY_EXISTS_IN_REPO = "A board with this name already exists and cannot be created! " +
             "Please, provide a different board name!";
-    public static final String TEAM_ALREADY_EXISTS_IN_REPO = "A team with this name already exists and cannot be created!" +
+    public static final String TEAM_ALREADY_EXISTS_IN_REPO = "A team with this name already exists and cannot be created! " +
             "Please, provide a different team name!";
     public static final String MEMBER_ALREADY_EXISTS_IN_REPO = "A member with this name already exists and cannot be created! " +
             "Please, provide a different member name!";
@@ -98,13 +98,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(assignableTasks);
     }
 
-    @Override
-    public void addTeam(Team teamToAdd) {
-        if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
-            throw new InvalidUserInputException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
-        }
-        this.teams.add(teamToAdd);
-    }
+
+//    @Override
+//    public void addTeam(Team teamToAdd) {
+//        if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
+//            throw new InvalidUserInputException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
+//        }
+//        this.teams.add(teamToAdd);
+//    }
 
     @Override
     public void addMemberToTeam(String teamName, Member memberToAdd) {

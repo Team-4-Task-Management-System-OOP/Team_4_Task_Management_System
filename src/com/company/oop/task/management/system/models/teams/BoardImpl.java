@@ -22,18 +22,15 @@ public class BoardImpl implements Board {
             "Board's name must be between %d and %d symbols long!",
             BOARD_NAME_MIN_LENGTH,
             BOARD_NAME_MAX_LENGTH);
-    private static final String ADD_TASK_SUCCESSFUL_MESSAGE = "The following task has been added: %s";
-    private static final String ACTIVITY_NULL_MESSAGE = "Activity message cannot be empty! " +
-            "You should provide some `Activity` message";
     private static final String CANNOT_ADD_AN_EMPTY_TASK_BOARD = "Cannot add an empty task to the board!";
-    private static final String TASK_ADDED_TO_BOARD = "Task with name %s has been added to board %s";
-    private static final String ALREADY_ADDED = "Task with title %s is already added to board %s";
+    private static final String TASK_ADDED_TO_BOARD = "Task with name ''%s'' has been added to board ''%s''";
+    private static final String ALREADY_ADDED = "Task with title %s is already added to board ''%s''";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";
     private static final String TASK_REMOVED_FROM_BOARD = "The following task with title ''%s'' " +
-            "has been removed from board %s:";
+            "has been removed from board ''%s''";
     private static final String TASK_REMOVE_ERR = "Task cannot be removed! It has not been created yet";
-    private static final String NO_HISTORY = "---NO BOARD HISTORY TO DISPLAY---%nDo some activities first!";
-    private static final String NO_TASKS = "---NO TASKS IN BOARD'S LIST TO DISPLAY---%nAdd a task first!";
+    private static final String NO_HISTORY = "---NO BOARD HISTORY TO DISPLAY---\nDo some activities first!\n";
+    private static final String NO_TASKS = "---NO TASKS IN BOARD'S LIST TO DISPLAY---\nAdd a task first!\n";
 
     // Fields
     private String name;
@@ -133,8 +130,7 @@ public class BoardImpl implements Board {
     public String toString() {
         return format("%nBoard Name: %s" +
                 "%n---Board Tasks---%n%s" +
-                "%n---Board History---%n%s" +
-                "%n", getName(), printTasks(), printHistory());
+                "%n---Board History---%n%s", getName(), printTasks(), printHistory());
     }
 
 

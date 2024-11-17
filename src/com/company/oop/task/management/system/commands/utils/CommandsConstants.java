@@ -6,6 +6,16 @@ public class CommandsConstants {
 
     public static final String TASK_CREATED = "Task with ID %d was created.";
 
+    public static final String TEAM_HEADLINE = "---Team №%d---%n";
+    public static final String MEMBER_HEADLINE = "---Member №%d---%n";
+    public static final String BOARD_HEADLINE = "---Board №%d---%n";
+
+    public static final String ALL_MEMBERS_MESSAGE = "---ALL MEMBERS---\n";
+
+    public static final String ALL_TEAMS_MESSAGE = "---ALL TEAMS---\n";
+
+    public static final String MEMBER_CREATION_SUCCESSFUL_MESSAGE = "A member with name ''%s'' has been created!";
+
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
 
@@ -17,8 +27,11 @@ public class CommandsConstants {
 
     public static final String ENUM_CHANGED = "The %s of task ID %d was changed from %s to %s successfully.";
 
-    public static final String NO_PERSONS_FOUND_IN_THE_MEMBERS = "There are no people to be shown. " +
-            "Please add a person first.";
+    public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
+            "Please add a member first.";
+
+    public static final String NO_TEAMS_FOUND = "There are no teams to be shown. " +
+            "Please add a team first.";
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 

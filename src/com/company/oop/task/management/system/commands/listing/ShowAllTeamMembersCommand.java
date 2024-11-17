@@ -21,7 +21,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand implements Command {
 
     @Override
     protected boolean requiresLogin() {
-        return true;
+        return false;
     }
 
     @Override

@@ -7,11 +7,12 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_CREATION_SUCCESSFUL_MESSAGE;
+
 public class CreateMemberCommand extends BaseCommand {
 
     // Constants
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String MEMBER_CREATION_SUCCESSFUL_MESSAGE = "A member with name %s has been created!";
 
     public CreateMemberCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);

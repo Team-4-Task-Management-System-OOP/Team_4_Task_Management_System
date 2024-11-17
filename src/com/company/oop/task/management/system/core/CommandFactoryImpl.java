@@ -32,7 +32,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case CREATECOMMENT:
                 return new CreateCommentCommand(taskManagementSystemRepository);
             case SHOWALLTEAMS:
-                return new ShowAllTeamCommand(taskManagementSystemRepository);
+                return new ShowAllTeamsCommand(taskManagementSystemRepository);
             case SHOWTEAMACTIVITY:
                 return new ShowTeamActivityCommand(taskManagementSystemRepository);
             case ADDMEMBERTOTEAM:

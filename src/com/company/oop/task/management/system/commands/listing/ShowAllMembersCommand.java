@@ -7,7 +7,8 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
-import static com.company.oop.task.management.system.commands.utils.CommandsConstants.NO_PERSONS_FOUND_IN_THE_MEMBERS;
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.*;
+import static java.lang.String.format;
 
 public class ShowAllMembersCommand extends BaseCommand {
 
@@ -18,34 +19,28 @@ public class ShowAllMembersCommand extends BaseCommand {
     }
 
     @Override
-    protected boolean requiresLogin() {
-        return false;
+    protected String executeCommand(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        List<Member> allMembers = getTaskManagementSystemRepository().getMembers();
+        if (allMembers.isEmpty()) {
+            return NO_MEMBERS_FOUND;
+        }
+        else {
+            StringBuilder allMembersPrint = new StringBuilder();
+            allMembersPrint.append(ALL_MEMBERS_MESSAGE);
+            for (int i = 0; i < allMembers.size(); i++) {
+                allMembersPrint.append(format(MEMBER_HEADLINE, i + 1)).append(allMembers.get(i).toString());
+                if (i < allMembers.size() - 1) {
+                    allMembersPrint.append(System.lineSeparator());
+                    allMembersPrint.append(JOIN_DELIMITER).append(System.lineSeparator());
+                }
+            }
+            return allMembersPrint.toString();
+        }
     }
 
     @Override
-    protected String executeCommand(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-
-        List<Member> allMembers = getTaskManagementSystemRepository().getMembers();
-
-        if (allMembers.isEmpty()) {
-            return NO_PERSONS_FOUND_IN_THE_MEMBERS;
-        }
-        StringBuilder allMembersPrint = new StringBuilder();
-        for (Member member : allMembers) {
-            allMembersPrint.append(member.getName()).append(System.lineSeparator());
-        }
-
-//        StringBuilder membersInfo = new StringBuilder("Team Members:\n");
-//        for (Member member : allMembers) {
-//            membersInfo.append("Name: ")
-//                    .append(member.getName())
-//                    .append(", Tasks: ")
-//                    .append(member.getTasks().size())
-//                    .append(", Activity History: ")
-//                    .append(member.getActivityHistory().size())
-//                    .append(" entries\n");
-//        }
-        return allMembersPrint.toString();
+    protected boolean requiresLogin() {
+        return false;
     }
 }

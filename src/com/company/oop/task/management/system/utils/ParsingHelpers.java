@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ParsingHelpers {
-    private static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+    private static final String NO_SUCH_ENUM = "There is no ''%s'' in %ss.";
     private static final int NEGATIVE_NUMBER = 0;
     private static final String NEGATIVE_INT_ERROR = "%s should be a positive number.";
-    private static final String INVALID_BOOLEAN_ERR = "Invalid value for %s. Should be either true or false.";
+    private static final String INVALID_BOOLEAN_ERR = "Invalid value for ''%s''. Should be either true or false.";
 
     public static double tryParseDouble(String valueToParse, String errorMessage) {
         try {

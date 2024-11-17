@@ -30,13 +30,13 @@ public class TeamImpl implements Team {
             " doesn't exist in team %s!";
     private static final String NOT_EXISTING_BOARD_MESSAGE = "Board with name ''%s''" +
             " doesn't exist in team %s!";
-    private static final String NO_MEMBERS = "---NO MEMBERS TO DISPLAY---%nAdd a member first!";
-    private static final String NO_BOARDS = "---NO BOARDS TO DISPLAY---%nAdd a board first!";
-    private static final String NO_HISTORY = "---NO TEAM HISTORY TO DISPLAY---%nDo some activities first!";
-    private static final String BOARD_REMOVED = "Board %s was successfully removed from team %s.";
-    private static final String BOARD_ADDED = "Board %s was successfully added to team %s.";
-    private static final String MEMBER_REMOVED = "Member %s was successfully removed from team %s.";
-    private static final String MEMBER_ADDED = "Member %s was successfully added to team %s.";
+    private static final String NO_MEMBERS = "---NO MEMBERS TO DISPLAY---\nAdd a member first!\n";
+    private static final String NO_BOARDS = "---NO BOARDS TO DISPLAY---\nAdd a board first!\n";
+    private static final String NO_HISTORY = "---NO TEAM HISTORY TO DISPLAY---\nDo some activities first!\n";
+    private static final String BOARD_REMOVED = "Board ''%s'' was successfully removed from team %s.";
+    private static final String BOARD_ADDED = "Board ''%s'' was successfully added to team %s.";
+    private static final String MEMBER_REMOVED = "Member ''%s'' was successfully removed from team %s.";
+    private static final String MEMBER_ADDED = "Member ''%s'' was successfully added to team %s.";
     public static final String CANNOT_ADD_AN_EMPTY_MEMBER = "Cannot add an empty member!";
     public static final String CANNOT_REMOVE_AN_EMPTY_MEMBER = "Cannot remove an empty member!";
     public static final String CANNOT_ADD_AN_EMPTY_BOARD = "Cannot add an empty board!";
@@ -181,8 +181,7 @@ public class TeamImpl implements Team {
 
     @Override
     public String toString() {
-        return format("---Team---%n" +
-                "%nTeam Name: %s" +
+        return format("%nTeam Name: %s" +
                 "%n---Team Members---%n%s" +
                 "%n---Team Boards---%n%s" +
                 "%n---Team History---%n%s", getName(), printMembers(), printBoards(), printHistory());
