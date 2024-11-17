@@ -13,7 +13,7 @@ public class ChangeSizeOfStoryCommand extends BaseCommand {
 
     @Override
     protected boolean requiresLogin() {
-        return false;
+        return true;
     }
 
     @Override

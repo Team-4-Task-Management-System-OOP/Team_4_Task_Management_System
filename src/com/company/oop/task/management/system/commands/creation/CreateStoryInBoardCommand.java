@@ -13,7 +13,7 @@ public class CreateStoryInBoardCommand extends BaseCommand {
 
     @Override
     protected boolean requiresLogin() {
-        return false;
+        return true;
     }
 
     @Override
