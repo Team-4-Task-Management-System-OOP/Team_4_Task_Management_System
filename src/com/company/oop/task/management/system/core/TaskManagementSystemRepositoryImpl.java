@@ -25,6 +25,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     private static final String MEMBER_ALREADY_EXISTS = "Member %s already exists. Choose a different name!";
     private static final String BOARD_ALREADY_EXISTS = "Board %s already exists in team %s!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
+    public static final String NO_LOGGED_IN_TEAM = "There is no logged in team.";
     public static final String NO_ELEMENT_NAME_FOUND = "No %s with name %s exists!";
     public static final String NO_TASK_WITH_ID_FOUND = "No task with ID %d";
     public static final String BOARD_ALREADY_EXISTS_IN_REPO = "A board with this name already exists and cannot be created! " +
@@ -42,6 +43,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     private int nextId;
     private Member loggedMember;
+    private Team loggedTeam;
 
     private final List<Member> members;
     private final List<Board> boards;
@@ -254,6 +256,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         }
         return loggedMember;
     }
+    @Override
+    public Team getLoggedInTeam() {
+        if (loggedTeam == null) {
+            throw new InvalidUserInputException(NO_LOGGED_IN_TEAM);
+        }
+        return loggedTeam;
+    }
 
     @Override
     public boolean hasLoggedInMember() {
@@ -261,12 +270,21 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public void login(Member member) {
+    public void loginMember(Member member) {
         loggedMember = member;
     }
 
     @Override
-    public void logout() {
+    public void loginTeam(Team team) {
+        loggedTeam = team;
+    }
+
+    @Override
+    public void logoutMember() {
         loggedMember = null;
+    }
+    @Override
+    public void logoutTeam() {
+        loggedTeam = null;
     }
 }

@@ -21,21 +21,21 @@ public class TeamImpl implements Team {
             "Team's name must be between %d and %d!",
             NAME_MIN_LENGTH,
             NAME_MAX_LENGTH);
-    private static final String MEMBER_ALREADY_EXISTS = "Member with name ''%s'' is already added to team %s!" +
+    private static final String MEMBER_ALREADY_EXISTS = "Member with name \"%s\" is already added to team %s!" +
             "Please, provide a different member to add to the team.";
-    private static final String BOARD_ALREADY_EXISTS = "Board with name ''%s'' is added to team %s! " +
+    private static final String BOARD_ALREADY_EXISTS = "Board with name \"%s\" is added to team %s! " +
             "Please, provide a different board to add to the team.";
-    private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member with name ''%s''" +
+    private static final String NOT_EXISTING_MEMBER_MESSAGE = "Member with name \"%s\"" +
             " doesn't exist in team %s!";
-    private static final String NOT_EXISTING_BOARD_MESSAGE = "Board with name ''%s''" +
+    private static final String NOT_EXISTING_BOARD_MESSAGE = "Board with name \"%s\"" +
             " doesn't exist in team %s!";
     private static final String NO_MEMBERS = "---NO MEMBERS TO DISPLAY---\nAdd a member first!\n";
     private static final String NO_BOARDS = "---NO BOARDS TO DISPLAY---\nAdd a board first!\n";
     private static final String NO_HISTORY = "---NO TEAM HISTORY TO DISPLAY---\nDo some activities first!\n";
-    private static final String BOARD_REMOVED = "Board ''%s'' was successfully removed from team %s.";
-    private static final String BOARD_ADDED = "Board ''%s'' was successfully added to team %s.";
-    private static final String MEMBER_REMOVED = "Member ''%s'' was successfully removed from team %s.";
-    private static final String MEMBER_ADDED = "Member ''%s'' was successfully added to team %s.";
+    private static final String BOARD_REMOVED = "Board \"%s\" was successfully removed from team %s.";
+    private static final String BOARD_ADDED = "Board \"%s\" was successfully added to team %s.";
+    private static final String MEMBER_REMOVED = "Member \"%s\" was successfully removed from team %s.";
+    private static final String MEMBER_ADDED = "Member \"%s\" was successfully added to team %s.";
     public static final String CANNOT_ADD_AN_EMPTY_MEMBER = "Cannot add an empty member!";
     public static final String CANNOT_REMOVE_AN_EMPTY_MEMBER = "Cannot remove an empty member!";
     public static final String CANNOT_ADD_AN_EMPTY_BOARD = "Cannot add an empty board!";

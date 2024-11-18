@@ -14,11 +14,11 @@ import static com.company.oop.task.management.system.commands.utils.CommandsCons
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.INVALID_INPUT_MESSAGE;
 import static java.lang.String.format;
 
-public class CreateCommentCommand extends BaseCommand{
+public class AddCommentToTask extends BaseCommand{
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
-    public CreateCommentCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public AddCommentToTask(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
@@ -32,8 +32,8 @@ public class CreateCommentCommand extends BaseCommand{
                 .findTaskById(getTaskManagementSystemRepository().getTasks(), taskId);
         Comment comment = new CommentImpl(content, authorName);
         task.addComment(comment);
-        task.historyLogger(format(COMMENT_ADDED, task.getTitle(), authorName));
-        return format(COMMENT_ADDED, task.getTitle(), authorName);
+        task.historyLogger(format(COMMENT_ADDED, task.getTitle(), taskId, authorName));
+        return format(COMMENT_ADDED, task.getTitle(), taskId, authorName);
     }
 
     @Override

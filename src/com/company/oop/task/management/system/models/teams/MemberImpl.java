@@ -17,15 +17,15 @@ public class MemberImpl implements Member {
 
     private static final int MEMBER_NAME_MIN_LENGTH = 5;
     private static final int MEMBER_NAME_MAX_LENGTH = 15;
-    private static final String NAME_ERR = "''%s'' is an invalid member name! " +
+    private static final String NAME_ERR = "\"%s\" is an invalid member name! " +
             "Name must be between %d and %d characters!";
-    private static final String TASK_ADDED_TO_MEMBER_TASK_LIST = "The following task with title ''%s'' " +
-            "has been added to the tasks of member ''%s''";
-    private static final String TASK_REMOVED_FROM_MEMBER_TASK_LIST = "The following task with title ''%s'' " +
+    private static final String TASK_ADDED_TO_MEMBER_TASK_LIST = "The following task with title \"%s\" " +
+            "has been added to the tasks of member \"%s\"";
+    private static final String TASK_REMOVED_FROM_MEMBER_TASK_LIST = "The following task with title \"%s\" " +
             "has been removed from the tasks of member %s:";
     private static final String TASK_REMOVE_ERR = "Task cannot be removed! It has not been created yet";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";
-    private static final String ALREADY_ADDED = "Task with title ''%s'' is already added to the tasks of member ''%s''";
+    private static final String ALREADY_ADDED = "Task with title \"%s\" is already added to the tasks of member \"%s\"";
     private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";;
     private static final String NO_TASKS = "---NO TASKS IN MEMBER'S LIST TO DISPLAY---\nAdd a task first!\n";
     private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---\nDo some activities first!\n";

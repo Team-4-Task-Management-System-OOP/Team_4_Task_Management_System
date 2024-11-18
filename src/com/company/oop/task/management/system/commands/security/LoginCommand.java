@@ -39,7 +39,8 @@ public class LoginCommand extends BaseCommand {
         if (!teamFound.getMembers().contains(memberFound)) {
             throw new InvalidUserInputException(WRONG_MEMBER_OR_TEAM);
         }
-        getTaskManagementSystemRepository().login(memberFound);
+        getTaskManagementSystemRepository().loginMember(memberFound);
+        getTaskManagementSystemRepository().loginTeam(teamFound);
         memberFound.addActivityHistory(format(MEMBER_LOGGED_IN, memberFound.getName()));
         return format(MEMBER_LOGGED_IN, memberFound.getName());
     }

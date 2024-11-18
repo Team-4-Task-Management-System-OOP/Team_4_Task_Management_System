@@ -27,6 +27,7 @@ public class CreateBoardInTeamCommand extends BaseCommand {
         Team teamToAddBoardTo = getTaskManagementSystemRepository().findTeamByName(teamName);
         Board boardNew = getTaskManagementSystemRepository().createBoard(boardName, teamToAddBoardTo);
         teamToAddBoardTo.addActivityHistory(format(BOARD_CREATED_AND_ADDED, boardName, teamName));
+        boardNew.addActivityHistory(format(BOARD_CREATED_AND_ADDED, boardName, teamName));
         return format(BOARD_CREATED_AND_ADDED, boardName, teamName);
     }
 
