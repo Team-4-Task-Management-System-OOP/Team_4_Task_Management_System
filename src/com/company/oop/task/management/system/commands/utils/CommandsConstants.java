@@ -24,6 +24,8 @@ public class CommandsConstants {
 
     public static final String TASK_ASSIGNED_SUCCESSFUL_MESSAGE = "A task with name ''%s'' has been assigned!";
 
+    public static final String TASK_UNASSIGNED_SUCCESSFUL_MESSAGE = "A task with name ''%s'' has been unassigned";
+
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
 
