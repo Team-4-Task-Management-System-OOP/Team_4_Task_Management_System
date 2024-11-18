@@ -1,8 +1,6 @@
 package com.company.oop.task.management.system.core;
 
 import com.company.oop.task.management.system.commands.contracts.Command;
-import com.company.oop.task.management.system.commands.utils.CommandsConstants;
-import com.company.oop.task.management.system.commands.utils.HelpCommand;
 import com.company.oop.task.management.system.commands.utils.UserCommandsGuide;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemEngine;
@@ -18,8 +16,8 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
     private static final String MAIN_SPLIT_SYMBOL = " ";
-    private static final String COMMENT_OPEN_SYMBOL = "{{";
-    private static final String COMMENT_CLOSE_SYMBOL = "}}";
+    private static final String COMPOSITE_PARAMETER_OPEN_SYMBOL = "\"";
+    private static final String COMPOSITE_PARAMETER_CLOSE_SYMBOL = "\"";
     private static final String REPORT_SEPARATOR = "####################";
 
     private final CommandFactory commandFactory;
@@ -57,41 +55,43 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
-        List<String> parameters = extractCommandParameters(inputLine);
+        List<String> parameters = extractParameters(inputLine);
         Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementSystemRepository);
         String executionResult = command.execute(parameters);
         print(executionResult);
     }
 
     private String extractCommandName(String inputLine) {
-        return inputLine.split(" ")[0];
+        return inputLine.split(MAIN_SPLIT_SYMBOL)[0];
     }
 
-    private List<String> extractCommandParameters(String inputLine) {
-        if (inputLine.contains(COMMENT_OPEN_SYMBOL)) {
-            return extractCommentParameters(inputLine);
-        }
-        String[] commandParts = inputLine.split(MAIN_SPLIT_SYMBOL);
-        List<String> parameters = new ArrayList<>();
-        for (int i = 1; i < commandParts.length; i++) {
-            parameters.add(commandParts[i]);
-        }
-        return parameters;
-    }
-//Todo dali shte grumne s opisanie na bug
-    private List<String> extractCommentParameters(String fullCommand) {
+    private List<String> extractParameters(String fullCommand) {
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
-        int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
-        int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
-        List<String> parameters = new ArrayList<>();
-        if (indexOfOpenComment >= 0) {
-            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
-       }
-        List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
+        List<String> parameterParts = new ArrayList<>(Arrays.asList(
+                fullCommand
+                .substring(indexOfFirstSeparator + 1)
+                .split(MAIN_SPLIT_SYMBOL)));
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < parameterParts.size(); i++) {
+            String parametersPart = parameterParts.get(i);
+            if (parametersPart.startsWith(COMPOSITE_PARAMETER_OPEN_SYMBOL)) {
+                StringBuilder compositeParameter = new StringBuilder();
+                while (true) {
+                    compositeParameter.append(parametersPart).append(" ");
+                    parametersPart = parameterParts.get(++i);
+                    if (parametersPart.endsWith(COMPOSITE_PARAMETER_CLOSE_SYMBOL)) {
+                        compositeParameter.append(parametersPart);
+                        break;
+                    }
+                }
+                String regex = "[" + COMPOSITE_PARAMETER_OPEN_SYMBOL + COMPOSITE_PARAMETER_CLOSE_SYMBOL + "]";
+                result.add(compositeParameter.toString().replaceAll(regex, ""));
+            } else {
+                result.add(parametersPart);
+            }
+        }
         result.removeAll(Arrays.asList(" ", "", null));
-        parameters.addAll(result);
-        return parameters;
+        return result;
     }
 
     private void print(String result) {
