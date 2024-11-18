@@ -20,16 +20,21 @@ public class CommandsConstants {
 
     public static final String MEMBER_CREATION_SUCCESSFUL_MESSAGE = "A member with name ''%s'' has been created!";
 
+    public static final String TEAM_CREATION_SUCCESSFUL_MESSAGE = "A team with name ''%s'' has been created!";
+
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
 
     public static final String COMMENT_ADDED = "Comment was added successfully to task %s by %s";
 
-    public static final String TASK_ASSIGNED = "Task with ID %d was assigned to %s";
+    public static final String BOARD_CREATED_AND_ADDED = "Board with name ''%s'' " +
+            "has been successfully created and added to team ''%s!''";
 
-    public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from %s";
+    public static final String TASK_ASSIGNED = "Task with ID %d was assigned to ''%s''";
 
-    public static final String ENUM_CHANGED = "The %s of task ID %d was changed from %s to %s successfully.";
+    public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from ''%s''";
+
+    public static final String ENUM_CHANGED = "The ''%s'' of task ID ''%d'' was changed from ''%s'' to ''%s'' successfully.";
 
     public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
             "Please add a member first.";

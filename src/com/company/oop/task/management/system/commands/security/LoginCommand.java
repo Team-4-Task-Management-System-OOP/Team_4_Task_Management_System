@@ -26,9 +26,8 @@ public class LoginCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         throwIfUserLoggedIn();
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String Team = parameters.get(0);
-        String Member = parameters.get(1);
-
+        String Member = parameters.get(0);
+        String Team = parameters.get(1);
         return login(Team, Member);
     }
 

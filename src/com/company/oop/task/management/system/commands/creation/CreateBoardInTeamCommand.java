@@ -8,14 +8,12 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.BOARD_CREATED_AND_ADDED;
+import static java.lang.String.format;
+
 public class CreateBoardInTeamCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-
-    private String boardName;
-    private String teamName;
-    private Board board;
-    private Team team;
 
     public CreateBoardInTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -28,9 +26,8 @@ public class CreateBoardInTeamCommand extends BaseCommand {
         String teamName = parameters.get(1);
         Team teamToAddBoardTo = getTaskManagementSystemRepository().findTeamByName(teamName);
         Board boardNew = getTaskManagementSystemRepository().createBoard(boardName, teamToAddBoardTo);
-
-
-        return "";
+        teamToAddBoardTo.addActivityHistory(format(BOARD_CREATED_AND_ADDED, boardName, teamName));
+        return format(BOARD_CREATED_AND_ADDED, boardName, teamName);
     }
 
     @Override

@@ -204,6 +204,7 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         Board board = new BoardImpl(boardName);
         if (!getBoards().contains(board)){
             boards.add(board);
+            team.addBoard(board);
         }
         else {
             throw new InvalidUserInputException(BOARD_ALREADY_EXISTS_IN_REPO);
@@ -213,17 +214,17 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
 
     @Override
     public Member findMemberByName(String memberName) {
-        return findElementByName(getMembers(), memberName);
+        return findElementByName(getMembers(), memberName, "member");
     }
 
     @Override
     public Board findBoardByName(String boardName) {
-        return findElementByName(getBoards(), boardName);
+        return findElementByName(getBoards(), boardName, "board");
     }
 
     @Override
     public Team findTeamByName(String teamName) {
-        return findElementByName(getTeams(), teamName);
+        return findElementByName(getTeams(), teamName, "team");
     }
 
     @Override
@@ -237,13 +238,13 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     }
 
     @Override
-    public <T extends Nameable> T findElementByName(List<T> elements, String name) {
+    public <T extends Nameable> T findElementByName(List<T> elements, String name, String className) {
         return elements
                 .stream()
                 .filter(element -> element.getName().equalsIgnoreCase(name))
                 .findAny()
                 .orElseThrow(() -> new ElementNotFoundException(
-                        String.format(NO_ELEMENT_NAME_FOUND, elements.getClass().getSimpleName(), name)));
+                        String.format(NO_ELEMENT_NAME_FOUND, className, name)));
     }
 
     @Override

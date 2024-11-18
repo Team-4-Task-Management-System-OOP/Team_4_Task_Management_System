@@ -59,7 +59,7 @@ public interface TaskManagementSystemRepository {
 
     <T extends Identifiable> T findTaskById(List<T> elements, int id);
 
-    <T extends Nameable> T findElementByName(List<T> elements, String name);
+    <T extends Nameable> T findElementByName(List<T> elements, String name, String classname);
 
     Member getLoggedInMember();
 

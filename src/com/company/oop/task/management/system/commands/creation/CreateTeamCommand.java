@@ -7,10 +7,12 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.TEAM_CREATION_SUCCESSFUL_MESSAGE;
+import static java.lang.String.format;
+
 public class CreateTeamCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String TEAM_CREATION_SUCCESSFUL_MESSAGE = "A team with name ''%s'' has been created!";
 
     public CreateTeamCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -21,8 +23,8 @@ public class CreateTeamCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String teamName = parameters.get(0);
         Team currentTeam = getTaskManagementSystemRepository().createTeam(teamName);
-        currentTeam.addActivityHistory(String.format(TEAM_CREATION_SUCCESSFUL_MESSAGE, teamName));
-        return String.format(TEAM_CREATION_SUCCESSFUL_MESSAGE, currentTeam.getName());
+        currentTeam.addActivityHistory(format(TEAM_CREATION_SUCCESSFUL_MESSAGE, teamName));
+        return format(TEAM_CREATION_SUCCESSFUL_MESSAGE, currentTeam.getName());
     }
 
     @Override

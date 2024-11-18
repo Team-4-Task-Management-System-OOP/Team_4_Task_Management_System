@@ -8,10 +8,10 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_CREATION_SUCCESSFUL_MESSAGE;
+import static java.lang.String.format;
 
 public class CreateMemberCommand extends BaseCommand {
 
-    // Constants
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
     public CreateMemberCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -23,8 +23,8 @@ public class CreateMemberCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String memberName = parameters.get(0);
         Member currentMember = getTaskManagementSystemRepository().createMember(memberName);
-        currentMember.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
-        return String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, currentMember.getName());
+        currentMember.addActivityHistory(format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
+        return format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, currentMember.getName());
     }
 
     @Override

@@ -26,9 +26,8 @@ public class AddMemberToTeamCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String teamName = parameters.get(0);
-        String memberName = parameters.get(1);
-
+        String memberName = parameters.get(0);
+        String teamName = parameters.get(1);
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
             throw new IllegalArgumentException(NO_TEAMS_FOUND);
@@ -44,7 +43,7 @@ public class AddMemberToTeamCommand extends BaseCommand {
         team.addMember(member);
 
         member.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
-        member.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
+        team.addActivityHistory(String.format(MEMBER_ADDED, memberName, teamName));
         return String.format(MEMBER_ADDED, memberName, teamName);
     }
 }
