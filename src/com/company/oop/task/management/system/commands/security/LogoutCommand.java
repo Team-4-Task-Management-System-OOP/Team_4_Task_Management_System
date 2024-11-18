@@ -23,7 +23,7 @@ public class LogoutCommand extends BaseCommand {
         String loggedOutMessage = format(USER_LOGGED_OUT, getTaskManagementSystemRepository().getLoggedInMember().getName());
         getTaskManagementSystemRepository().getLoggedInMember().addActivityHistory(loggedOutMessage);
         getTaskManagementSystemRepository().logout();
-        return format(USER_LOGGED_OUT, getTaskManagementSystemRepository().getLoggedInMember().getName());
+        return format(loggedOutMessage);
     }
 
     @Override
