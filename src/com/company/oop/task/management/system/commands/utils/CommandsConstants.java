@@ -25,6 +25,8 @@ public class CommandsConstants {
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
 
+    public final static String USER_LOGGED_OUT = "Member %s logged out!";
+
     public static final String COMMENT_ADDED = "Comment was added successfully to task %s by %s";
 
     public static final String BOARD_CREATED_AND_ADDED = "Board with name ''%s'' " +

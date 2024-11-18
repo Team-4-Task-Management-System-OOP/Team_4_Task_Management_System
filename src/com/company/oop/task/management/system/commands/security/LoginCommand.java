@@ -9,6 +9,8 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class LoginCommand extends BaseCommand {
 
     private final static String MEMBER_LOGGED_IN = "Member %s successfully logged in!";
@@ -38,7 +40,8 @@ public class LoginCommand extends BaseCommand {
             throw new InvalidUserInputException(WRONG_MEMBER_OR_TEAM);
         }
         getTaskManagementSystemRepository().login(memberFound);
-        return String.format(MEMBER_LOGGED_IN, memberFound.getName());
+        memberFound.addActivityHistory(format(MEMBER_LOGGED_IN, memberFound.getName()));
+        return format(MEMBER_LOGGED_IN, memberFound.getName());
     }
 
     @Override
@@ -49,7 +52,7 @@ public class LoginCommand extends BaseCommand {
     private void throwIfUserLoggedIn() {
         if (getTaskManagementSystemRepository().hasLoggedInMember()) {
             throw new InvalidUserInputException(
-                    String.format(MEMBER_LOGGED_IN_ALREADY,
+                    format(MEMBER_LOGGED_IN_ALREADY,
                             getTaskManagementSystemRepository().getLoggedInMember().getName())
             );
         }

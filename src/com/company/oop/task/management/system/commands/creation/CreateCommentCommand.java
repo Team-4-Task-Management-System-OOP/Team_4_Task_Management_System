@@ -23,11 +23,6 @@ public class CreateCommentCommand extends BaseCommand{
     }
 
     @Override
-    protected boolean requiresLogin() {
-        return true;
-    }
-
-    @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String content = parameters.get(0);
@@ -37,7 +32,12 @@ public class CreateCommentCommand extends BaseCommand{
                 .findTaskById(getTaskManagementSystemRepository().getTasks(), taskId);
         Comment comment = new CommentImpl(content, authorName);
         task.addComment(comment);
-
+        task.historyLogger(format(COMMENT_ADDED, task.getTitle(), authorName));
         return format(COMMENT_ADDED, task.getTitle(), authorName);
+    }
+
+    @Override
+    protected boolean requiresLogin() {
+        return false;
     }
 }
