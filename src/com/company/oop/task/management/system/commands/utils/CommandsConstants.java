@@ -40,7 +40,11 @@ public class CommandsConstants {
 
     public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from ''%s''";
 
-    public static final String ENUM_CHANGED = "The ''%s'' of task ID ''%d'' was changed from ''%s'' to ''%s'' successfully.";
+    public static final String ENUM_CHANGED = "The priority of task ID ''%d'' was changed from ''%s'' to ''%s'' successfully.";
+
+    public static final String BUG_PRIORITY_CHANGED = "Bug priority changed";
+
+    public static final String STORY_PRIORITY_CHANGED = "Story priority changed";
 
     public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
             "Please add a member first.";
