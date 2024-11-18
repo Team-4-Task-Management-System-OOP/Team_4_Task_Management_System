@@ -6,9 +6,9 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 
 import java.util.List;
 
-public abstract class BaseCommand implements Command {
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_NOT_LOGGED;
 
-    private final static String MEMBER_NOT_LOGGED = "You are not logged in! Please login first!";
+public abstract class BaseCommand implements Command {
 
     private static TaskManagementSystemRepository taskManagementSystemRepository;
 

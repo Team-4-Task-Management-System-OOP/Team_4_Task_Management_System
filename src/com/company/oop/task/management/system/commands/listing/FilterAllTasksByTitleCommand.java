@@ -30,7 +30,7 @@ public class FilterAllTasksByTitleCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String targetTitle = parameters.getFirst();
+        String targetTitle = parameters.get(0);
         if (tasks.isEmpty()) {
             throw new ElementNotFoundException(NO_REGISTERED_TASKS);
         }

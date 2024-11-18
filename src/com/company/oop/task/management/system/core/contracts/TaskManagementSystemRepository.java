@@ -2,7 +2,6 @@ package com.company.oop.task.management.system.core.contracts;
 
 import com.company.oop.task.management.system.models.tasks.contracts.*;
 import com.company.oop.task.management.system.models.tasks.enums.*;
-import com.company.oop.task.management.system.models.teams.TeamImpl;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Nameable;
@@ -63,10 +62,16 @@ public interface TaskManagementSystemRepository {
 
     Member getLoggedInMember();
 
+    Team getLoggedInTeam();
+
     boolean hasLoggedInMember();
 
-    void login(Member member);
+    void loginMember(Member member);
 
-    void logout();
+    void loginTeam(Team team);
+
+    void logoutMember();
+
+    void logoutTeam();
 
 }

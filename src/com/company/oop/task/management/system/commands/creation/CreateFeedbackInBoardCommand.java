@@ -2,22 +2,43 @@ package com.company.oop.task.management.system.commands.creation;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
+import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
+import com.company.oop.task.management.system.models.teams.contracts.Board;
+import com.company.oop.task.management.system.utils.ParsingHelpers;
+import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.FEEDBACK_CREATED;
+import static com.company.oop.task.management.system.models.tasks.FeedbackImpl.*;
+import static java.lang.String.format;
+
 public class CreateFeedbackInBoardCommand extends BaseCommand {
+
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
 
     public CreateFeedbackInBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
     @Override
-    protected boolean requiresLogin() {
-        return true;
+    protected String executeCommand(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+        String title = parameters.get(0);
+        String description = parameters.get(1);
+        int rating = ParsingHelpers.tryParseInt(parameters.get(2),
+                (format(RATING_ERR, RATING_MIN, RATING_MAX)));
+        String boardNameToAddFeedbackIn = parameters.get(3);
+        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating);
+        Board boardToAddFeedbackIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddFeedbackIn);
+        boardToAddFeedbackIn.addTask(feedback);
+        feedback.historyLogger(format(FEEDBACK_CREATED, feedback.getId(), feedback.getTitle()));
+        return format(FEEDBACK_CREATED, feedback.getId(), feedback.getTitle());
     }
 
     @Override
-    protected String executeCommand(List<String> parameters) {
-        return "";
+    protected boolean requiresLogin() {
+        return true;
     }
 }

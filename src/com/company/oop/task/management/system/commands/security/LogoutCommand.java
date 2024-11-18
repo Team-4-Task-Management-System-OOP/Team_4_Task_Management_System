@@ -22,7 +22,8 @@ public class LogoutCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String loggedOutMessage = format(USER_LOGGED_OUT, getTaskManagementSystemRepository().getLoggedInMember().getName());
         getTaskManagementSystemRepository().getLoggedInMember().addActivityHistory(loggedOutMessage);
-        getTaskManagementSystemRepository().logout();
+        getTaskManagementSystemRepository().logoutMember();
+        getTaskManagementSystemRepository().logoutTeam();
         return format(loggedOutMessage);
     }
 
