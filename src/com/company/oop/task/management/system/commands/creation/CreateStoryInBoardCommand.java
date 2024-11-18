@@ -23,8 +23,6 @@ public class CreateStoryInBoardCommand extends BaseCommand {
         super(taskManagementSystemRepository);
     }
 
-
-
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
@@ -32,12 +30,12 @@ public class CreateStoryInBoardCommand extends BaseCommand {
         String description = parameters.get(1);
         PriorityType storyPriorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
         StorySize storySize = ParsingHelpers.tryParseEnum(parameters.get(3), StorySize.class);
-        String boardNameToAddFeedbackIn = parameters.get(4);
-        Board boardToAddStoryIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddFeedbackIn);
+        String boardNameToAddStoryIn = parameters.get(4);
+        Board boardToAddStoryIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddStoryIn);
         if (getTaskManagementSystemRepository()
                 .getLoggedInMember().getTeam().getBoards().contains(boardToAddStoryIn)) {
             throw new InvalidUserInputException(format(BOARD_DOES_NOT_EXIST_IN_TEAM,
-                    boardNameToAddFeedbackIn,
+                    boardNameToAddStoryIn,
                     getTaskManagementSystemRepository().getLoggedInMember().getTeam().getName()));
         }
         Story story = getTaskManagementSystemRepository()

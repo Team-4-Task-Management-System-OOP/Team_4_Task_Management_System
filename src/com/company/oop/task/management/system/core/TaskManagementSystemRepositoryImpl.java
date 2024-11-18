@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private static final String TEAM_ALREADY_EXISTS = "Team %s already exists. Choose a different name!";
     private static final String MEMBER_ALREADY_EXISTS = "Member %s already exists. Choose a different name!";
     private static final String BOARD_ALREADY_EXISTS = "Board %s already exists in team %s!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
@@ -99,15 +98,6 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
     public List<Assignable> getAssignedTasks() {
         return new ArrayList<>(assignableTasks);
     }
-
-
-//    @Override
-//    public void addTeam(Team teamToAdd) {
-//        if (teams.stream().anyMatch(t -> t.getName().equalsIgnoreCase(teamToAdd.getName()))) {
-//            throw new InvalidUserInputException(String.format(TEAM_ALREADY_EXISTS, teamToAdd.getName()));
-//        }
-//        this.teams.add(teamToAdd);
-//    }
 
     @Override
     public void addMemberToTeam(String teamName, Member memberToAdd) {

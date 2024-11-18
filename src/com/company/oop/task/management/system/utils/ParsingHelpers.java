@@ -4,6 +4,8 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParsingHelpers {
     private static final String NO_SUCH_ENUM = "There is no ''%s'' in %ss.";
@@ -24,6 +26,14 @@ public class ParsingHelpers {
             return Integer.parseInt(valueToParse);
         } catch (NumberFormatException e) {
             throw new InvalidUserInputException(errorMessage);
+        }
+    }
+
+    public static ArrayList<String> splitList(String valueToParse, String errorMessage) {
+        try {
+            return new ArrayList<>(List.of(valueToParse.split(",")));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 
