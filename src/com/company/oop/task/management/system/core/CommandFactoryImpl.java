@@ -73,10 +73,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new UnassignTaskCommand(taskManagementSystemRepository);
             case LISTALLTASKS:
                 return new ListAllTasksCommand(taskManagementSystemRepository);
-            case FILTERTASKSBYTITLE:
-                return new FilterTasksByTitleCommand(taskManagementSystemRepository);
-            case SORTTASKBYTITLE:
-                return new SortTasksByTitleCommand(taskManagementSystemRepository);
+            case FILTERALLTASKSBYTITLE:
+                return new FilterAllTasksByTitleCommand(taskManagementSystemRepository);
             case LISTBUGS:
                 return new ListBugsCommand(taskManagementSystemRepository);
             case LISTSTORIES:
@@ -91,6 +89,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new FilterTasksByAssigneeCommand(taskManagementSystemRepository);
             case SORTTASKS:
                 return new SortTasksCommand(taskManagementSystemRepository);
+            case SORTALLTASKBYTITLE:
+                return new SortAllTasksByTitleCommand(taskManagementSystemRepository);
+            case SORTANDFILTERALLTASKSBYTITLE:
+                return new SortAndFilterAllTasksByTitleCommand(taskManagementSystemRepository);
             case LOGIN:
                 return new LoginCommand(taskManagementSystemRepository);
             case LOGOUT:

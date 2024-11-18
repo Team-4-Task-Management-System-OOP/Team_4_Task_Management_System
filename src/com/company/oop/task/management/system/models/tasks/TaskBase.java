@@ -34,14 +34,13 @@ public abstract class TaskBase implements Task {
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";
     private static final String NO_COMMENTS = "---NO COMMENTS ADDED TO TASK TO DISPLAY---";
 
-    //Fields
+
     private final int id;
     private String title;
     private String description;
     private final List<Comment> comments;
     private final List<String> history;
 
-    //Constructor
     public TaskBase(int id, String title, String description) {
         this.id = id;
         setTitle(title);
@@ -50,7 +49,6 @@ public abstract class TaskBase implements Task {
         this.history = new ArrayList<>();
     }
 
-    //Getters and Setters
     @Override
     public int getId() {
         return id;
@@ -88,7 +86,6 @@ public abstract class TaskBase implements Task {
 
     public abstract TaskType getTaskType();
 
-    //Methods
     @Override
     public void addComment(Comment comment) {
         if (comment == null || comment.getContent() == null || comment.getContent().isEmpty()) {
@@ -104,14 +101,12 @@ public abstract class TaskBase implements Task {
         history.add(format("[%s] - %s", formatTime(LocalDateTime.now()), log));
     }
 
-    //Print
-    //important info - title, description, task type
-    // optional info - comments, history
     @Override
     public String printImportantInfo() {
-        return format("Id: %d%n" +
-                "Task Type: %s%n"+
-                "Title: %s%n", getId(), getTaskType(), getTitle());
+        return format(
+                "Task Type: %s%n" +
+                "Title: %s%n" +
+                "Description: %s%n", getTaskType(), getTitle(), getDescription());
     }
 
     @Override
@@ -149,7 +144,6 @@ public abstract class TaskBase implements Task {
                 printImportantInfo(), getDescription(), printComments(), printLogHistory());
     }
 
-    //Equals Override in order to make contains method work properly in repo
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -2,10 +2,18 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.models.teams.contracts.Team;
+import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.*;
+
 public class UnassignTaskCommand extends BaseCommand {
+
+    private static final int EXPECTED_ARGUMENTS_COUNT = 3;
 
     public UnassignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -18,6 +26,34 @@ public class UnassignTaskCommand extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        return "";
+
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_ARGUMENTS_COUNT);
+
+        String taskName = parameters.get(0);
+        String memberName = parameters.get(1);
+        String teamName = parameters.get(2);
+
+        Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
+        if (team == null) {
+            throw new IllegalArgumentException(NO_TEAMS_FOUND);
+        }
+
+        Member member = team.getMembers()
+                .stream()
+                .filter(m -> m.getName().equalsIgnoreCase(memberName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NO_MEMBERS_FOUND));
+
+        Task task = team.getBoards()
+                .stream()
+                .flatMap(board -> board.getTasks().stream())
+                .filter(t -> t.getTitle().equalsIgnoreCase(taskName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NO_TASKS_FOUND));
+
+        member.removeTask(task);
+
+        member.addActivityHistory(String.format(TASK_UNASSIGNED_SUCCESSFUL_MESSAGE, task.getTitle()));
+        return String.format(TASK_UNASSIGNED, task.getId(), memberName);
     }
 }

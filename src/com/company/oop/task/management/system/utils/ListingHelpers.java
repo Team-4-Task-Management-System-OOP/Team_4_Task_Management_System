@@ -2,8 +2,9 @@ package com.company.oop.task.management.system.utils;
 import com.company.oop.task.management.system.models.contracts.Printable;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.JOIN_DELIMITER;
 
@@ -15,26 +16,47 @@ public class ListingHelpers {
     //Somehow have to find a way to optimize all printElement methods in all models
 
     public static <T extends Printable> String elementsToString(List<T> elements) {
-        if (elements.isEmpty()){
-            return EMPTY_LIST;
-        }
-        List<String> stringElements = new ArrayList<>();
-        for (T element : elements) {
-            stringElements.add(element.toString());
-        }
-        return String.join(JOIN_DELIMITER + System.lineSeparator(), stringElements).trim();
+       return elements.isEmpty() ? EMPTY_LIST :
+               elements.stream()
+                       .map(Object::toString)
+                       .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                       .trim();
     }
 
-    public static <T extends Task> String importantInfoToString(List<T> elements) {
-        if (elements.isEmpty()){
-            return EMPTY_LIST;
-        }
-        List<String> result = new ArrayList<>();
-        for (T element : elements) {
-            result.add(element.printImportantInfo());
-        }
+    public static <T extends Task> String listImportantInfoForAllTasks(List<T> elements) {
+      return elements.isEmpty() ? EMPTY_LIST :
+              elements.stream()
+                      .map(Task::printImportantInfo)
+                      .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                      .trim();
+    }
 
-        return String.join(JOIN_DELIMITER + System.lineSeparator(), result).trim();
+    public static <T extends Task> String listAllTasksFilteredByTitle(List<T> elements, String targetTitle) {
+        return elements.isEmpty() ? EMPTY_LIST :
+                elements.stream()
+                        .filter(task -> task.getTitle().contains(targetTitle))
+                        .map(Task::printImportantInfo)
+                        .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                        .trim();
+    }
+
+    public static <T extends Task> String listAllTasksSortedByTitle(List<T> elements) {
+        return elements.isEmpty() ? EMPTY_LIST :
+                elements.stream()
+                        .sorted(Comparator.comparing(Task::getTitle))
+                        .map(Task::printImportantInfo)
+                        .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                        .trim();
+    }
+
+    public static <T extends Task> String listAllTasksSortedAndFilteredByTitle(List<T> elements, String targetTitle) {
+        return elements.isEmpty() ? EMPTY_LIST :
+                elements.stream()
+                        .filter(task -> task.getTitle().contains(targetTitle))
+                        .sorted(Comparator.comparing(Task::getTitle))
+                        .map(Task::printImportantInfo)
+                        .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                        .trim();
     }
 
 }

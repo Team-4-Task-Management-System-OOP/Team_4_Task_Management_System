@@ -2,7 +2,6 @@ package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Bug;
-import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
@@ -17,7 +16,6 @@ import static java.lang.String.format;
 
 public class BugImpl extends TaskBase implements Bug {
 
-    // Constants
     public static final String STEPS_ERROR_MESSAGE = "You should enter at least one step for reproducible!";
     public static final String SET_BUG_ASSIGNEE_SUCCESSFULLY = "Bug %s has been successfully assigned to %s. " +
             "Previous assignee was %s.";
@@ -33,14 +31,12 @@ public class BugImpl extends TaskBase implements Bug {
     public static final String BUG_PRIORITY = "Bug Priority is already set to %s!";
     public static final String ASSIGNEE_CANNOT_BE_EMPTY = "Assignee cannot be empty.";
 
-    // Fields
     private PriorityType bugPriority;
     private List<String> reproducibleSteps;
     private BugSeverity bugSeverity;
     private BugStatus bugStatus;
     private Member assignee;
 
-    //Constructor
     public BugImpl(int id, String title, String description,
                    List<String> reproducibleSteps, PriorityType bugPriority, BugSeverity bugSeverity) {
         super(id, title, description);
@@ -51,7 +47,6 @@ public class BugImpl extends TaskBase implements Bug {
         this.assignee = DEFAULT_ASSIGNEE;
     }
 
-    //Setters
     private void setReproducibleSteps(List<String> reproducibleSteps) {
         validatePositive(reproducibleSteps.size(), STEPS_ERROR_MESSAGE);
         this.reproducibleSteps = new ArrayList<>(reproducibleSteps);
@@ -71,7 +66,6 @@ public class BugImpl extends TaskBase implements Bug {
         }
     }
 
-    //Getters
     @Override
     public List<String> getReproducibleSteps() {
         return new ArrayList<>(reproducibleSteps);
@@ -102,7 +96,6 @@ public class BugImpl extends TaskBase implements Bug {
         return TaskType.BUG;
     }
 
-    //Methods
     //ToDo For enhancement
     private void logChange(String messageTemplate, Object oldValue, Object newValue) {
         super.historyLogger(format(messageTemplate, oldValue, newValue));
@@ -147,7 +140,6 @@ public class BugImpl extends TaskBase implements Bug {
         }
     }
 
-    //Print
     public String printReproducibleSteps() {
         StringBuilder printReproducibleSteps = new StringBuilder();
         for (int i = 0; i < reproducibleSteps.size(); i++) {
