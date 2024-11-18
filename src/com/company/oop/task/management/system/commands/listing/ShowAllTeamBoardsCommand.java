@@ -48,29 +48,5 @@ public class ShowAllTeamBoardsCommand extends BaseCommand implements Command {
             }
             return teamBoardsToPrint.toString();
         }
-
-//        for (Board board : allTeamBoards) {
-//            if (board.getName().equalsIgnoreCase(teamName)) {
-//                team = board;
-//                break;
-//            }
-//            else return format(TEAM_NOT_FOUND, teamName);
-//        }
-//
-//        List<Board> boards = team.getBoards();
-//
-//        if (boards.isEmpty()) {
-//            return format(NO_BOARDS_FOUND_IN_TEAM, teamName);
-//        }
-//
-//        StringBuilder boardsInfo = new StringBuilder("Team Boards:\n");
-//        for (Board board : boards) {
-//            boardsInfo.append(format(
-//                    "Board Name: %s, Tasks: %d, Activity History: %d entries\n",
-//                    board.getName(),
-//                    board.getTasks().size(),
-//                    board.getHistory().size()));
-//        }
-//        return boardsInfo.toString();
     }
 }

@@ -2,11 +2,15 @@ package com.company.oop.task.management.system.commands.utils;
 
 public class CommandsConstants {
 
-    public static final String MEMBER_ADDED = "Member %s was added to team %s.";
+    public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s.\"";
 
     public static final String TASK_CREATED = "Task with ID %d was created.";
 
     public static final String FEEDBACK_CREATED = "Feedback with ID %d and title \"%s\" was created.";
+
+    public static final String STORY_CREATED = "Story with ID %d and title \"%s\" was created.";
+
+    public static final String BUG_CREATED = "Bug with ID %d and title \"%s\" was created.";
 
     public static final String TEAM_HEADLINE = "---Team №%d---%n";
 
@@ -35,7 +39,8 @@ public class CommandsConstants {
 
     public final static String MEMBER_NOT_LOGGED = "You are not logged in! Please login first!";
 
-    public static final String COMMENT_ADDED = "Comment was added successfully to task %s by %s";
+    public static final String COMMENT_ADDED = "Comment was added successfully to task with title \"%s\" and ID %d. " +
+            "Author of comment: \"%s\"";
 
     public static final String BOARD_CREATED_AND_ADDED = "Board with name \"%s\" " +
             "has been successfully created and added to team \"%s!\"";
@@ -44,7 +49,10 @@ public class CommandsConstants {
 
     public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from \"%s\"";
 
-    public static final String ENUM_CHANGED = "The \"%s\" of task ID \"%d\" was changed from \"%s\" to \"%s\" successfully.";
+    public static final String ENUM_CHANGED = "The \"%s\" of task ID \"%d\" was changed " +
+            "from \"%s\" to \"%s\" successfully.";
+
+    public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" doesn't exist in team \"%s\"";
 
     public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
             "Please add a member first.";

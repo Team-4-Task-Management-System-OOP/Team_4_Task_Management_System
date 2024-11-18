@@ -28,8 +28,6 @@ public interface TaskManagementSystemRepository {
 
     List<Assignable> getAssignedTasks();
 
-    // public void addTeam(Team teamToAdd);
-
     Team findTeamByName(String name);
 
     Member findMemberByName(String memberName);

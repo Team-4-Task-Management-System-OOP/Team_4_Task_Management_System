@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.commands.creation;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
@@ -10,6 +11,7 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.BOARD_DOES_NOT_EXIST_IN_TEAM;
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.FEEDBACK_CREATED;
 import static com.company.oop.task.management.system.models.tasks.FeedbackImpl.*;
 import static java.lang.String.format;
@@ -30,8 +32,14 @@ public class CreateFeedbackInBoardCommand extends BaseCommand {
         int rating = ParsingHelpers.tryParseInt(parameters.get(2),
                 (format(RATING_ERR, RATING_MIN, RATING_MAX)));
         String boardNameToAddFeedbackIn = parameters.get(3);
-        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating);
         Board boardToAddFeedbackIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddFeedbackIn);
+        if (getTaskManagementSystemRepository()
+                .getLoggedInMember().getTeam().getBoards().contains(boardToAddFeedbackIn)) {
+            throw new InvalidUserInputException(format(BOARD_DOES_NOT_EXIST_IN_TEAM,
+                    boardNameToAddFeedbackIn,
+                    getTaskManagementSystemRepository().getLoggedInMember().getTeam().getName()));
+        }
+        Feedback feedback = getTaskManagementSystemRepository().createFeedback(title, description, rating);
         boardToAddFeedbackIn.addTask(feedback);
         feedback.historyLogger(format(FEEDBACK_CREATED, feedback.getId(), feedback.getTitle()));
         return format(FEEDBACK_CREATED, feedback.getId(), feedback.getTitle());

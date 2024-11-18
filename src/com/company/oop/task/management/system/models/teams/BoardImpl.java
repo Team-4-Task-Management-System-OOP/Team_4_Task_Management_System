@@ -113,7 +113,7 @@ public class BoardImpl implements Board {
         }
         StringBuilder printTasks = new StringBuilder();
         for (Task task : tasks) {
-            printTasks.append(task.getTitle()).append(System.lineSeparator());
+            printTasks.append(task.toString()).append(System.lineSeparator());
         }
         return printTasks.toString();
     }
