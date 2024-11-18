@@ -15,6 +15,7 @@ import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
 
+    //Constants
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
     public static final int DESCRIPTION_MIN_LENGTH = 10;
@@ -32,6 +33,7 @@ public abstract class TaskBase implements Task {
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";
     private static final String NO_COMMENTS = "---NO COMMENTS ADDED TO TASK TO DISPLAY---";
+
 
     private final int id;
     private String title;
@@ -101,9 +103,10 @@ public abstract class TaskBase implements Task {
 
     @Override
     public String printImportantInfo() {
-        return format("Id: %d%n" +
-                "Task Type: %s%n"+
-                "Title: %s%n", getId(), getTaskType(), getTitle());
+        return format(
+                "Task Type: %s%n" +
+                "Title: %s%n" +
+                "Description: %s%n", getTaskType(), getTitle(), getDescription());
     }
 
     @Override

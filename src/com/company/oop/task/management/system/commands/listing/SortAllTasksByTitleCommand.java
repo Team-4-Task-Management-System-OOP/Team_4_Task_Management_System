@@ -8,27 +8,27 @@ import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.NO_REGISTERED_TASKS;
-import static com.company.oop.task.management.system.utils.ListingHelpers.listImportantInfoForAllTasks;
+import static com.company.oop.task.management.system.utils.ListingHelpers.listAllTasksSortedByTitle;
 
-public class ListAllTasksCommand extends BaseCommand {
+public class SortAllTasksByTitleCommand extends BaseCommand {
 
     private final List<Task> tasks;
 
-    public ListAllTasksCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public SortAllTasksByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
         tasks = taskManagementSystemRepository.getTasks();
     }
 
     @Override
     protected boolean requiresLogin() {
-        return true;
+        return false;
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        if(tasks.isEmpty()){
+        if (tasks.isEmpty()) {
             throw new ElementNotFoundException(NO_REGISTERED_TASKS);
         }
-        return listImportantInfoForAllTasks(tasks);
+        return listAllTasksSortedByTitle(tasks);
     }
 }

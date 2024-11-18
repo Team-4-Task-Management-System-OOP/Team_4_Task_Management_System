@@ -1,8 +1,6 @@
 package com.company.oop.task.management.system.core;
 
 import com.company.oop.task.management.system.commands.contracts.Command;
-import com.company.oop.task.management.system.commands.utils.CommandsConstants;
-import com.company.oop.task.management.system.commands.utils.HelpCommand;
 import com.company.oop.task.management.system.commands.utils.UserCommandsGuide;
 import com.company.oop.task.management.system.core.contracts.CommandFactory;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemEngine;
@@ -32,7 +30,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
 
     @Override
     public void start() {
-       System.out.println(UserCommandsGuide.ENGINE_START_MESSAGE); //ToDo
+        System.out.println(UserCommandsGuide.ENGINE_START_MESSAGE); //ToDo
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
@@ -78,7 +76,8 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         }
         return parameters;
     }
-//Todo dali shte grumne s opisanie na bug
+
+    //Todo dali shte grumne s opisanie na bug
     private List<String> extractCommentParameters(String fullCommand) {
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
@@ -87,7 +86,7 @@ public class TaskManagementSystemEngineImpl implements TaskManagementSystemEngin
         if (indexOfOpenComment >= 0) {
             parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
             fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
-       }
+        }
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
         result.removeAll(Arrays.asList(" ", "", null));
         parameters.addAll(result);
