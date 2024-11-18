@@ -15,7 +15,6 @@ import static java.lang.String.format;
 
 public class MemberImpl implements Member {
 
-    //Constants
     private static final int MEMBER_NAME_MIN_LENGTH = 5;
     private static final int MEMBER_NAME_MAX_LENGTH = 15;
     private static final String NAME_ERR = "''%s'' is an invalid member name! " +
@@ -32,13 +31,11 @@ public class MemberImpl implements Member {
     private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---\nDo some activities first!\n";
     private static final Team DEFAULT_TEAM = new TeamImpl("Unassigned");
 
-    //Fields
     private String name;
     private Team team;
     private final List<Task> tasks;
     private final List<String> activityHistory;
 
-    //Constructor
     public MemberImpl(String name) {
         setName(name);
         this.tasks = new ArrayList<>();
@@ -46,7 +43,6 @@ public class MemberImpl implements Member {
         this.team = DEFAULT_TEAM;
     }
 
-    //Setters
     private void setName(String name) {
         validateStringLength(name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH,
                 format(NAME_ERR, name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH));
@@ -67,7 +63,6 @@ public class MemberImpl implements Member {
         this.team = teamName;
     }
 
-    //Getters
     @Override
     public String getName() {
         return name;
@@ -88,7 +83,6 @@ public class MemberImpl implements Member {
         return team;
     }
 
-    //Methods
     @Override
     public void addTask(Task task) {
         if (task == null) {
@@ -149,7 +143,6 @@ public class MemberImpl implements Member {
         }
     }
 
-    //Print
     @Override
     public String toString() {
         return  format("%nMember Name: %s" +
@@ -158,7 +151,6 @@ public class MemberImpl implements Member {
                 "%n---Member History---%n%s", getName(), team.getName(), printTasks(), printHistory());
     }
 
-    //Equals Override in order to make contains method work properly in repo
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

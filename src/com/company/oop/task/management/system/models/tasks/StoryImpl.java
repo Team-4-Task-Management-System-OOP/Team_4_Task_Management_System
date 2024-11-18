@@ -9,7 +9,6 @@ import static java.lang.String.format;
 
 public class StoryImpl extends TaskBase implements Story {
 
-    //Constants
     public static final String SET_STORY_ASSIGNEE_SUCCESSFULLY = "Story %s has been successfully assigned to %s. " +
             "Previous assignee was %s.";
     public static final String ALREADY_ASSIGNED_STORY = "Story %s is already assigned to %s.";
@@ -24,13 +23,11 @@ public class StoryImpl extends TaskBase implements Story {
     public static final String STORY_SIZE_CANNOT_BE_EMPTY = "Story's Size cannot be empty.";
     public static final String ASSIGNEE_CANNOT_BE_EMPTY = "Assignee cannot be empty.";
 
-    //Fields
     private PriorityType storyPriorityType;
     private StorySize size;
     private StoryStatus storyStatus;
     private Member assignee;
 
-    //Constructor
     public StoryImpl(int id, String title, String description, PriorityType storyPriorityType,
                      StorySize size) {
         super(id, title, description);
@@ -40,7 +37,6 @@ public class StoryImpl extends TaskBase implements Story {
         this.assignee = DEFAULT_ASSIGNEE;
     }
 
-    //Setters
     @Override
     public void setAssignee(Member assignee) {
         if (assignee == null) {
@@ -56,7 +52,6 @@ public class StoryImpl extends TaskBase implements Story {
         }
     }
 
-    //Getters
     @Override
     public PriorityType getPriority() {
         return storyPriorityType;
@@ -81,7 +76,6 @@ public class StoryImpl extends TaskBase implements Story {
         return TaskType.STORY;
     }
 
-    //Methods
     //ToDo For enhancement
     private void logChange(String messageTemplate, Object oldValue, Object newValue) {
         super.historyLogger(format(messageTemplate, oldValue, newValue));
@@ -129,7 +123,6 @@ public class StoryImpl extends TaskBase implements Story {
         }
     }
 
-    //Print
     @Override
     public String printImportantInfo() {
         return format("%s" +

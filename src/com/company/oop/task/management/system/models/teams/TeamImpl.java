@@ -15,7 +15,6 @@ import static java.lang.String.format;
 
 public class TeamImpl implements Team {
 
-    // Constants
     public static final int NAME_MIN_LENGTH = 5;
     public static final int NAME_MAX_LENGTH = 15;
     private static final String NAME_LENGTH_ERR = format(
@@ -42,13 +41,11 @@ public class TeamImpl implements Team {
     public static final String CANNOT_ADD_AN_EMPTY_BOARD = "Cannot add an empty board!";
     public static final String CANNOT_REMOVE_AN_EMPTY_BOARD = "Cannot remove an empty board!";
 
-    //Fields
     private String name;
     private final List<Member> members;
     private final List<Board> boards;
     private final List<String> activityHistory;
 
-    //Constructor
     public TeamImpl(String name) {
         setName(name);
         this.members = new ArrayList<>();
@@ -56,13 +53,11 @@ public class TeamImpl implements Team {
         this.activityHistory = new ArrayList<>();
     }
 
-    //Setters
     private void setName(String name) {
         validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERR);
         this.name = name;
     }
 
-    //Getters
     @Override
     public String getName() {
         return name;
@@ -82,7 +77,6 @@ public class TeamImpl implements Team {
         return new ArrayList<>(activityHistory);
     }
 
-    //Methods
     @Override
     public void addActivityHistory(String history) {
         activityHistory.add(format("[%s] - %s", formatTime(LocalDateTime.now()), history));
@@ -139,7 +133,6 @@ public class TeamImpl implements Team {
         }
     }
 
-    //Print
     @Override
     public String printHistory() {
         if (getActivityHistory().isEmpty() || getActivityHistory() == null) {
@@ -187,7 +180,6 @@ public class TeamImpl implements Team {
                 "%n---Team History---%n%s", getName(), printMembers(), printBoards(), printHistory());
     }
 
-    //Equals Override in order to make contains method work properly in repo
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

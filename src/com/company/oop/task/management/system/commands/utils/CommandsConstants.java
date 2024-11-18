@@ -22,6 +22,8 @@ public class CommandsConstants {
 
     public static final String TEAM_CREATION_SUCCESSFUL_MESSAGE = "A team with name ''%s'' has been created!";
 
+    public static final String TASK_ASSIGNED_SUCCESSFUL_MESSAGE = "A task with name ''%s'' has been assigned!";
+
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
 
@@ -46,6 +48,9 @@ public class CommandsConstants {
 
     public static final String NO_BOARDS_FOUND = "There are no boards in team ''%s'' to be shown. " +
             "Please add a board to team ''%s'' first.";
+
+    public static final String NO_TASKS_FOUND = "There are no tasks in board ''%s'' to be shown. " +
+            "Please add a task to board ''%s'' first.";
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 

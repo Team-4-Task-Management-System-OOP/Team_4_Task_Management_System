@@ -14,7 +14,6 @@ import static java.lang.String.format;
 
 public class BoardImpl implements Board {
 
-    // Constants
     private static final int BOARD_NAME_MIN_LENGTH = 5;
     private static final int BOARD_NAME_MAX_LENGTH = 10;
     private static final String BOARD_NAME_LENGTH_ERR = format(
@@ -31,25 +30,21 @@ public class BoardImpl implements Board {
     private static final String NO_HISTORY = "---NO BOARD HISTORY TO DISPLAY---\nDo some activities first!\n";
     private static final String NO_TASKS = "---NO TASKS IN BOARD'S LIST TO DISPLAY---\nAdd a task first!\n";
 
-    // Fields
     private String name;
     private final List<Task> tasks;
     private final List<String> activityHistory;
 
-    //Constructor
     public BoardImpl(String name) {
         setName(name);
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
     }
 
-    //Setters
     private void setName(String name) {
         validateStringLength(name,BOARD_NAME_MIN_LENGTH, BOARD_NAME_MAX_LENGTH, BOARD_NAME_LENGTH_ERR);
         this.name = name;
     }
 
-    //Getters
     @Override
     public String getName() {
         return name;
@@ -65,7 +60,6 @@ public class BoardImpl implements Board {
         return new ArrayList<>(activityHistory);
     }
 
-    //Methods
     @Override
     public void addActivityHistory(String history) {
         activityHistory.add(format("[%s] - %s", formatTime(LocalDateTime.now()), history));
@@ -98,7 +92,6 @@ public class BoardImpl implements Board {
         }
     }
 
-    //Print
     @Override
     public String printHistory() {
         if (getHistory().isEmpty() || getHistory() == null) {
@@ -132,8 +125,6 @@ public class BoardImpl implements Board {
                 "%n---Board History---%n%s", getName(), printTasks(), printHistory());
     }
 
-
-    //Equals Override in order to make contains method work properly in repo
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
