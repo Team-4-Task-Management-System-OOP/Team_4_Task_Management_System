@@ -5,6 +5,8 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 public enum PriorityType {
     HIGH, MEDIUM, LOW;
 
+    public static final String INVALID_PRIORITY = "Invalid Priority. Priority can be: High, Medium, Low.";
+
     @Override
     public String toString() {
         switch (this) {
@@ -15,7 +17,7 @@ public enum PriorityType {
             case LOW:
                 return "Low";
             default:
-                throw new InvalidUserInputException("Invalid Priority. Priority can be: High, Medium, Low.");
+                throw new InvalidUserInputException(INVALID_PRIORITY);
         }
     }
 
