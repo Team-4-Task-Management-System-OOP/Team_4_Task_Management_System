@@ -2,7 +2,6 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.task.management.system.models.teams.MemberImpl;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
