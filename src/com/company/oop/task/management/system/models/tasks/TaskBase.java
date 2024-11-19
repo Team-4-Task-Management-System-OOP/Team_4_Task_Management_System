@@ -63,10 +63,6 @@ public abstract class TaskBase implements Task {
         this.title = title;
     }
 
-    public abstract void assignMember(Member assignee);
-
-    public abstract void unassignMember();
-
     @Override
     public String getDescription() {
         return description;

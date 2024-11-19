@@ -55,17 +55,15 @@ public class BugImpl extends TaskBase implements Bug {
 
     @Override
     public void assignMember(Member assignee) {
-        if (this.assignee.equals(assignee)) {
+        if (!this.assignee.equals(DEFAULT_ASSIGNEE)) {
             throw new InvalidUserInputException(format(ALREADY_ASSIGNED_BUG,
                     getTitle(), getAssignee().getName()));
         }
         if (assignee == null) {
             throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
         }
-        if (!getAssignee().getName().equalsIgnoreCase(assignee.getName())) {
-            super.historyLogger(format(SET_BUG_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
-            this.assignee = assignee;
-        }
+        super.historyLogger(format(SET_BUG_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
+        this.assignee = assignee;
     }
 
     @Override

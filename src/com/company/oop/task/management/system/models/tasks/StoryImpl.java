@@ -40,17 +40,15 @@ public class StoryImpl extends TaskBase implements Story {
 
     @Override
     public void assignMember(Member assignee) {
-        if (this.assignee.equals(assignee)) {
+        if (!DEFAULT_ASSIGNEE.equals(this.assignee)) {
             throw new InvalidUserInputException(format(ALREADY_ASSIGNED_STORY,
                     getTitle(), getAssignee().getName()));
         }
         if (assignee == null) {
             throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
         }
-        if (!getAssignee().getName().equalsIgnoreCase(assignee.getName())) {
-            super.historyLogger(format(SET_STORY_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
-            this.assignee = assignee;
-        }
+        super.historyLogger(format(SET_STORY_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
+        this.assignee = assignee;
     }
 
     @Override

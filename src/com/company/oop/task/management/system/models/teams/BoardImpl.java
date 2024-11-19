@@ -1,6 +1,7 @@
 package com.company.oop.task.management.system.models.teams;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 
@@ -33,11 +34,13 @@ public class BoardImpl implements Board {
 
     private String name;
     private final List<Task> tasks;
+    private final List<Assignable> assignableTasks;
     private final List<String> activityHistory;
 
     public BoardImpl(String name) {
         setName(name);
         this.tasks = new ArrayList<>();
+        this.assignableTasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
     }
 
@@ -54,6 +57,10 @@ public class BoardImpl implements Board {
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
+    }
+
+    public List<Assignable> getAssignableTasks() {
+        return new ArrayList<>(assignableTasks);
     }
 
     @Override
@@ -81,11 +88,40 @@ public class BoardImpl implements Board {
     }
 
     @Override
+    public void addTask(Assignable task) {
+        if (task == null) {
+            throw new InvalidUserInputException(CANNOT_ADD_AN_EMPTY_TASK_BOARD);
+        }
+        if (assignableTasks.stream().noneMatch(m -> m.getTitle().equalsIgnoreCase(task.getTitle()))) {
+            assignableTasks.add(task);
+            tasks.add(task);
+            addActivityHistory(format(TASK_ADDED_TO_BOARD, task.getTitle(), getName()));
+        }
+        else {
+            throw new InvalidUserInputException(format(ALREADY_ADDED, task.getTitle(), getName()));
+        }
+    }
+
+    @Override
     public void removeTask(Task task) {
         if (task == null) {
             throw new InvalidUserInputException(CANNOT_REMOVE_AN_EMPTY_TASK);
         }
         if (tasks.stream().anyMatch(m -> m.getTitle().equalsIgnoreCase(task.getTitle()))) {
+            tasks.remove(task);
+            addActivityHistory(format(TASK_REMOVED_FROM_BOARD, task.getTitle(), getName()));
+        } else {
+            throw new InvalidUserInputException(TASK_REMOVE_ERR);
+        }
+    }
+
+    @Override
+    public void removeTask(Assignable task) {
+        if (task == null) {
+            throw new InvalidUserInputException(CANNOT_REMOVE_AN_EMPTY_TASK);
+        }
+        if (assignableTasks.stream().anyMatch(m -> m.getTitle().equalsIgnoreCase(task.getTitle()))) {
+            assignableTasks.remove(task);
             tasks.remove(task);
             addActivityHistory(format(TASK_REMOVED_FROM_BOARD, task.getTitle(), getName()));
         } else {

@@ -51,16 +51,6 @@ public class FeedbackImpl extends TaskBase implements Feedback {
     }
 
     @Override
-    public void assignMember(Member assignee) {
-        throw new InvalidUserInputException(CANNOT_ASSIGN_FEEDBACK);
-    }
-
-    @Override
-    public void unassignMember(){
-        throw new InvalidUserInputException(CANNOT_UNASSIGN_FEEDBACK);
-    }
-
-    @Override
     public TaskType getTaskType() {
         return TaskType.FEEDBACK;
     }

@@ -4,6 +4,8 @@ import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
+import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
@@ -34,7 +36,7 @@ public class UnassignTaskCommand extends BaseCommand {
 
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_ARGUMENTS_COUNT);
 
-        int iD = ParsingHelpers.tryParseInt(parameters.get(0), VALID_TASK_ID);
+        int id = ParsingHelpers.tryParseInt(parameters.get(0), VALID_TASK_ID);
         String memberName = parameters.get(1);
         String teamName = parameters.get(2);
 
@@ -49,18 +51,18 @@ public class UnassignTaskCommand extends BaseCommand {
                 .findFirst()
                 .orElseThrow(() -> new ElementNotFoundException(format(NO_MEMBERS_FOUND, team.getName())));
 
-        Task task = team.getBoards()
+        Assignable task = team.getBoards()
                 .stream()
-                .flatMap(board -> board.getTasks().stream())
-                .filter(t -> t.getId() == iD)
+                .flatMap(board -> board.getAssignableTasks().stream())
+                .filter(t -> t.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new ElementNotFoundException(format(NO_TASK_FOUND, iD)));
+                .orElseThrow(() -> new ElementNotFoundException(format(NO_TASK_FOUND, id)));
 
         if (task.getTaskType().equals(TaskType.FEEDBACK)){
             throw new InvalidUserInputException(CANNOT_UNASSIGN_FEEDBACK);
         }
 
-        //member.removeTask(task);
+        member.removeTask(task);
         task.unassignMember();
         member.addActivityHistory(format(TASK_UNASSIGNED_SUCCESSFUL_MESSAGE, task.getTitle()));
         return format(TASK_UNASSIGNED, task.getId(), memberName);
