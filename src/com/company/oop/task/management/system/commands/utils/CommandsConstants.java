@@ -4,8 +4,6 @@ public class CommandsConstants {
 
     public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s.\"";
 
-    public static final String TASK_CREATED = "Task with ID %d was created.";
-
     public static final String FEEDBACK_CREATED = "Feedback with ID %d and title \"%s\" was created.";
 
     public static final String STORY_CREATED = "Story with ID %d and title \"%s\" was created.";
@@ -55,22 +53,28 @@ public class CommandsConstants {
 
     public static final String INVALID_RATING_VALUE = "Invalid rating value. It must be an integer.";
 
-    public static final String INVALID_SEVERITY_VALUE = "Invalid severity value: '%s'. Valid values are: MINOR, MAJOR, CRITICAL.";
+    public static final String INVALID_SEVERITY_VALUE = "Invalid severity value: '%s'. " +
+            "Valid values are: MINOR, MAJOR, CRITICAL.";
 
-    public static final String RATING_ERROR = "Rating must be between 1 and 10.";
+    public static final String RATING_ERROR = "Rating must be between \"1\" and \"10\".";
 
-    public static final String FEEDBACK_RATING_CHANGED = "Feedback rating changed from %d to %d for Feedback with ID %s.";
+    public static final String FEEDBACK_RATING_CHANGED = "Feedback rating changed from \"%d\" " +
+            "to \"%d\" for Feedback with ID \"%s\".";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_RATING_OF_FEEDBACK = "Successfully changed the rating of feedback '%s' to %d.";
+    public static final String SUCCESSFULLY_CHANGED_THE_RATING_OF_FEEDBACK = "Successfully changed " +
+            "the rating of feedback '%s' to %d.";
 
     public static final String ENUM_CHANGED = "The priority of task ID \"%d\" was changed " +
             "from \"%s\" to \"%s\" successfully.";
 
-    public static final String BUG_SEVERITY_CHANGED_FROM = "Bug severity changed from %s to %s for Bug with ID %s.";
+    public static final String BUG_SEVERITY_CHANGED_FROM = "Bug severity changed from \"%s\" " +
+            "to \"%s\" for Bug with ID %s.";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_SEVERITY_OF_BUG = "Successfully changed the severity of bug '%s' to %s.";
+    public static final String SUCCESSFULLY_CHANGED_THE_SEVERITY_OF_BUG = "Successfully changed " +
+            "the severity of bug \"%s\" to %s.\"";
 
-    public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" doesn't exist in team \"%s\"";
+    public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" " +
+            "doesn't exist in team \"%s\"";
 
     public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
             "Please add a member first.";
