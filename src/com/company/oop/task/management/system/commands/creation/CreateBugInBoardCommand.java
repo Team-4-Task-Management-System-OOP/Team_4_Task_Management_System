@@ -13,14 +13,11 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.*;
-import static com.company.oop.task.management.system.commands.utils.CommandsConstants.STORY_CREATED;
 import static java.lang.String.format;
 
 public class CreateBugInBoardCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
-    public static final String INVALID_INGREDIENTS = "Invalid value for steps to reproduce. Should be a valid list of steps.";
-
     public CreateBugInBoardCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -30,7 +27,7 @@ public class CreateBugInBoardCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String title = parameters.get(0);
         String description = parameters.get(1);
-        List<String> stepsToReproduce = ParsingHelpers.splitList(parameters.get(2), INVALID_INGREDIENTS);
+        List<String> stepsToReproduce = ParsingHelpers.splitList(parameters.get(2), INVALID_REPRODUCIBLE_STEPS);
         PriorityType bugPrioritytype = ParsingHelpers.tryParseEnum(parameters.get(3), PriorityType.class);
         BugSeverity bugSeverity = ParsingHelpers.tryParseEnum(parameters.get(4), BugSeverity.class);
         String boardNameToAddBugIn = parameters.get(5);

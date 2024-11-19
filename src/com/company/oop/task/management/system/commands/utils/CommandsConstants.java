@@ -10,6 +10,9 @@ public class CommandsConstants {
 
     public static final String BUG_CREATED = "Bug with ID %d and title \"%s\" was created.";
 
+    public static final String INVALID_REPRODUCIBLE_STEPS = "Invalid value for steps to reproduce. " +
+            "Should be a valid list of steps.";
+
     public static final String TEAM_HEADLINE = "---Team №%d---%n";
 
     public static final String MEMBER_HEADLINE = "---Member №%d---%n";
