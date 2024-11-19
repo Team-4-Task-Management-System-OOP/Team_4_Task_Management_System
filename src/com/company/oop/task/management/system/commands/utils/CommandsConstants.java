@@ -63,6 +63,9 @@ public class CommandsConstants {
     public static final String INVALID_SEVERITY_VALUE = "Invalid severity value: '%s'. " +
             "Valid values are: MINOR, MAJOR, CRITICAL.";
 
+    public static final String INVALID_SIZE_VALUE = "Invalid size value: '%s'. " +
+            "Valid values are: SMALL, MEDIUM, LARGE.";
+
     public static final String RATING_ERROR = "Rating must be between \"1\" and \"10\".";
 
     public static final String FEEDBACK_RATING_CHANGED = "Feedback rating changed from \"%d\" " +
@@ -70,6 +73,10 @@ public class CommandsConstants {
 
     public static final String SUCCESSFULLY_CHANGED_THE_RATING_OF_FEEDBACK = "Successfully changed " +
             "the rating of feedback '%s' to %d.";
+
+    public static final String SIZE_CHANGED = "Story size changed from %s to %s for Story with ID %s.";
+
+    public static final String SUCCESSFULLY_CHANGED_THE_SIZE = "Successfully changed the size of story '%s' to %s.";
 
     public static final String ENUM_CHANGED = "The priority of task ID \"%d\" was changed " +
             "from \"%s\" to \"%s\" successfully.";
@@ -79,6 +86,12 @@ public class CommandsConstants {
 
     public static final String SUCCESSFULLY_CHANGED_THE_SEVERITY_OF_BUG = "Successfully changed " +
             "the severity of bug \"%s\" to %s.\"";
+
+    public static final String INVALID_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: ACTIVE, FIXED.";
+
+    public static final String BUG_STATUS_CHANGED = "Bug status changed from %s to %s for Bug with ID %s.";
+
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_BUG = "Successfully changed the status of bug '%s' to %s.";
 
     public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" " +
             "doesn't exist in team \"%s\"";
