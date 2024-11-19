@@ -17,18 +17,19 @@ import static java.lang.String.format;
 public class BugImpl extends TaskBase implements Bug {
 
     public static final String STEPS_ERROR_MESSAGE = "You should enter at least one step for reproducible!";
-    public static final String SET_BUG_ASSIGNEE_SUCCESSFULLY = "Bug %s has been successfully assigned to %s. " +
-            "Previous assignee was %s.";
-    public static final String ALREADY_ASSIGNED_BUG = "Bug %s is already assigned to %s.";
-    public static final String BUG_SEVERITY_CHANGED = "Bug Severity changed from %s to %s successfully.";
-    public static final String BUG_SEVERITY_ALREADY_SET = "Bug Severity is already set to %s!";
+    public static final String SET_BUG_ASSIGNEE_SUCCESSFULLY = "Bug %s has been successfully assigned to \"%s\". " +
+            "Previous assignee was \"%s\".";
+    public static final String UNASSIGN_BUG_SUCCESSFULLY = "Bug %s has been successfully unassigned from \"%s\"";
+    public static final String ALREADY_ASSIGNED_BUG = "Bug \"%s\" is already assigned to member \"%s\".";
+    public static final String BUG_SEVERITY_CHANGED = "Bug Severity changed from \"%s\" to \"%s\" successfully.";
+    public static final String BUG_SEVERITY_ALREADY_SET = "Bug Severity is already set to \"%s\"!";
     public static final String BUG_STATUS_CANNOT_BE_EMPTY = "Bug's Priority Type cannot be empty!";
-    public static final String BUG_STATUS_CHANGED = "Bug Status changed from %s to %s successfully.";
-    public static final String BUG_STATUS_ALREADY_SET = "Bug Status is already set to %s!";
+    public static final String BUG_STATUS_CHANGED = "Bug Status changed from \"%s\" to \"%s\" successfully.";
+    public static final String BUG_STATUS_ALREADY_SET = "Bug Status is already set to \"%s\"!";
     public static final String BUG_SEVERITY_CANNOT_BE_EMPTY = "Bug's Severity cannot be empty!";
     public static final String BUG_PRIORITY_TYPE_CANNOT_BE_EMPTY = "Bug's Priority Type cannot be empty!";
-    public static final String BUG_PRIORITY_CHANGED = "Bug Priority changed from %s to %s successfully.";
-    public static final String BUG_PRIORITY = "Bug Priority is already set to %s!";
+    public static final String BUG_PRIORITY_CHANGED = "Bug Priority changed from \"%s\" to \"%s\" successfully.";
+    public static final String BUG_PRIORITY = "Bug Priority is already set to \"%s\"!";
     public static final String ASSIGNEE_CANNOT_BE_EMPTY = "Assignee cannot be empty.";
 
     private PriorityType bugPriority;
@@ -53,17 +54,24 @@ public class BugImpl extends TaskBase implements Bug {
     }
 
     @Override
-    public void setAssignee(Member assignee) {
+    public void assignMember(Member assignee) {
+        if (this.assignee.equals(assignee)) {
+            throw new InvalidUserInputException(format(ALREADY_ASSIGNED_BUG,
+                    getTitle(), getAssignee().getName()));
+        }
         if (assignee == null) {
             throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
         }
         if (!getAssignee().getName().equalsIgnoreCase(assignee.getName())) {
             super.historyLogger(format(SET_BUG_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
             this.assignee = assignee;
-        } else {
-            throw new InvalidUserInputException(format(ALREADY_ASSIGNED_BUG,
-                    getTitle(), getAssignee().getName()));
         }
+    }
+
+    @Override
+    public void unassignMember(){
+        super.historyLogger(format(UNASSIGN_BUG_SUCCESSFULLY, getTitle(), getAssignee()));
+        this.assignee = DEFAULT_ASSIGNEE;
     }
 
     @Override

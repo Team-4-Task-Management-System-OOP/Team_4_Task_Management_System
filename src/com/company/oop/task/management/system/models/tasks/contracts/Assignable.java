@@ -14,6 +14,4 @@ public interface Assignable extends Task{
 
     void changePriority(PriorityType priority);
 
-    void setAssignee(Member assignee);
-
 }

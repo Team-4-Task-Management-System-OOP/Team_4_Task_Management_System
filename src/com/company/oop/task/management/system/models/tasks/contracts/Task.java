@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.models.tasks.contracts;
 
 import com.company.oop.task.management.system.models.contracts.Printable;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
 
 import java.util.List;
 
@@ -14,6 +15,10 @@ public interface Task extends Commentable, Identifiable, Printable {
     List<String> getHistory();
 
     TaskType getTaskType();
+
+    void assignMember (Member member);
+
+    void unassignMember();
 
     String printImportantInfo();
 

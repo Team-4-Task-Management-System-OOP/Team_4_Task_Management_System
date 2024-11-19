@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
-    private static final String MEMBER_ALREADY_EXISTS = "Member %s already exists. Choose a different name!";
-    private static final String BOARD_ALREADY_EXISTS = "Board %s already exists in team %s!";
+    public static final String MEMBER_ALREADY_EXISTS = "Member \"s\" already exists. Choose a different name!";
+    public static final String BOARD_ALREADY_EXISTS = "Board \"%s\" already exists in team \"%s\"!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
     public static final String NO_LOGGED_IN_TEAM = "There is no logged in team.";
-    public static final String NO_ELEMENT_NAME_FOUND = "No %s with name %s exists!";
+    public static final String NO_ELEMENT_NAME_FOUND = "No %s with name \"%s\" exists!";
     public static final String NO_TASK_WITH_ID_FOUND = "No task with ID %d";
     public static final String BOARD_ALREADY_EXISTS_IN_REPO = "A board with this name already exists and cannot be created! " +
             "Please, provide a different board name!";

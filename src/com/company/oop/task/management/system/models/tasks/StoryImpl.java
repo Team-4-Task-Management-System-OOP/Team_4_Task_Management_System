@@ -5,6 +5,7 @@ import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.*;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 
+import static com.company.oop.task.management.system.models.tasks.BugImpl.UNASSIGN_BUG_SUCCESSFULLY;
 import static java.lang.String.format;
 
 public class StoryImpl extends TaskBase implements Story {
@@ -38,7 +39,11 @@ public class StoryImpl extends TaskBase implements Story {
     }
 
     @Override
-    public void setAssignee(Member assignee) {
+    public void assignMember(Member assignee) {
+        if (this.assignee.equals(assignee)) {
+            throw new InvalidUserInputException(format(ALREADY_ASSIGNED_STORY,
+                    getTitle(), getAssignee().getName()));
+        }
         if (assignee == null) {
             throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
         }
@@ -46,10 +51,12 @@ public class StoryImpl extends TaskBase implements Story {
             super.historyLogger(format(SET_STORY_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
             this.assignee = assignee;
         }
-        else{
-            throw new InvalidUserInputException(format(ALREADY_ASSIGNED_STORY,
-                    getTitle(), getAssignee().getName()));
-        }
+    }
+
+    @Override
+    public void unassignMember(){
+        super.historyLogger(format(UNASSIGN_BUG_SUCCESSFULLY, getTitle(), getAssignee()));
+        this.assignee = DEFAULT_ASSIGNEE;
     }
 
     @Override

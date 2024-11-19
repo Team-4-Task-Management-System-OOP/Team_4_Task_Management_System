@@ -2,19 +2,23 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
+import com.company.oop.task.management.system.utils.ParsingHelpers;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.*;
+import static java.lang.String.format;
 
 public class AssignTaskCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
-
     public AssignTaskCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
@@ -29,7 +33,7 @@ public class AssignTaskCommand extends BaseCommand {
 
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String taskName = parameters.get(0);
+        int iD = ParsingHelpers.tryParseInt(parameters.get(0), VALID_TASK_ID);
         String memberName = parameters.get(1);
         String teamName = parameters.get(2);
 
@@ -42,18 +46,22 @@ public class AssignTaskCommand extends BaseCommand {
                 .stream()
                 .filter(m -> m.getName().equalsIgnoreCase(memberName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NO_MEMBERS_FOUND));
+                .orElseThrow(() -> new ElementNotFoundException(format(NO_MEMBERS_FOUND, team.getName())));
 
         Task task = team.getBoards()
                 .stream()
                 .flatMap(board -> board.getTasks().stream())
-                .filter(t -> t.getTitle().equalsIgnoreCase(taskName))
+                .filter(t -> t.getId() == (iD))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_TASKS_FOUND, taskName, taskName)));
+                .orElseThrow(() -> new ElementNotFoundException(format(NO_TASK_FOUND, iD)));
 
-        member.addTask(task);
+        if (task.getTaskType().equals(TaskType.FEEDBACK)){
+            throw new InvalidUserInputException(format(CANNOT_ASSIGN_FEEDBACK, member.getName()));
+        }
 
-        member.addActivityHistory(String.format(TASK_ASSIGNED_SUCCESSFUL_MESSAGE, task.getTitle()));
-        return String.format(TASK_ASSIGNED, task.getId(), memberName);
+        //member.addTask(task);
+        task.assignMember(member);
+        member.addActivityHistory(format(TASK_ASSIGNED_SUCCESSFUL_MESSAGE, task.getTitle()));
+        return format(TASK_ASSIGNED, task.getId(), memberName);
     }
 }
