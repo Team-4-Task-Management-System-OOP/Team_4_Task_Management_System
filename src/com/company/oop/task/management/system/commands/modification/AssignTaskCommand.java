@@ -49,7 +49,7 @@ public class AssignTaskCommand extends BaseCommand {
                 .flatMap(board -> board.getTasks().stream())
                 .filter(t -> t.getTitle().equalsIgnoreCase(taskName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NO_TASKS_FOUND));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_TASKS_FOUND, taskName, taskName)));
 
         member.addTask(task);
 
