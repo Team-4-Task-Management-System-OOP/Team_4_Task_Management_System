@@ -38,7 +38,7 @@ public class ChangeStatusOfBugCommand extends BaseCommand {
         try {
             status = BugStatus.valueOf(newStatus.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(INVALID_STATUS_VALUE, newStatus));
+            throw new IllegalArgumentException(String.format(INVALID_BUG_STATUS_VALUE, newStatus));
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);

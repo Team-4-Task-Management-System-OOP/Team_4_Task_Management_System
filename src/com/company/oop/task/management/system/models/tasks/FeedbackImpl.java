@@ -6,7 +6,6 @@ import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateIntRange;
-import static com.company.oop.task.management.system.utils.ValidationHelpers.validatePositive;
 import static java.lang.String.format;
 
 

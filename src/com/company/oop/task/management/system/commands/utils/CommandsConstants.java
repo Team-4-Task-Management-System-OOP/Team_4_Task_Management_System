@@ -83,11 +83,23 @@ public class CommandsConstants {
     public static final String SUCCESSFULLY_CHANGED_THE_SEVERITY_OF_BUG = "Successfully changed " +
             "the severity of bug \"%s\" to %s.\"";
 
-    public static final String INVALID_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: ACTIVE, FIXED.";
+    public static final String INVALID_BUG_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: ACTIVE, FIXED.";
+
+    public static final String INVALID_FEEDBACK_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: NEW, UNSCHEDULED, SCHEDULED, DONE.";
 
     public static final String BUG_STATUS_CHANGED = "Bug status changed from %s to %s for Bug with ID %s.";
 
+    public static final String FEEDBACK_STATUS_CHANGED = "Feedback status changed from %s to %s for Feedback with ID %s.";
+
+    public static final String INVALID_STORY_STATUS_VALUE = "Invalid story status value: '%s'. Valid values are: NOT_DONE, IN_PROGRESS, DONE.";
+
+    public static final String STORY_STATUS_CHANGED = "Story status changed from %s to %s for Story with ID %s.";
+
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_STORY = "Successfully changed the status of story '%s' to %s.";
+
     public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_BUG = "Successfully changed the status of bug '%s' to %s.";
+
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_FEEDBACK = "Successfully changed the status of feedback '%s' to %s.";
 
     public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" " +
             "doesn't exist in team \"%s\"";
