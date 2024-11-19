@@ -7,6 +7,7 @@ import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
+import com.company.oop.task.management.system.models.teams.contracts.Team;
 import com.company.oop.task.management.system.utils.ParsingHelpers;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
 
@@ -31,13 +32,18 @@ public class CreateStoryInBoardCommand extends BaseCommand {
         PriorityType storyPriorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
         StorySize storySize = ParsingHelpers.tryParseEnum(parameters.get(3), StorySize.class);
         String boardNameToAddStoryIn = parameters.get(4);
-        Board boardToAddStoryIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddStoryIn);
-        if (getTaskManagementSystemRepository()
-                .getLoggedInMember().getTeam().getBoards().contains(boardToAddStoryIn)) {
+        Team loggedInTeam = getTaskManagementSystemRepository().getLoggedInTeam();
+        boolean boardExistsInTeam = loggedInTeam.getBoards()
+                .stream()
+                .anyMatch(board -> board.getName().equalsIgnoreCase(boardNameToAddStoryIn));
+
+        if (!boardExistsInTeam) {
             throw new InvalidUserInputException(format(BOARD_DOES_NOT_EXIST_IN_TEAM,
                     boardNameToAddStoryIn,
-                    getTaskManagementSystemRepository().getLoggedInMember().getTeam().getName()));
+                    loggedInTeam.getName()));
         }
+        Board boardToAddStoryIn = getTaskManagementSystemRepository().findBoardByName(boardNameToAddStoryIn);
+
         Story story = getTaskManagementSystemRepository()
                 .createStory(title, description, storyPriorityType, storySize);
         boardToAddStoryIn.addTask(story);

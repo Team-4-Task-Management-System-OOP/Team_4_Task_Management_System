@@ -4,6 +4,7 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
+import com.company.oop.task.management.system.models.teams.contracts.Member;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import static java.lang.String.format;
 
 public abstract class TaskBase implements Task {
 
-    //Constants
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 100;
     public static final int DESCRIPTION_MIN_LENGTH = 10;
@@ -33,7 +33,6 @@ public abstract class TaskBase implements Task {
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";
     private static final String NO_COMMENTS = "---NO COMMENTS ADDED TO TASK TO DISPLAY---";
-
 
     private final int id;
     private String title;
@@ -63,6 +62,10 @@ public abstract class TaskBase implements Task {
         validateStringLength(title, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH, TITLE_VAL_ERR);
         this.title = title;
     }
+
+    public abstract void assignMember(Member assignee);
+
+    public abstract void unassignMember();
 
     @Override
     public String getDescription() {

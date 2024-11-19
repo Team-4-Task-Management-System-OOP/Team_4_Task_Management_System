@@ -42,6 +42,7 @@ public class AddMemberToTeamCommand extends BaseCommand {
 
         Member member = getTaskManagementSystemRepository().findMemberByName(memberName);
         team.addMember(member);
+        member.setTeam(team);
 
         member.addActivityHistory(String.format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, memberName));
         team.addActivityHistory(String.format(MEMBER_ADDED, memberName, teamName));

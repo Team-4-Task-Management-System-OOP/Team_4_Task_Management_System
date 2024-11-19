@@ -21,6 +21,8 @@ public class CommandsConstants {
 
     public static final String ALL_MEMBERS_MESSAGE = "---ALL MEMBERS---\n";
 
+    public static final String ALL_MEMBERS_IN_TEAM_MESSAGE = "---ALL MEMBERS IN TEAM \"%s\"---\n";
+
     public static final String ALL_TEAMS_MESSAGE = "---ALL TEAMS---\n";
 
     public static final String ALL_TEAM_BOARDS_MESSAGE = "---ALL TEAM BOARDS---\n";
@@ -35,6 +37,8 @@ public class CommandsConstants {
 
     public static final String INVALID_INPUT_MESSAGE = "Invalid input. " +
             "Please enter valid task ID.";
+
+    public static final String VALID_TASK_ID = "Please, provide a valid task ID";
 
     public final static String USER_LOGGED_OUT = "Member \"%s\" logged out!";
 
@@ -79,17 +83,25 @@ public class CommandsConstants {
     public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" " +
             "doesn't exist in team \"%s\"";
 
-    public static final String NO_MEMBERS_FOUND = "There are no members to be shown. " +
+    public static final String NO_MEMBERS_FOUND = "There are no members in team \"%s\" to be shown. " +
             "Please add a member first.";
 
+    public static final String CANNOT_UNASSIGN_FEEDBACK = "Cannot unassign a feedback to member \"%s\", " +
+            "because feedback is not an assignable Task!";
+
+    public static final String CANNOT_ASSIGN_FEEDBACK = "Cannot assign a feedback to member \"%s\", " +
+            "because feedback is not an assignable Task!";
+
     public static final String NO_TEAMS_FOUND = "There are no teams to be shown. " +
+            "Please add a team first.";
+
+    public static final String NO_MEMBERS_FOUND_IN_TEAM = "There are no members in team \"%s\" to be shown. " +
             "Please add a team first.";
 
     public static final String NO_BOARDS_FOUND = "There are no boards in team \"%s\" to be shown. " +
             "Please add a board to team \"%s\" first.";
 
-    public static final String NO_TASKS_FOUND = "There are no tasks in board \"%s\" to be shown. " +
-            "Please add a task to board \"%s\" first.";
+    public static final String NO_TASK_FOUND = "There is no task with id \"%d\" found!";
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 

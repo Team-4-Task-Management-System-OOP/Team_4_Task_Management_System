@@ -7,6 +7,7 @@ import com.company.oop.task.management.system.models.teams.contracts.Board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
@@ -129,7 +130,8 @@ public class BoardImpl implements Board {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BoardImpl board = (BoardImpl) o;
-        return name.equalsIgnoreCase(board.name);
+        Board board = (Board) o;
+        return name.equalsIgnoreCase(board.getName());
     }
+
 }
