@@ -1,4 +1,4 @@
-package com.company.oop.task.management.system.tests.utils.models;
+package com.company.oop.task.management.system.tests.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.StoryImpl;

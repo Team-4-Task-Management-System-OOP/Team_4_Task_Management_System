@@ -16,8 +16,8 @@ import static java.lang.String.format;
 
 public class MemberImpl implements Member {
 
-    private static final int MEMBER_NAME_MIN_LENGTH = 5;
-    private static final int MEMBER_NAME_MAX_LENGTH = 15;
+    public static final int MEMBER_NAME_MIN_LENGTH = 5;
+    public static final int MEMBER_NAME_MAX_LENGTH = 15;
     private static final String NAME_ERR = "\"%s\" is an invalid member name! " +
             "Name must be between %d and %d characters!";
     private static final String TASK_ADDED_TO_MEMBER_TASK_LIST = "The following task with title \"%s\" " +

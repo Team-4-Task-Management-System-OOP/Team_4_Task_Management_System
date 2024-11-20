@@ -1,12 +1,9 @@
-package com.company.oop.task.management.system.tests.utils.models;
+package com.company.oop.task.management.system.tests.models.teams;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
-import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.teams.BoardImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

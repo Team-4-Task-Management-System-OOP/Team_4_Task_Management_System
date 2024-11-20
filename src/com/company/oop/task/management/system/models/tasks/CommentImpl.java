@@ -7,10 +7,10 @@ import static java.lang.String.format;
 
 public class CommentImpl implements Comment {
 
-    private static final int AUTHOR_LEN_MIN = 4;
-    private static final int AUTHOR_LEN_MAX = 15;
-    private static final int CONTENT_LEN_MIN = 2;
-    private static final int CONTENT_LEN_MAX = 200;
+    public static final int AUTHOR_LEN_MIN = 4;
+    public static final int AUTHOR_LEN_MAX = 15;
+    public static final int CONTENT_LEN_MIN = 2;
+    public static final int CONTENT_LEN_MAX = 200;
 
     private static final String AUTHOR_LEN_ERR = format(
             "Author's name must be between %d and %d characters long!",
@@ -20,7 +20,7 @@ public class CommentImpl implements Comment {
             "Content must be between %d and %d characters long!",
             CONTENT_LEN_MIN,
             CONTENT_LEN_MAX);
-    private static final String COMMENT_HEADLINE = "%n---COMMENT---%n";
+    public static final String COMMENT_HEADLINE = "%n---COMMENT---%n";
 
     private String author;
     private String content;
