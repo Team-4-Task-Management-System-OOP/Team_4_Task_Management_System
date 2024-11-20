@@ -102,10 +102,10 @@ public abstract class TaskBase implements Task {
 
     @Override
     public String printImportantInfo() {
-        return format(
-                "Task Type: %s%n" +
+        return format("Id: %d%n" +
+                "Task Type: %s%n"+
                 "Title: %s%n" +
-                "Description: %s%n", getTaskType(), getTitle(), getDescription());
+                "Description: %s%n", getId(), getTaskType(), getTitle(), getDescription());
     }
 
     @Override
@@ -137,10 +137,9 @@ public abstract class TaskBase implements Task {
     @Override
     public String toString() {
         return String.format("%s" +
-                        "Description: %s%n" +
                         "Comments: %s%n" +
                         "History: %s%n",
-                printImportantInfo(), getDescription(), printComments(), printLogHistory());
+                printImportantInfo(), printComments(), printLogHistory());
     }
 
     @Override

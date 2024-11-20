@@ -2,7 +2,9 @@ package com.company.oop.task.management.system.commands.utils;
 
 public class CommandsConstants {
 
-    public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s.\"";
+    public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s\".";
+
+    public static final String MEMBER_REMOVED_FROM_PREVIOUS_TEAM = "Member \"%s\" was removed from team \"%s\".";
 
     public static final String FEEDBACK_CREATED = "Feedback with ID %d and title \"%s\" was created.";
 
@@ -110,6 +112,8 @@ public class CommandsConstants {
 
     public static final String NO_MEMBERS_FOUND = "There are no members in team \"%s\" to be shown. " +
             "Please add a member first.";
+    public static final String NO_MEMBERS_FOUND_GENERAL_ERR_MSG = "There are no members in the system. " +
+            "Please add a member first.";
 
     public static final String CANNOT_UNASSIGN_FEEDBACK = "Cannot unassign a feedback to member \"%s\", " +
             "because feedback is not an assignable Task!";
@@ -138,7 +142,7 @@ public class CommandsConstants {
 
     public static final String NO_REGISTERED_ASSIGNED_TASKS = "There are no assigned tasks.";
 
-    public static final String MEMBER_ALREADY_IN_TEAM = "The member is already in the team!";
+    public static final String MEMBER_ALREADY_IN_TEAM = "Member \"%s\" is already in the team!";
 
     public static final String JOIN_DELIMITER = "####################";
 

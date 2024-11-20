@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_CREATION_SUCCESSFUL_MESSAGE;
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
@@ -27,10 +28,10 @@ public class MemberImpl implements Member {
     private static final String TASK_REMOVE_ERR = "Task cannot be removed! It has not been created yet";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";
     private static final String ALREADY_ADDED = "Task with title \"%s\" is already added to the tasks of member \"%s\"";
-    private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";;
+    private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";
     private static final String NO_TASKS = "---NO TASKS IN MEMBER'S LIST TO DISPLAY---\nAdd a task first!\n";
     private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---\nDo some activities first!\n";
-    private static final Team DEFAULT_TEAM = new TeamImpl("Unassigned");
+    public static final Team DEFAULT_TEAM = new TeamImpl("Unassigned");
 
     private String name;
     private Team team;
@@ -42,6 +43,7 @@ public class MemberImpl implements Member {
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
         this.team = DEFAULT_TEAM;
+        activityHistory.add(format("[%s] - %s", formatTime(LocalDateTime.now()), format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, getName())));
     }
 
     private void setName(String name) {
@@ -51,17 +53,22 @@ public class MemberImpl implements Member {
     }
 
     @Override
-    public void setTeam(Team teamName) {
+    public void setTeam(Team teamNameToSet) {
         if (team.getName() == null || team.getName().equalsIgnoreCase(DEFAULT_TEAM.getName())) {
-            this.team = teamName;
-            addActivityHistory(format("Member %s assigned to team %s.", getName(), teamName.getName()));
+            addActivityHistory(format("Member %s assigned to team %s.", getName(), teamNameToSet.getName()));
+
         }
-        if (this.team != null && this.team.getName().equalsIgnoreCase(teamName.getName())) {
-            throw new InvalidUserInputException(format("Member %s is already part of this team!", getName()));
+        else {
+            if (this.team != null && this.team.getName().equalsIgnoreCase(teamNameToSet.getName())) {
+                throw new InvalidUserInputException(format("Member %s is already part of this team!", getName()));
+            }
         }
-        addActivityHistory(format("Member %s reassigned to team %s from team %s.",
-                getName(), teamName.getName(), this.team.getName()));
-        this.team = teamName;
+        if(!this.team.getName().equalsIgnoreCase(DEFAULT_TEAM.getName())) {
+            addActivityHistory(format("Member %s reassigned to team %s from team %s.",
+                    getName(), teamNameToSet.getName(), this.team.getName()));
+            this.team = teamNameToSet;
+        }
+        this.team = teamNameToSet;
     }
 
     @Override

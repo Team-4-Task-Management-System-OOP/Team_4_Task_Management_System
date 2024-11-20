@@ -4,13 +4,14 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
-import com.company.oop.task.management.system.models.teams.contracts.Member;
 
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateIntRange;
 import static java.lang.String.format;
 
 
 public class FeedbackImpl extends TaskBase implements Feedback {
+    public static final int RATING_MIN = 1;
+    public static final int RATING_MAX = 10;
 
     public static final String FEEDBACK_STATUS_CHANGED = "Feedback Status changed from \"%s\" to \"%s\" successfully.";
     public static final String RATING_CHANGED = "Feedback's feedbackRating changed from \"%d\" to \"%d\" successfully.";
@@ -18,12 +19,6 @@ public class FeedbackImpl extends TaskBase implements Feedback {
     public static final String RATING_ALREADY_SET = "Feedback's feedbackRating is already set to \"%s\"!";
     public static final String FEEDBACK_STATUS_CANNOT_BE_EMPTY = "Feedback Status cannot be empty.";
     public static final String RATING_ERR = "Feedback rating is invalid. It must be between %d and %d.";
-    public static final String CANNOT_ASSIGN_FEEDBACK = "Cannot assign feedback to any member " +
-            "because feedback is not an assignable Task!";
-    public static final String CANNOT_UNASSIGN_FEEDBACK = "Cannot unassign feedback to any member " +
-            "because feedback is not an assignable Task!";
-    public static final int RATING_MIN = 1;
-    public static final int RATING_MAX = 10;
 
     private int feedbackRating;
     private FeedbackStatus feedbackStatus;
