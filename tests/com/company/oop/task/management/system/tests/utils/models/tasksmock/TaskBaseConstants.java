@@ -9,7 +9,10 @@ public class TaskBaseConstants {
 
     public static final String VALID_TASK_TITLE = TestUtilities.getString(TITLE_MIN_LENGTH + 1);
     public static final String INVALID_TASK_TITLE = TestUtilities.getString(TITLE_MIN_LENGTH - 1);
+
     public static final String VALID_TASK_DESCRIPTION = TestUtilities.getString(DESCRIPTION_MIN_LENGTH + 1);
     public static final String INVALID_TASK_DESCRIPTION = TestUtilities.getString(DESCRIPTION_MIN_LENGTH - 1);
 
+    public static final String EDGE_TASK_TITLE = TestUtilities.getString(TITLE_MIN_LENGTH);
+    public static final String EDGE_TASK_DESCRIPTION = TestUtilities.getString(DESCRIPTION_MIN_LENGTH);
 }
