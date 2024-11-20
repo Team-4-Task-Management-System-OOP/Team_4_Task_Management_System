@@ -71,18 +71,18 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignTaskCommand(taskManagementSystemRepository);
             case UNASSIGNTASK:
                 return new UnassignTaskCommand(taskManagementSystemRepository);
-            case LISTALLTASKS:
-                return new ListAllTasksCommand(taskManagementSystemRepository);
+            case SHOWALLTASKS:
+                return new ShowAllTasksCommand(taskManagementSystemRepository);
             case FILTERALLTASKSBYTITLE:
                 return new FilterAllTasksByTitleCommand(taskManagementSystemRepository);
-            case LISTBUGS:
-                return new ListBugsCommand(taskManagementSystemRepository);
-            case LISTSTORIES:
-                return new ListStoriesCommand(taskManagementSystemRepository);
-            case LISTFEEDBACKS:
-                return new ListFeedbacksCommand(taskManagementSystemRepository);
-            case LISTASSIGNEDTASKS:
-                return new ListAssignedTasksCommand(taskManagementSystemRepository);
+            case SHOWALLBUGS:
+                return new ShowAllBugsCommand(taskManagementSystemRepository);
+            case SHOWALLSTORIES:
+                return new ShowAllStoriesCommand(taskManagementSystemRepository);
+            case SHOWALLFEEDBACKS:
+                return new ShowAllFeedbacksCommand(taskManagementSystemRepository);
+            case SHOWALLASSIGNEDTASKS:
+                return new ShowAllAssignedTasks(taskManagementSystemRepository);
             case FILTERTASKSBYSTATUS:
                 return new FilterTasksByStatusCommand(taskManagementSystemRepository);
             case FILTERTASKSBYASSIGNEE:

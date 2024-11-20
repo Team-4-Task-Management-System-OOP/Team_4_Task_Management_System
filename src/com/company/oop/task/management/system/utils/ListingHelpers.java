@@ -11,10 +11,6 @@ import static com.company.oop.task.management.system.commands.utils.CommandsCons
 public class ListingHelpers {
     public static final String EMPTY_LIST = "The list is empty! Please, add an element first!";
 
-
-//ToDo to optimize printing, possible can add Printable interface if need
-    //Somehow have to find a way to optimize all printElement methods in all models
-
     public static <T extends Printable> String elementsToString(List<T> elements) {
        return elements.isEmpty() ? EMPTY_LIST :
                elements.stream()

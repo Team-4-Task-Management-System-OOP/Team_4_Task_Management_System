@@ -42,28 +42,6 @@ public class ShowAllTeamMembersCommand extends BaseCommand implements Command {
                 allMembersInTeamPrint.append(JOIN_DELIMITER).append(System.lineSeparator());
             }
         }
-
-//        Optional<Team> optionalTeam = getTaskManagementSystemRepository()
-//                .getTeams()
-//                .stream()
-//                .filter(team -> team.getName().equalsIgnoreCase(teamName))
-//                .findFirst();
-//
-//        if (optionalTeam.isEmpty()) {
-//            return String.format(TEAM_NOT_FOUND, teamName);
-//        }
-//        Team team = optionalTeam.get();
-//        List<Member> members = team.getMembers();
-//
-//        if (members.isEmpty()) {
-//            return String.format(NO_MEMBERS_FOUND_IN_TEAM, teamName);
-//        }
-//        StringBuilder membersInfo = new StringBuilder("Team Members:\n");
-//        members.forEach(member -> membersInfo.append(String.format(
-//                "Name: %s, Tasks: %d, Activity History: %d entries\n",
-//                member.getName(),
-//                member.getTasks().size(),
-//                member.getActivityHistory().size())));
         return allMembersInTeamPrint.toString();
     }
 }
