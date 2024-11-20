@@ -40,7 +40,7 @@ public class AssignTaskCommand extends BaseCommand {
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(NO_TEAMS_FOUND);
+            throw new ElementNotFoundException(NO_TEAMS_FOUND);
         }
 
         Member member = team.getMembers()

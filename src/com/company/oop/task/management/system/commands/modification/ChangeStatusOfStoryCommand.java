@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -38,12 +39,12 @@ public class ChangeStatusOfStoryCommand extends BaseCommand {
         try {
             status = StoryStatus.valueOf(newStatus.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(INVALID_STORY_STATUS_VALUE, newStatus));
+            throw new InvalidUserInputException(String.format(INVALID_STORY_STATUS_VALUE, newStatus));
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(NO_TEAMS_FOUND);
+            throw new InvalidUserInputException(NO_TEAMS_FOUND);
         }
 
         Story story = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getStories(), storyId);

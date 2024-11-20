@@ -2,6 +2,8 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -36,12 +38,12 @@ public class ChangeStatusOfFeedbackCommand extends BaseCommand {
         try {
             status = FeedbackStatus.valueOf(newStatus.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(INVALID_FEEDBACK_STATUS_VALUE, newStatus));
+            throw new InvalidUserInputException(String.format(INVALID_FEEDBACK_STATUS_VALUE, newStatus));
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(NO_TEAMS_FOUND);
+            throw new ElementNotFoundException(NO_TEAMS_FOUND);
         }
 
         Feedback feedback = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getFeedbacks(), feedbackId);

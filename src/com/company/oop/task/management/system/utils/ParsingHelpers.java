@@ -33,7 +33,7 @@ public class ParsingHelpers {
         try {
             return new ArrayList<>(List.of(valueToParse.split(",")));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 

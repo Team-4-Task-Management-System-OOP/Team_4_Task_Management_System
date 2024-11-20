@@ -2,6 +2,8 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Bug;
 import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -38,12 +40,12 @@ public class ChangeSeverityOfBugCommand extends BaseCommand {
         try {
             severity = BugSeverity.valueOf(newSeverity.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(INVALID_SEVERITY_VALUE, newSeverity));
+            throw new InvalidUserInputException(String.format(INVALID_SEVERITY_VALUE, newSeverity));
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(String.format(NO_TEAMS_FOUND));
+            throw new ElementNotFoundException(String.format(NO_TEAMS_FOUND));
         }
 
         Bug bug = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getBugs(), bugId);

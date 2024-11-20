@@ -2,6 +2,8 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Bug;
 import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
@@ -37,12 +39,12 @@ public class ChangeStatusOfBugCommand extends BaseCommand {
         try {
             status = BugStatus.valueOf(newStatus.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(INVALID_BUG_STATUS_VALUE, newStatus));
+            throw new InvalidUserInputException(String.format(INVALID_BUG_STATUS_VALUE, newStatus));
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(NO_TEAMS_FOUND);
+            throw new ElementNotFoundException(NO_TEAMS_FOUND);
         }
 
         Bug bug = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getBugs(), bugId);

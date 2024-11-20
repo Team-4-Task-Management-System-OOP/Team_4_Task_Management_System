@@ -2,6 +2,8 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 import com.company.oop.task.management.system.utils.ParsingHelpers;
@@ -35,13 +37,13 @@ public class ChangeRatingOfFeedbackCommand extends BaseCommand {
         String teamName = parameters.get(2);
 
         if (newRating < 1 || newRating > 10) {
-            throw new IllegalArgumentException(RATING_ERROR);
+            throw new InvalidUserInputException(RATING_ERROR);
 
         }
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new IllegalArgumentException(String.format(NO_TEAMS_FOUND));
+            throw new ElementNotFoundException(String.format(NO_TEAMS_FOUND));
         }
 
         Feedback feedback = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getFeedbacks(), feedbackId);
