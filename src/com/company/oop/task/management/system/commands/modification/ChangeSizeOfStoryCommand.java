@@ -6,13 +6,14 @@ import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
+import com.company.oop.task.management.system.utils.ParsingHelpers;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
 import java.util.List;
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.*;
 
 public class ChangeSizeOfStoryCommand extends BaseCommand {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
     public ChangeSizeOfStoryCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
@@ -28,10 +29,9 @@ public class ChangeSizeOfStoryCommand extends BaseCommand {
 
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String newSize = parameters.get(0);
-        String storyName = parameters.get(1);
-        String boardName = parameters.get(2);
-        String teamName = parameters.get(3);
+        int storyId = ParsingHelpers.tryParseInt(parameters.get(0), INVALID_INPUT_MESSAGE);
+        String newSize = parameters.get(1);
+        String teamName = parameters.get(2);
 
         StorySize size;
         try {
@@ -45,32 +45,12 @@ public class ChangeSizeOfStoryCommand extends BaseCommand {
             throw new IllegalArgumentException(NO_TEAMS_FOUND);
         }
 
-        Board board = findBoardByName(team, boardName);
-        Story story = findStoryByName(board, storyName);
+        Story story = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getStories(), storyId);
 
         StorySize oldSize = story.getStorySize();
         story.changeStorySize(size);
+
         story.historyLogger(String.format(SIZE_CHANGED, oldSize, size, story.getId()));
-
-        return String.format(SUCCESSFULLY_CHANGED_THE_SIZE, storyName, size);
-    }
-
-    private Board findBoardByName(Team team, String boardName) {
-        return team.getBoards()
-                .stream()
-                .filter(board -> board.getName().equalsIgnoreCase(boardName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format(NO_BOARDS_FOUND, boardName, team.getName())));
-    }
-
-    private Story findStoryByName(Board board, String storyName) {
-        return board.getTasks()
-                .stream()
-                .filter(task -> task instanceof Story)
-                .map(task -> (Story) task)
-                .filter(story -> story.getTitle().equalsIgnoreCase(storyName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NO_REGISTERED_STORIES));
+        return String.format(SUCCESSFULLY_CHANGED_THE_SIZE, story.getId() , size);
     }
 }
