@@ -43,7 +43,7 @@ public class CommentImplTests {
     }
 
     @Test
-    void testGetAuthor() {
+    public void getAuthor_Should_ReturnCorrectAuthor_WhenParametersAreCorrect() {
         // Act
         String actualAuthor = comment.getAuthor();
 
@@ -52,10 +52,7 @@ public class CommentImplTests {
     }
 
     @Test
-    void testToString() {
-        // Act
-        String actualToString = comment.toString();
-
+    public void toString_Should_ReturnCorrectStringOrder_When_ParametersAreCorrect() {
 
         String expectedToString = String.format(COMMENT_HEADLINE +
                 "Author: %s%n" +
@@ -63,7 +60,7 @@ public class CommentImplTests {
                 "-------------", comment.getAuthor(), comment.getContent());
 
         // Assert
-        Assertions.assertEquals(expectedToString, actualToString,
+        Assertions.assertEquals(expectedToString, comment.toString(),
                 CORRECT_FORMATTED_STRING);
     }
 
