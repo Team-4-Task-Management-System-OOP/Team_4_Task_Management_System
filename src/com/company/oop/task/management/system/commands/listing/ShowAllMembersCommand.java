@@ -23,9 +23,8 @@ public class ShowAllMembersCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         List<Member> allMembers = getTaskManagementSystemRepository().getMembers();
         if (allMembers.isEmpty()) {
-            return NO_MEMBERS_FOUND;
-        }
-        else {
+            return NO_MEMBERS_FOUND_GENERAL_ERR_MSG;
+        } else {
             StringBuilder allMembersPrint = new StringBuilder();
             allMembersPrint.append(ALL_MEMBERS_MESSAGE);
             for (int i = 0; i < allMembers.size(); i++) {

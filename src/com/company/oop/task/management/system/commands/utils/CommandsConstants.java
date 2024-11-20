@@ -110,6 +110,8 @@ public class CommandsConstants {
 
     public static final String NO_MEMBERS_FOUND = "There are no members in team \"%s\" to be shown. " +
             "Please add a member first.";
+    public static final String NO_MEMBERS_FOUND_GENERAL_ERR_MSG = "There are no members in the system. " +
+            "Please add a member first.";
 
     public static final String CANNOT_UNASSIGN_FEEDBACK = "Cannot unassign a feedback to member \"%s\", " +
             "because feedback is not an assignable Task!";

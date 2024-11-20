@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ValidationHelpers {
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. " +
-            "Expected: %d; received: %d.";
+            "Expected: %d, received: %d.";
 
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {
