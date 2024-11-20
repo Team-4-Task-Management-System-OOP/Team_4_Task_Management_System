@@ -1,7 +1,6 @@
 package com.company.oop.task.management.system.tests.models.teams;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
-import com.company.oop.task.management.system.models.tasks.StoryImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 import com.company.oop.task.management.system.models.teams.MemberImpl;
 import org.junit.jupiter.api.Assertions;

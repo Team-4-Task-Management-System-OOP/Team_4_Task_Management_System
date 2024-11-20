@@ -2,7 +2,9 @@ package com.company.oop.task.management.system.commands.utils;
 
 public class CommandsConstants {
 
-    public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s.\"";
+    public static final String MEMBER_ADDED = "Member \"%s\" was added to team \"%s\".";
+
+    public static final String MEMBER_REMOVED_FROM_PREVIOUS_TEAM = "Member \"%s\" was removed from team \"%s\".";
 
     public static final String FEEDBACK_CREATED = "Feedback with ID %d and title \"%s\" was created.";
 
@@ -140,7 +142,7 @@ public class CommandsConstants {
 
     public static final String NO_REGISTERED_ASSIGNED_TASKS = "There are no assigned tasks.";
 
-    public static final String MEMBER_ALREADY_IN_TEAM = "The member is already in the team!";
+    public static final String MEMBER_ALREADY_IN_TEAM = "Member \"%s\" is already in the team!";
 
     public static final String JOIN_DELIMITER = "####################";
 
