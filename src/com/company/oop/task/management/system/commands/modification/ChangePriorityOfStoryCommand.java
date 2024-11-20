@@ -14,7 +14,7 @@ import static com.company.oop.task.management.system.commands.utils.CommandsCons
 
 public class ChangePriorityOfStoryCommand extends BaseCommand {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 4;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     public static final String INVALID_PRIORITY_VALUE = "Invalid priority value: '%s'. Valid values are: LOW, MEDIUM, HIGH.";
 
     public ChangePriorityOfStoryCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
@@ -30,9 +30,9 @@ public class ChangePriorityOfStoryCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String newPriority = parameters.get(0);
-        int storyId = ParsingHelpers.tryParseInt(parameters.get(1), INVALID_INPUT_MESSAGE);
-        String teamName = parameters.get(3);
+        int storyId = ParsingHelpers.tryParseInt(parameters.get(0), INVALID_INPUT_MESSAGE);
+        String newPriority = parameters.get(1);
+        String teamName = parameters.get(2);
 
         PriorityType priority;
         try {
