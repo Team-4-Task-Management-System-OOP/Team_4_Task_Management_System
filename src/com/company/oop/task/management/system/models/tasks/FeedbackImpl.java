@@ -52,7 +52,7 @@ public class FeedbackImpl extends TaskBase implements Feedback {
 
     @Override
     public void changeFeedbackRating(int ratingNew) {
-        validateIntRange(feedbackRating, RATING_MIN, RATING_MAX,
+        validateIntRange(ratingNew, RATING_MIN, RATING_MAX,
                 (format(RATING_ERR, RATING_MIN, RATING_MAX)));
         if (getFeedbackRating() != ratingNew){
             super.historyLogger(format(RATING_CHANGED, getFeedbackRating(), ratingNew));

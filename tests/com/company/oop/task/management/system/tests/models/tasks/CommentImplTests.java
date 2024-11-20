@@ -3,6 +3,7 @@ package com.company.oop.task.management.system.tests.models.tasks;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
+import com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class CommentImplTests {
 
     @BeforeEach
     public void setUpMemberImplConstructor(){
-        comment = getCommentMock();
+        comment = getValidCommentMock();
     }
 
     @Test
@@ -28,18 +29,23 @@ public class CommentImplTests {
     }
 
     @Test
-    public void constructor_Should_ThrowException_When_ModelNameLengthOutOfBounds() {
+    public void constructor_Should_ThrowException_When_CommentAuthorIsInvalid() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> new CommentImpl(
-                INVALID_CONTENT,
-                VALID_AUTHOR
-        ));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> getInvalidAuthorCommentMock());
+    }
+
+    @Test
+    public void constructor_Should_ThrowException_When_CommentContentIsInvalid() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> getInvalidContentCommentMock());
     }
 
     @Test
     public void constructor_Should_CreateNewComment_When_ParametersAreCorrect() {
         // Assert
-        Assertions.assertEquals(VALID_CONTENT, comment.getContent());
+        Assertions.assertNotNull(comment);
+        Assertions.assertEquals(CommentMock.VALID_CONTENT, comment.getContent());
+        Assertions.assertEquals(CommentMock.VALID_AUTHOR, comment.getAuthor());
     }
 
     @Test
@@ -52,7 +58,7 @@ public class CommentImplTests {
     }
 
     @Test
-    public void toString_Should_ReturnCorrectStringOrder_When_ParametersAreCorrect() {
+    public void toString_Should_PrintCorrectStringOrder_When_ParametersAreCorrect() {
 
         String expectedToString = String.format(COMMENT_HEADLINE +
                 "Author: %s%n" +
@@ -64,4 +70,15 @@ public class CommentImplTests {
                 CORRECT_FORMATTED_STRING);
     }
 
+    @Test
+    void constructor_Should_CreateNewComment_When_BothParametersAreIncorrect() {
+        // Arrange
+        InvalidUserInputException exception = Assertions.assertThrows(InvalidUserInputException.class, () -> {
+            new CommentImpl(
+                    CommentMock.INVALID_CONTENT,
+                    CommentMock.INVALID_AUTHOR
+            );
+        });
+    }
 }
+
