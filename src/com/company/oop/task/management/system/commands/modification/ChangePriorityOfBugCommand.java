@@ -31,8 +31,8 @@ public class ChangePriorityOfBugCommand extends BaseCommand {
 
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String newPriority = parameters.get(0);
-        int bugId = ParsingHelpers.tryParseInt(parameters.get(1), INVALID_INPUT_MESSAGE);
+        int bugId = ParsingHelpers.tryParseInt(parameters.get(0), INVALID_INPUT_MESSAGE);
+        String newPriority = parameters.get(1);
         String teamName = parameters.get(2);
 
         PriorityType priority;
