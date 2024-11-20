@@ -2,10 +2,12 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
+import com.company.oop.task.management.system.models.tasks.contracts.Bug;
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
+import com.company.oop.task.management.system.utils.ParsingHelpers;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
@@ -31,8 +33,7 @@ public class ChangePriorityOfStoryCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         String newPriority = parameters.get(0);
-        String storyName = parameters.get(1);
-        String boardName = parameters.get(2);
+        int storyId = ParsingHelpers.tryParseInt(parameters.get(1), INVALID_INPUT_MESSAGE);
         String teamName = parameters.get(3);
 
         PriorityType priority;
@@ -47,23 +48,7 @@ public class ChangePriorityOfStoryCommand extends BaseCommand {
             throw new IllegalArgumentException(String.format(NO_TEAMS_FOUND));
         }
 
-        Board board = team.getBoards()
-                .stream()
-                .filter(b -> b.getName().equalsIgnoreCase(boardName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format(NO_BOARDS_FOUND, teamName, teamName)
-                ));
-
-        Story story = board.getTasks()
-                .stream()
-                .filter(task -> task instanceof Story)
-                .map(task -> (Story) task)
-                .filter(s -> s.getTitle().equalsIgnoreCase(storyName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format(NO_REGISTERED_STORIES)
-                ));
+        Story story = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getStories(), storyId);
 
         story.changePriority(priority);
 
