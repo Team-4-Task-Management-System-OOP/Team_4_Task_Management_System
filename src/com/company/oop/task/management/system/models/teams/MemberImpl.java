@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_CREATION_SUCCESSFUL_MESSAGE;
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
@@ -42,6 +43,7 @@ public class MemberImpl implements Member {
         this.tasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
         this.team = DEFAULT_TEAM;
+        activityHistory.add(format("[%s] - %s", formatTime(LocalDateTime.now()), format(MEMBER_CREATION_SUCCESSFUL_MESSAGE, getName())));
     }
 
     private void setName(String name) {
