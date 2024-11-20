@@ -2,10 +2,8 @@ package com.company.oop.task.management.system.commands.modification;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
-import com.company.oop.task.management.system.models.tasks.contracts.Bug;
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
-import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Team;
 import com.company.oop.task.management.system.utils.ParsingHelpers;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
