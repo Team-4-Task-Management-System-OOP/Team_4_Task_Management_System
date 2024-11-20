@@ -31,8 +31,8 @@ public class ChangeStatusOfStoryCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
         int storyId = ParsingHelpers.tryParseInt(parameters.get(0), INVALID_INPUT_MESSAGE);
-        String newStatus = parameters.get(0);
-        String teamName = parameters.get(3);
+        String newStatus = parameters.get(1);
+        String teamName = parameters.get(2);
 
         StoryStatus status;
         try {
