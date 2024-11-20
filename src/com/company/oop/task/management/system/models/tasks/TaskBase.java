@@ -102,10 +102,9 @@ public abstract class TaskBase implements Task {
 
     @Override
     public String printImportantInfo() {
-        return format(
-                "Task Type: %s%n" +
-                "Title: %s%n" +
-                "Description: %s%n", getTaskType(), getTitle(), getDescription());
+        return format("Id: %d%n" +
+                "Task Type: %s%n"+
+                "Title: %s%n", getId(), getTaskType(), getTitle());
     }
 
     @Override

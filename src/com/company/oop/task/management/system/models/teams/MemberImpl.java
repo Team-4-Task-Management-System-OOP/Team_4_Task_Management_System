@@ -28,7 +28,7 @@ public class MemberImpl implements Member {
     private static final String TASK_REMOVE_ERR = "Task cannot be removed! It has not been created yet";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";
     private static final String ALREADY_ADDED = "Task with title \"%s\" is already added to the tasks of member \"%s\"";
-    private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";;
+    private static final String CANNOT_ADD_AN_EMPTY_TASK_MEMBER = "Cannot add an empty task.";
     private static final String NO_TASKS = "---NO TASKS IN MEMBER'S LIST TO DISPLAY---\nAdd a task first!\n";
     private static final String NO_HISTORY = "---NO MEMBER HISTORY TO DISPLAY---\nDo some activities first!\n";
     public static final Team DEFAULT_TEAM = new TeamImpl("Unassigned");
