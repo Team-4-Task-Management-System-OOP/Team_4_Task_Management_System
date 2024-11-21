@@ -1,6 +1,6 @@
 TEAM 4 - TASK MANAGEMENT SYSTEM - JAVA PROJECT 1
 
-#1. Description
+# 1. Description
 The project focuses on the main principles of Object Oriented Programming in Java
 The main goal of this console application is to keep track of tasks.
 First, a member is created, then a team is created. We implemented a login command to ensure that the member is in the team in which he will make modifications.
@@ -24,7 +24,7 @@ For clarification:
 •	Story Status is one of the following: Not Done, InProgress, or Done.
 •	Feedback Status is one of the following: New, Unscheduled, Scheduled, or Done.
 
-#2. Commands
+# 2. Commands
 For the purposes of this project, we implemented a redacted engine, which takes the command, recognizes it from the enums of commands, and deletes the command parameter. After which, it takes what is type based on the command type and executes its functionalities.
 In order to make long titles, descriptions, reproducible steps etc., we implemented a new functionality, which takes the first (") that it finds in the parameter, which indicates that the parameter is going to be a sequence of strings until the end of (") 
 EXAMPLE: addcomment "long content for comment examople" John 3 (content, author, id of task to add the comment to).
@@ -96,14 +96,14 @@ Change status of story, requires login
 changestatusofstory id newStatus teamName
 
 
-#3. Design proccess
+# 3. Design proccess
 First we started with designing the structure of the project and creating the logical sequence in the models. Then we implemented all the interfaces and implementations for the classes. 
 Some tasks are assignable, so a logical addition was needed. Then we created the core of the program.- TaskManagementRepository, TaskManagementEngine and CommandFactory. 
 The next step was to create all the commands responsible for running the application. 
 After implementation of each command, we tested it with sample inputs, which then we added to the main input and expected output of the program. 
 After all of the main functionality was done, we started creating tests for models, then repository, then commands. We found some bugs while doing tests, which was a good validation for the functionalities.
 
-SAMPLE INPUT
+# 4. SAMPLE INPUT
 
 Team-4-Task-Management-System README
 Sample input ::
@@ -151,7 +151,7 @@ assigntask 3 tisho JavaOOP
 
 
 
-SAMPLE OUTPUT
+# 5. SAMPLE OUTPUT
 
 There are no members in the system. Please add a member first.
 ####################
