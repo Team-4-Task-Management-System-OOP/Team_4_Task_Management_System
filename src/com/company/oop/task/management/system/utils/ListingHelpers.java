@@ -30,7 +30,7 @@ public class ListingHelpers {
     public static <T extends Task> String listAllTasksFilteredByTitle(List<T> elements, String targetTitle) {
         return elements.isEmpty() ? EMPTY_LIST :
                 elements.stream()
-                        .filter(task -> task.getTitle().contains(targetTitle))
+                        .filter(task -> task.getTitle().toLowerCase().contains(targetTitle))
                         .map(Task::printImportantInfo)
                         .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
                         .trim();
@@ -48,7 +48,7 @@ public class ListingHelpers {
     public static <T extends Task> String listAllTasksSortedAndFilteredByTitle(List<T> elements, String targetTitle) {
         return elements.isEmpty() ? EMPTY_LIST :
                 elements.stream()
-                        .filter(task -> task.getTitle().contains(targetTitle))
+                        .filter(task -> task.getTitle().toLowerCase().contains(targetTitle))
                         .sorted(Comparator.comparing(Task::getTitle))
                         .map(Task::printImportantInfo)
                         .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))

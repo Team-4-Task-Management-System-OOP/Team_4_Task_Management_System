@@ -31,7 +31,7 @@ public class SortAndFilterAllTasksByTitleCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String targetTitle = parameters.get(0);
-        if (tasks.isEmpty()) {
+        if (tasks.isEmpty() || tasks.stream().noneMatch(t -> t.getTitle().toLowerCase().contains(targetTitle.toLowerCase()))) {
             throw new ElementNotFoundException(NO_REGISTERED_TASKS);
         }
         return listAllTasksSortedAndFilteredByTitle(tasks,targetTitle);

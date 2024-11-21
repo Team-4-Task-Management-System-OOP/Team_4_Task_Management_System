@@ -53,7 +53,6 @@ public class AddMemberToTeamCommand extends BaseCommand {
         team.addMember(member);
         member.setTeam(team);
 
-        team.addActivityHistory(format(MEMBER_ADDED, memberName, teamName));
         return format(MEMBER_ADDED, memberName, teamName);
     }
 }
