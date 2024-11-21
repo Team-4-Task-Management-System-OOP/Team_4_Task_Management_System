@@ -20,5 +20,4 @@ public enum PriorityType {
                 throw new InvalidUserInputException(INVALID_PRIORITY);
         }
     }
-
 }

@@ -5,19 +5,19 @@ import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
+import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.getInvalidPriorityBugMock;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.*;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock.*;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_DESCRIPTION;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_TITLE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FeedbackImplTests {
 
@@ -25,7 +25,7 @@ public class FeedbackImplTests {
 
     @BeforeEach
     public void setUpFeedbackImplConstructor(){
-        feedback = getFeedbackMock();
+        feedback = getValidFeedbackMock();
     }
 
     @Test
@@ -76,8 +76,8 @@ public class FeedbackImplTests {
     @Test
     void getTaskType_Should_ReturnFeedback_ForAllInstances() {
         // Arrange
-        FeedbackImpl feedback1 = FeedbackMock.getFeedbackMock();
-        FeedbackImpl feedback2 = FeedbackMock.getFeedbackMock();
+        FeedbackImpl feedback1 = FeedbackMock.getValidFeedbackMock();
+        FeedbackImpl feedback2 = FeedbackMock.getValidFeedbackMock();
 
         // Act & Assert
         Assertions.assertEquals(TaskType.FEEDBACK, feedback1.getTaskType());
@@ -85,7 +85,7 @@ public class FeedbackImplTests {
     }
 
     @Test
-    public void should_Create_Bus_When_ValidValuesArePassed() {
+    public void should_Create_Feedback_When_ValidValuesArePassed() {
         // Act, Assert
         Assertions.assertAll(
                 () -> Assertions.assertEquals(1, feedback.getId()),
@@ -93,6 +93,12 @@ public class FeedbackImplTests {
                 () -> Assertions.assertEquals(VALID_TASK_DESCRIPTION, feedback.getDescription()),
                 () -> Assertions.assertEquals(VALID_FEEDBACK_RATING, feedback.getFeedbackRating())
         );
+    }
+
+    @Test
+    public void equals_Should_Return_True_When_ValidObjectsOfFeedbackAreCompared() {
+        // Act, Assert
+        Assertions.assertTrue(getValidFeedbackMock().equals(feedback));;
     }
 
     @Test
@@ -110,10 +116,10 @@ public class FeedbackImplTests {
     @Test
     void changeFeedbackStatus_Should_ChangeCorrectlyFeedbackStatus_When_ParametersAreCorrect() {
         feedback.changeFeedbackStatus(FeedbackStatus.DONE);
-        assertEquals(FeedbackStatus.DONE, feedback.getFeedbackStatus());
+        Assertions.assertEquals(FeedbackStatus.DONE, feedback.getFeedbackStatus());
 
         feedback.changeFeedbackStatus(FeedbackStatus.UNSCHEDULED);
-        assertEquals(FeedbackStatus.UNSCHEDULED, feedback.getFeedbackStatus());
+        Assertions.assertEquals(FeedbackStatus.UNSCHEDULED, feedback.getFeedbackStatus());
     }
 
     @Test
@@ -128,16 +134,25 @@ public class FeedbackImplTests {
     void changeFeedbackStatus_Should_ThrowException_When_StatusIsNull() {
         feedback.changeFeedbackStatus(FeedbackStatus.DONE);
         Assertions.assertThrows(InvalidUserInputException.class,
-                () -> feedback.changeFeedbackStatus(null));
+                () -> feedback.changeFeedbackStatus(NULL_FEEDBACK_STATUS));
+    }
+
+    @Test
+    void changeFeedbackStatus_Should_ThrowException_When_NewStatusIsInvalid() {
+        feedback.changeFeedbackStatus(FeedbackStatus.DONE);
+        Assertions.assertThrows(IllegalArgumentException.class,
+                    () -> {FeedbackStatus invalidStatus = FeedbackStatus.valueOf("INVALID");
+                    feedback.changeFeedbackStatus(invalidStatus);
+                });
     }
 
     @Test
     void changeFeedbackRating_Should_ChangeCorrectlyRating_When_ParametersAreCorrect() {
         feedback.changeFeedbackRating(5);
-        assertEquals(5, feedback.getFeedbackRating());
+        Assertions.assertEquals(5, feedback.getFeedbackRating());
 
         feedback.changeFeedbackRating(6);
-        assertEquals(6, feedback.getFeedbackRating());
+        Assertions.assertEquals(6, feedback.getFeedbackRating());
     }
 
     @Test
@@ -176,6 +191,16 @@ public class FeedbackImplTests {
     void addComment_Should_ThrowException_When_CommentIsNull() {
         Assertions.assertThrows(InvalidUserInputException.class,
                 () -> feedback.addComment(getNullCommentMock()));
+    }
+
+    @Test
+    public void getComments_Should_ReturnCopyOfTheCollection() {
+
+        // Act
+        feedback.getComments().add(getValidCommentMock());
+
+        // Assert
+        Assertions.assertEquals(0, feedback.getComments().size());
     }
 
 

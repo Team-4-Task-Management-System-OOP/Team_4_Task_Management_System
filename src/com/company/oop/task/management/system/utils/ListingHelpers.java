@@ -1,4 +1,5 @@
 package com.company.oop.task.management.system.utils;
+import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.contracts.Printable;
 import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
@@ -57,12 +58,15 @@ public class ListingHelpers {
     }
 
     public static <T extends Assignable> String listAllAssignedTasksFilteredByAssignee(List<T> elements, String assigneeName) {
-        return elements.isEmpty() ? EMPTY_LIST :
-                elements.stream()
-                        .filter(task -> task.getAssignee().getName().equalsIgnoreCase(assigneeName))
-                        .map(Assignable::printImportantInfo)
-                        .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
-                        .trim();
+        String filteredTasks = elements.stream()
+                .filter(task -> task.getAssignee().getName().equalsIgnoreCase(assigneeName))
+                .map(Assignable::printImportantInfo)
+                .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                .trim();
+        if (filteredTasks.isEmpty()){
+            throw new InvalidUserInputException(String.format("No tasks assigned to '%s'.", assigneeName));
+        }
+        return filteredTasks;
     }
 
 }

@@ -16,7 +16,7 @@ public class StoryMock {
     public static final PriorityType INVALID_STORY_PRIORITY_TYPE = null;
     public static final StorySize INVALID_STORY_SIZE = null;
 
-    public static StoryImpl getStoryMock() {
+    public static StoryImpl getValidStoryMock() {
         return new StoryImpl(1,
                 TaskBaseConstants.VALID_TASK_TITLE,
                 TaskBaseConstants.VALID_TASK_DESCRIPTION,

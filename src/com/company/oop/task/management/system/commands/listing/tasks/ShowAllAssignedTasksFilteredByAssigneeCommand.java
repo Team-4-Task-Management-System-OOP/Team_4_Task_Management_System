@@ -26,11 +26,13 @@ public class ShowAllAssignedTasksFilteredByAssigneeCommand extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        if (assignedTasks.isEmpty() || assignedTasks.stream().allMatch(t -> t.getAssignee().getName().equalsIgnoreCase(UNASSIGNED))) {
+        if (assignedTasks.isEmpty() || assignedTasks.stream()
+                .allMatch(t -> t.getAssignee().getName().equalsIgnoreCase(UNASSIGNED))) {
             throw new ElementNotFoundException(NO_REGISTERED_ASSIGNED_TASKS);
         }
         String assigneeName = parameters.get(0);
-        return listAllAssignedTasksFilteredByAssignee(assignedTasks.stream().filter(t -> !t.getAssignee().getName().equalsIgnoreCase(UNASSIGNED)).toList(), assigneeName);
+        return listAllAssignedTasksFilteredByAssignee(assignedTasks.stream()
+                .filter(t -> !t.getAssignee().getName().equalsIgnoreCase(UNASSIGNED)).toList(), assigneeName);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,20 @@ public class BugImpl extends TaskBase implements Bug {
                    List<String> reproducibleSteps, PriorityType bugPriority, BugSeverity bugSeverity) {
         super(id, title, description);
         setReproducibleSteps(reproducibleSteps);
-        this.bugPriority = bugPriority;
-        this.bugSeverity = bugSeverity;
+        setBugPriority(bugPriority);
+        setBugSeverity(bugSeverity);
         this.bugStatus = BugStatus.ACTIVE;
         this.assignee = DEFAULT_ASSIGNEE;
+    }
+
+    private void setBugPriority(PriorityType bugPriority) {
+        ValidationHelpers.validateNotNull(bugPriority);
+        this.bugPriority = bugPriority;
+    }
+
+    private void setBugSeverity(BugSeverity bugSeverity) {
+        ValidationHelpers.validateNotNull(bugSeverity);
+        this.bugSeverity = bugSeverity;
     }
 
     private void setReproducibleSteps(List<String> reproducibleSteps) {

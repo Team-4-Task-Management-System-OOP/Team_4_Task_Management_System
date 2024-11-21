@@ -4,6 +4,7 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
 import com.company.oop.task.management.system.models.tasks.enums.*;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
+import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import static com.company.oop.task.management.system.models.tasks.BugImpl.UNASSIGN_BUG_SUCCESSFULLY;
 import static java.lang.String.format;
@@ -25,17 +26,27 @@ public class StoryImpl extends TaskBase implements Story {
     public static final String ASSIGNEE_CANNOT_BE_EMPTY = "Assignee cannot be empty.";
 
     private PriorityType storyPriorityType;
-    private StorySize size;
+    private StorySize storySize;
     private StoryStatus storyStatus;
     private Member assignee;
 
     public StoryImpl(int id, String title, String description, PriorityType storyPriorityType,
-                     StorySize size) {
+                     StorySize storySize) {
         super(id, title, description);
-        this.storyPriorityType = storyPriorityType;
-        this.size = size;
+        setStoryPriorityType(storyPriorityType);
+        setStorySize(storySize);
         this.storyStatus = StoryStatus.NOT_DONE;
         this.assignee = DEFAULT_ASSIGNEE;
+    }
+
+    private void setStorySize(StorySize storySize) {
+        ValidationHelpers.validateNotNull(storySize);
+        this.storySize = storySize;
+    }
+
+    private void setStoryPriorityType(PriorityType storyPriorityType) {
+        ValidationHelpers.validateNotNull(storyPriorityType);
+        this.storyPriorityType = storyPriorityType;
     }
 
     @Override
@@ -64,7 +75,7 @@ public class StoryImpl extends TaskBase implements Story {
 
     @Override
     public StorySize getStorySize() {
-        return size;
+        return storySize;
     }
 
     @Override
@@ -116,7 +127,7 @@ public class StoryImpl extends TaskBase implements Story {
         }
         if (sizeNew != getStorySize()){
             super.historyLogger(format(STORY_SIZE_CHANGED, getStorySize(), sizeNew));
-            size = sizeNew;
+            storySize = sizeNew;
         }
         else {
             throw new InvalidUserInputException(format(STORY_SIZE_ALREADY_CHANGED, getStorySize()));

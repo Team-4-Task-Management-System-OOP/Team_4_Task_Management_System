@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.getBugMock;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.getValidBugMock;
 import static com.company.oop.task.management.system.tests.utils.models.teamsmock.MemberMock.*;
 
 public class MemberImplTests {
@@ -16,11 +16,11 @@ public class MemberImplTests {
     public static final String ONE_TASK = "The list should contain exactly one task!";
 
     private MemberImpl member;
-    private Assignable task = getBugMock();
+    private Assignable task = getValidBugMock();
 
     @BeforeEach
     public void setUpMemberImplConstructor(){
-        member = getMockMember();
+        member = getValidMockMember();
     }
 
     @Test

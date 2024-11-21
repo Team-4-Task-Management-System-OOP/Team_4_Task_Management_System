@@ -10,7 +10,7 @@ public class MemberMock {
     public static final String INVALID_MEMBER_NAME = TestUtilities.getString(MEMBER_NAME_MIN_LENGTH - 1);
 
 
-    public static MemberImpl getMockMember() {
+    public static MemberImpl getValidMockMember() {
         return new MemberImpl(
                 VALID_MEMBER_NAME);
     }
