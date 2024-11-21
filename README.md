@@ -103,7 +103,7 @@ The next step was to create all the commands responsible for running the applica
 After implementation of each command, we tested it with sample inputs, which then we added to the main input and expected output of the program. 
 After all of the main functionality was done, we started creating tests for models, then repository, then commands. We found some bugs while doing tests, which was a good validation for the functionalities.
 
-# 4. SAMPLE INPUT
+## 4. SAMPLE INPUT
 
 showallmembers
 showallteams
@@ -149,7 +149,7 @@ assigntask 3 tisho JavaOOP
 
 
 
-# 5. SAMPLE OUTPUT
+## 5. SAMPLE OUTPUT
 
 There are no members in the system. Please add a member first.
 ####################
