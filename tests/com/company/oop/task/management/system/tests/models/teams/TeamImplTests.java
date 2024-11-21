@@ -70,6 +70,7 @@ public class TeamImplTests {
 
         team.addBoard(board);
 
+
         assertTrue(team.getBoards().contains(board));
         assertTrue(team.getActivityHistory().stream()
                 .anyMatch(history -> history.contains("Board \"Project\" was successfully added to team ValidName.")));
