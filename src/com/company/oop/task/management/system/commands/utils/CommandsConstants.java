@@ -134,6 +134,8 @@ public class CommandsConstants {
 
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 
+    public static final String NO_REGISTERED_TASKS_WITH_PARTICULAR_TITLE = "There are no registered tasks with \"%s\".";
+
     public static final String NO_REGISTERED_BUGS = "There are no registered bugs.";
 
     public static final String NO_REGISTERED_FEEDBACKS = "There are no registered feedbacks.";

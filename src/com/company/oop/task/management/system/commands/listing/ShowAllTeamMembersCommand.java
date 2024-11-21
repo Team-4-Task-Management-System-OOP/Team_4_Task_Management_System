@@ -31,7 +31,7 @@ public class ShowAllTeamMembersCommand extends BaseCommand implements Command {
         String teamName = parameters.get(0);
         Team teamToShowMembers = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (teamToShowMembers.getMembers().isEmpty()) {
-            return NO_MEMBERS_FOUND_IN_TEAM;
+            return format(NO_MEMBERS_FOUND_IN_TEAM, teamName);
         }
         StringBuilder allMembersInTeamPrint = new StringBuilder();
         allMembersInTeamPrint.append(format(ALL_MEMBERS_IN_TEAM_MESSAGE, teamToShowMembers.getName()));

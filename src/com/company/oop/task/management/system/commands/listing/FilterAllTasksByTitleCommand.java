@@ -8,8 +8,9 @@ import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
-import static com.company.oop.task.management.system.commands.utils.CommandsConstants.NO_REGISTERED_TASKS;
+import static com.company.oop.task.management.system.commands.utils.CommandsConstants.NO_REGISTERED_TASKS_WITH_PARTICULAR_TITLE;
 import static com.company.oop.task.management.system.utils.ListingHelpers.listAllTasksFilteredByTitle;
+import static java.lang.String.format;
 
 public class FilterAllTasksByTitleCommand extends BaseCommand {
 
@@ -31,8 +32,8 @@ public class FilterAllTasksByTitleCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String targetTitle = parameters.get(0);
-        if (tasks.isEmpty()) {
-            throw new ElementNotFoundException(NO_REGISTERED_TASKS);
+        if (tasks.isEmpty() || tasks.stream().noneMatch(t -> t.getTitle().contains(targetTitle))) {
+            throw new ElementNotFoundException(format(NO_REGISTERED_TASKS_WITH_PARTICULAR_TITLE, targetTitle));
         }
         return listAllTasksFilteredByTitle(tasks, targetTitle);
     }
