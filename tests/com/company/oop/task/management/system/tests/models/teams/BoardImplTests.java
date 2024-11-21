@@ -1,9 +1,14 @@
 package com.company.oop.task.management.system.tests.models.teams;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+import com.company.oop.task.management.system.models.tasks.BugImpl;
+import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.teams.BoardImpl;
+import com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static com.company.oop.task.management.system.models.teams.BoardImpl.CANNOT_ADD_AN_EMPTY_TASK_BOARD;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,19 +29,19 @@ public class BoardImplTests {
         assertTrue(board.getHistory().isEmpty());
     }
 
-//    @Test
-//    void testAddTask_ValidTask() {
-//        String task = "Implement login feature";
-//        board.addTask(task);
-//
-//        List<Task> tasks = board.getTasks();
-//        List<String> history = board.getActivityHistory();
-//
-//        assertEquals(1, tasks.size());
-//        assertEquals(task, tasks.getFirst());
-//        assertEquals(1, history.size());
-//        assertEquals(task, history.getFirst());
-//    }
+    @Test
+    void testAddTask_ValidTask() {
+        BugImpl task = BugMock.getValidBugMock();
+        board.addTask(task);
+
+        List<Task> tasks = board.getTasks();
+        List<String> history = board.getHistory();
+
+        assertEquals(1, tasks.size());
+        assertEquals(task.getTitle(), tasks.get(0).getTitle());
+        assertEquals(1, history.size());
+        assertEquals(task.getTitle(), tasks.get(0).getTitle());
+    }
 
     @Test
     void testAddTask_NullTask_ShouldThrowException() {
@@ -54,14 +59,22 @@ public class BoardImplTests {
         assertTrue(board.getHistory().isEmpty());
     }
 
-//    @Test
-//    void testAddMultipleTasks() {
-//        Task task = new Task("Task 1");
-//        board.addTask(task);
-//
-//        assertEquals(2, board.getTasks().size());
-//        assertEquals("Task 1", board.getTasks().get(0));
-//        assertEquals("Task 2", board.getTasks().get(1));
-//        assertEquals(2, board.getActivityHistory().size());
-//    }
+    @Test
+    public void test_remove_null_task_throws_exception() {
+        BoardImpl board = new BoardImpl("ValidName");
+        Exception exception = assertThrows(InvalidUserInputException.class, () -> {
+            board.removeTask((Task) null);
+        });
+        assertEquals("Cannot remove an empty task.", exception.getMessage());
+    }
+
+    @Test
+    public void test_add_null_task_throws_exception() {
+        BoardImpl board = new BoardImpl("ValidName");
+        Exception exception = assertThrows(InvalidUserInputException.class, () -> {
+            board.addTask((Task) null);
+        });
+        assertEquals("Cannot add an empty task to the board!", exception.getMessage());
+    }
+
 }
