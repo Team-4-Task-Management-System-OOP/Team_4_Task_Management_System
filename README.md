@@ -1,4 +1,6 @@
-TEAM 4 - TASK MANAGEMENT SYSTEM - JAVA PROJECT 1
+# TEAM 4 - TASK MANAGEMENT SYSTEM - JAVA PROJECT 1 
+
+- COVERS MAIN PRINCIPLES OF OOP, STREAMS, LAMBDAS, GENERICS
 
 # 1. Description
 The project focuses on the main principles of Object Oriented Programming in Java
@@ -145,6 +147,9 @@ showallteammembers JavaOOP
 assigntask 3 tisho JavaOOP
 unassigntask 3 tisho JavaOOP
 assigntask 3 tisho JavaOOP
+showallassignedtasks
+showallassignedtasksfilteredbyassignee tisho
+showallassignedtasksfilteredbyassignee pesho
 ```
 
 
@@ -173,7 +178,7 @@ Member Team: Unassigned
 Add a task first!
 
 ---Member History---
-[21-ноември-2024 02:33:07] - A member with name "sasho" has been created!
+[21-ноември-2024 20:32:14] - A member with name "sasho" has been created!
 
 ####################
 ---Member №2---
@@ -185,7 +190,7 @@ Member Team: Unassigned
 Add a task first!
 
 ---Member History---
-[21-ноември-2024 02:33:07] - A member with name "pesho" has been created!
+[21-ноември-2024 20:32:14] - A member with name "pesho" has been created!
 
 ####################
 A team with name "Managers" has been created!
@@ -209,7 +214,7 @@ Add a member first!
 Add a board first!
 
 ---Team History---
-[21-ноември-2024 02:33:07] - A team with name "Managers" has been created!
+[21-ноември-2024 20:32:14] - A team with name "Managers" has been created!
 
 ####################
 ---Team №2---
@@ -224,7 +229,7 @@ Add a member first!
 Add a board first!
 
 ---Team History---
-[21-ноември-2024 02:33:07] - A team with name "JavaOOP" has been created!
+[21-ноември-2024 20:32:14] - A team with name "JavaOOP" has been created!
 
 ####################
 You are not logged in! Please login first!
@@ -243,16 +248,15 @@ No team with name "jokes" exists!
 ####################
 Board with name "python" has been successfully created and added to team "JavaOOP!"
 ####################
-[21-ноември-2024 02:33:07] - A team with name "JavaOOP" has been created!
-[21-ноември-2024 02:33:07] - Member "pesho" was successfully added to team JavaOOP.
-[21-ноември-2024 02:33:07] - Member "pesho" was added to team "JAVAOOP".
-[21-ноември-2024 02:33:07] - Board "python" was successfully added to team JavaOOP.
-[21-ноември-2024 02:33:07] - Board with name "python" has been successfully created and added to team "JavaOOP!"
+[21-ноември-2024 20:32:14] - A team with name "JavaOOP" has been created!
+[21-ноември-2024 20:32:15] - Member "pesho" was successfully added to team JavaOOP.
+[21-ноември-2024 20:32:15] - Board "python" was successfully added to team JavaOOP.
+[21-ноември-2024 20:32:15] - Board with name "python" has been successfully created and added to team "JavaOOP!"
 
 ####################
-[21-ноември-2024 02:33:07] - A member with name "pesho" has been created!
-[21-ноември-2024 02:33:07] - Member pesho assigned to team JavaOOP.
-[21-ноември-2024 02:33:07] - Member pesho successfully logged in!
+[21-ноември-2024 20:32:14] - A member with name "pesho" has been created!
+[21-ноември-2024 20:32:15] - Member pesho assigned to team JavaOOP.
+[21-ноември-2024 20:32:15] - Member pesho successfully logged in!
 
 ####################
 Board with name "JavaTasks" has been successfully created and added to team "JavaOOP!"
@@ -272,7 +276,7 @@ Board Name: python
 Add a task first!
 
 ---Board History---
-[21-ноември-2024 02:33:07] - Board with name "python" has been successfully created and added to team "JavaOOP!"
+[21-ноември-2024 20:32:15] - Board with name "python" has been successfully created and added to team "JavaOOP!"
 
 ####################
 ---Board №2---
@@ -286,13 +290,13 @@ Description: good practice with stringbuilders!
 Rating: 9
 Feedback Status: New
 Comments: ---NO COMMENTS ADDED TO TASK TO DISPLAY---
-History: [21-ноември-2024 02:33:08] - Feedback with ID 1 and title "Amazing work!" was created.
+History: [21-ноември-2024 20:32:15] - Feedback with ID 1 and title "Amazing work!" was created.
 
 
 
 ---Board History---
-[21-ноември-2024 02:33:07] - Board with name "JavaTasks" has been successfully created and added to team "JavaOOP!"
-[21-ноември-2024 02:33:08] - Task with name "Amazing work!" has been added to board "JavaTasks"
+[21-ноември-2024 20:32:15] - Board with name "JavaTasks" has been successfully created and added to team "JavaOOP!"
+[21-ноември-2024 20:32:15] - Task with name "Amazing work!" has been added to board "JavaTasks"
 
 ####################
 ---Board №3---
@@ -303,13 +307,13 @@ Board Name: PythonTsks
 Add a task first!
 
 ---Board History---
-[21-ноември-2024 02:33:08] - Board with name "PythonTsks" has been successfully created and added to team "JavaOOP!"
+[21-ноември-2024 20:32:15] - Board with name "PythonTsks" has been successfully created and added to team "JavaOOP!"
 
 ####################
 No board with name "JavaOOP" exists!
 ####################
-[21-ноември-2024 02:33:07] - Board with name "JavaTasks" has been successfully created and added to team "JavaOOP!"
-[21-ноември-2024 02:33:08] - Task with name "Amazing work!" has been added to board "JavaTasks"
+[21-ноември-2024 20:32:15] - Board with name "JavaTasks" has been successfully created and added to team "JavaOOP!"
+[21-ноември-2024 20:32:15] - Task with name "Amazing work!" has been added to board "JavaTasks"
 
 ####################
 A member with name "tisho" has been created!
@@ -318,9 +322,13 @@ Invalid number of arguments. Expected: 2, received: 1.
 ####################
 Member "tisho" was added to team "JavaOOP".
 ####################
+[21-ноември-2024 20:32:15] - A member with name "tisho" has been created!
+[21-ноември-2024 20:32:15] - Member tisho assigned to team JavaOOP.
+
+####################
 Story with ID 2 and title "has to happen tomorrow" was created.
 ####################
-Comment was added successfully to task with title "has to happen tomorrow" and ID 2. Author of comment: "tisho"
+Comment was added successfully to task with title "has to happen tomorrow" and ID "2". Author of comment: "tisho"
 ####################
 Bug with ID 3 and title "DOESNT WORK AS INTENDED" was created.
 ####################
@@ -334,9 +342,9 @@ Member Team: JavaOOP
 Add a task first!
 
 ---Member History---
-[21-ноември-2024 02:33:07] - A member with name "pesho" has been created!
-[21-ноември-2024 02:33:07] - Member pesho assigned to team JavaOOP.
-[21-ноември-2024 02:33:07] - Member pesho successfully logged in!
+[21-ноември-2024 20:32:14] - A member with name "pesho" has been created!
+[21-ноември-2024 20:32:15] - Member pesho assigned to team JavaOOP.
+[21-ноември-2024 20:32:15] - Member pesho successfully logged in!
 
 ####################
 ---Member №2---
@@ -348,33 +356,43 @@ Member Team: JavaOOP
 Add a task first!
 
 ---Member History---
-[21-ноември-2024 02:33:08] - A member with name "tisho" has been created!
-[21-ноември-2024 02:33:08] - Member tisho assigned to team JavaOOP.
+[21-ноември-2024 20:32:15] - A member with name "tisho" has been created!
+[21-ноември-2024 20:32:15] - Member tisho assigned to team JavaOOP.
 
 ####################
-Task with ID 3 was assigned to "tisho"
+Task with ID "3" was assigned to "tisho"
 ####################
-Task with ID 3 was unassigned from "tisho"
+Task with ID "3" was unassigned from "tisho"
 ####################
-Task with ID 3 was assigned to "tisho"
+Task with ID "3" was assigned to "tisho"
 ####################
-Bug priority changed
+Id: 3
+Task Type: BUG
+Title: DOESNT WORK AS INTENDED
+Description: Fix payment transaction implementation
+Priority Type: High
+Severity: Critical
+Bug Status: Active
+Assignee: tisho
+---Reproducible steps---
+1. copy the input in file
+2.  try to pay
+3.  read the exception.
 ####################
-Story priority changed
-####################
-Successfully changed the rating of feedback '1' to 6.
-####################
-Successfully changed the severity of bug "3" to Major."
-####################
-Successfully changed the status of bug '3' to Done.
-####################
-Successfully changed the size of story '2' to Small.
-####################
-Successfully changed the status of feedback '1' to Unscheduled.
-####################
-Successfully changed the status of story '2' to In progress.
+Id: 3
+Task Type: BUG
+Title: DOESNT WORK AS INTENDED
+Description: Fix payment transaction implementation
+Priority Type: High
+Severity: Critical
+Bug Status: Active
+Assignee: tisho
+---Reproducible steps---
+1. copy the input in file
+2.  try to pay
+3.  read the exception.
 ####################
 
-Task with ID 2 was assigned to "tisho"
+No tasks assigned to 'pesho'.
 ####################
 ```
