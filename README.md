@@ -104,7 +104,7 @@ After implementation of each command, we tested it with sample inputs, which the
 After all of the main functionality was done, we started creating tests for models, then repository, then commands. We found some bugs while doing tests, which was a good validation for the functionalities.
 
 ## 4. SAMPLE INPUT
-
+```
 showallmembers
 showallteams
 createmember sasho
@@ -145,12 +145,12 @@ showallteammembers JavaOOP
 assigntask 3 tisho JavaOOP
 unassigntask 3 tisho JavaOOP
 assigntask 3 tisho JavaOOP
-
+```
 
 
 
 ## 5. SAMPLE OUTPUT
-
+```
 There are no members in the system. Please add a member first.
 ####################
 There are no teams to be shown. Please add a team first.
@@ -377,3 +377,4 @@ Successfully changed the status of story '2' to In progress.
 
 Task with ID 2 was assigned to "tisho"
 ####################
+```
