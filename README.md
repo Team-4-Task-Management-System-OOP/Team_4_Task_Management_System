@@ -105,8 +105,6 @@ After all of the main functionality was done, we started creating tests for mode
 
 # 4. SAMPLE INPUT
 
-Team-4-Task-Management-System README
-Sample input ::
 showallmembers
 showallteams
 createmember sasho
