@@ -14,7 +14,7 @@ public class ValidationHelpers {
             throw new InvalidUserInputException(message);
         }
     }
-
+//test
     public static void validateStringLength(String stringToValidate, double minLength, double maxLength, String errorMessage) {
         validateDecimalRange(stringToValidate.length(), minLength, maxLength, errorMessage);
     }
