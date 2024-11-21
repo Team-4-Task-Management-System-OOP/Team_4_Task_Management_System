@@ -6,7 +6,6 @@ import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Bug;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
-import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import org.junit.jupiter.api.Assertions;
@@ -14,8 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.*;
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.getInvalidTitleBugMock;
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.*;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.getInvalidCommentMock;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.getValidCommentMock;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_DESCRIPTION;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_TITLE;
 
@@ -200,7 +199,7 @@ public class BugImplTests {
     @Test
     void addComment_Should_ThrowException_When_CommentIsNull() {
         Assertions.assertThrows(InvalidUserInputException.class,
-                () -> bug.addComment(getNullCommentMock()));
+                () -> bug.addComment(new CommentImpl()));
     }
 
     @Test

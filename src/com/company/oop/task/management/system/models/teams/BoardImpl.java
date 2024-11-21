@@ -23,7 +23,7 @@ public class BoardImpl implements Board {
             "Board's name must be between %d and %d symbols long!",
             BOARD_NAME_MIN_LENGTH,
             BOARD_NAME_MAX_LENGTH);
-    private static final String CANNOT_ADD_AN_EMPTY_TASK_BOARD = "Cannot add an empty task to the board!";
+    public static final String CANNOT_ADD_AN_EMPTY_TASK_BOARD = "Cannot add an empty task to the board!";
     private static final String TASK_ADDED_TO_BOARD = "Task with name \"%s\" has been added to board \"%s\"";
     private static final String ALREADY_ADDED = "Task with title %s is already added to board \"%s\"";
     private static final String CANNOT_REMOVE_AN_EMPTY_TASK = "Cannot remove an empty task.";

@@ -2,7 +2,10 @@ package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.contracts.Story;
-import com.company.oop.task.management.system.models.tasks.enums.*;
+import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
+import com.company.oop.task.management.system.models.tasks.enums.StorySize;
+import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
+import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.utils.ValidationHelpers;
 
@@ -51,14 +54,14 @@ public class StoryImpl extends TaskBase implements Story {
 
     @Override
     public void assignMember(Member assignee) {
+        if (assignee == null) {
+            throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
+        }
         if (!DEFAULT_ASSIGNEE.equals(this.assignee)) {
             throw new InvalidUserInputException(format(ALREADY_ASSIGNED_STORY,
                     getTitle(), getAssignee().getName()));
         }
-        if (assignee == null) {
-            throw new InvalidUserInputException(ASSIGNEE_CANNOT_BE_EMPTY);
-        }
-        super.historyLogger(format(SET_STORY_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), getAssignee()));
+        super.historyLogger(format(SET_STORY_ASSIGNEE_SUCCESSFULLY, getTitle(), assignee.getName(), this.assignee.getName()));
         this.assignee = assignee;
     }
 

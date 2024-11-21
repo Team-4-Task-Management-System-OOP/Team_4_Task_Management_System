@@ -5,7 +5,6 @@ import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
-import com.company.oop.task.management.system.models.tasks.enums.BugStatus;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock;
@@ -13,8 +12,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.BugMock.getInvalidPriorityBugMock;
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.*;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.getInvalidCommentMock;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.getValidCommentMock;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock.*;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_DESCRIPTION;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_TITLE;
@@ -134,7 +133,7 @@ public class FeedbackImplTests {
     void changeFeedbackStatus_Should_ThrowException_When_StatusIsNull() {
         feedback.changeFeedbackStatus(FeedbackStatus.DONE);
         Assertions.assertThrows(InvalidUserInputException.class,
-                () -> feedback.changeFeedbackStatus(NULL_FEEDBACK_STATUS));
+                () -> feedback.changeFeedbackStatus(null));
     }
 
     @Test
@@ -190,7 +189,7 @@ public class FeedbackImplTests {
     @Test
     void addComment_Should_ThrowException_When_CommentIsNull() {
         Assertions.assertThrows(InvalidUserInputException.class,
-                () -> feedback.addComment(getNullCommentMock()));
+                () -> feedback.addComment(new CommentImpl()));
     }
 
     @Test

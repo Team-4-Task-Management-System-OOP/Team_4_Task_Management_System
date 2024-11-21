@@ -13,9 +13,6 @@ public class StoryMock {
     public static final PriorityType VALID_STORY_PRIORITY_TYPE = PriorityType.HIGH;
     public static final StorySize VALID_STORY_SIZE = StorySize.LARGE;
 
-    public static final PriorityType INVALID_STORY_PRIORITY_TYPE = null;
-    public static final StorySize INVALID_STORY_SIZE = null;
-
     public static StoryImpl getValidStoryMock() {
         return new StoryImpl(1,
                 TaskBaseConstants.VALID_TASK_TITLE,
@@ -30,8 +27,8 @@ public class StoryMock {
                 1, // Valid ID
                 INVALID_TASK_TITLE, // Invalid (empty) title
                 INVALID_TASK_DESCRIPTION, // Invalid (null) description
-                INVALID_STORY_PRIORITY_TYPE, // Invalid (null) priority
-                INVALID_STORY_SIZE // Invalid (null) size
+                null, // Invalid (null) priority
+                null // Invalid (null) size
         );
     }
 
@@ -40,7 +37,7 @@ public class StoryMock {
                 1,
                 TaskBaseConstants.VALID_TASK_TITLE,
                 TaskBaseConstants.VALID_TASK_DESCRIPTION,
-                INVALID_STORY_PRIORITY_TYPE,
+                null,
                 VALID_STORY_SIZE
         );
     }

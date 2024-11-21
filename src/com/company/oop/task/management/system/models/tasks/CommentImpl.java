@@ -26,6 +26,9 @@ public class CommentImpl implements Comment {
     private String author;
     private String content;
 
+    public CommentImpl() {
+    }
+
     public CommentImpl(String content, String author) {
         setContent(content);
         setAuthor(author);

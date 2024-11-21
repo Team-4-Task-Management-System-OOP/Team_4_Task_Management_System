@@ -16,8 +16,6 @@ public class BugMock {
     public static final TaskType INVALID_BUG_TASK_TYPE = TaskType.STORY;
 
     public static final List<String>  INVALID_REPRODUCIBLE_STEPS = List.of();
-    public static final PriorityType INVALID_BUG_PRIORITY_TYPE = null;
-    public static final BugSeverity INVALID_BUG_SEVERITY = null;
 
     public static BugImpl getValidBugMock() {
         return new BugImpl( 1,
@@ -34,8 +32,8 @@ public class BugMock {
                 "",
                 null,
                 INVALID_REPRODUCIBLE_STEPS,
-                INVALID_BUG_PRIORITY_TYPE,
-                INVALID_BUG_SEVERITY
+                null,
+                null
         );
     }
 
@@ -78,7 +76,7 @@ public class BugMock {
                 TaskBaseConstants.VALID_TASK_TITLE,
                 TaskBaseConstants.VALID_TASK_DESCRIPTION,
                 VALID_REPRODUCIBLE_STEPS,
-                INVALID_BUG_PRIORITY_TYPE,
+                null,
                 VALID_BUG_SEVERITY
         );
     }
@@ -90,7 +88,7 @@ public class BugMock {
                 TaskBaseConstants.VALID_TASK_DESCRIPTION,
                 VALID_REPRODUCIBLE_STEPS,
                 VALID_BUG_PRIORITY_TYPE,
-                INVALID_BUG_SEVERITY
+                null
         );
     }
 }

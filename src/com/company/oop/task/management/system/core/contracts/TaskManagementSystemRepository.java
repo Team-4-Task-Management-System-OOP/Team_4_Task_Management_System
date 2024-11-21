@@ -1,7 +1,9 @@
 package com.company.oop.task.management.system.core.contracts;
 
 import com.company.oop.task.management.system.models.tasks.contracts.*;
-import com.company.oop.task.management.system.models.tasks.enums.*;
+import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
+import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
+import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.teams.contracts.Board;
 import com.company.oop.task.management.system.models.teams.contracts.Member;
 import com.company.oop.task.management.system.models.teams.contracts.Nameable;
@@ -34,11 +36,7 @@ public interface TaskManagementSystemRepository {
 
     Board findBoardByName(String boardName);
 
-    void addMemberToTeam(String teamName, Member memberToAdd);
-
-    void addBoardToTeam(String teamName, Board boardToAdd);
-
-    Comment createComment(String content, String author);
+   // void addMemberToTeam(String teamName, Member memberToAdd);
 
     Feedback createFeedback(String title, String description, int rating);
 

@@ -4,11 +4,12 @@ import com.company.oop.task.management.system.core.contracts.TaskManagementSyste
 import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
 import com.company.oop.task.management.system.models.tasks.BugImpl;
-import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
 import com.company.oop.task.management.system.models.tasks.StoryImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.*;
-import com.company.oop.task.management.system.models.tasks.enums.*;
+import com.company.oop.task.management.system.models.tasks.enums.BugSeverity;
+import com.company.oop.task.management.system.models.tasks.enums.PriorityType;
+import com.company.oop.task.management.system.models.tasks.enums.StorySize;
 import com.company.oop.task.management.system.models.teams.BoardImpl;
 import com.company.oop.task.management.system.models.teams.MemberImpl;
 import com.company.oop.task.management.system.models.teams.TeamImpl;
@@ -22,7 +23,6 @@ import java.util.List;
 
 public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemRepository {
     public static final String MEMBER_ALREADY_EXISTS = "Member \"s\" already exists. Choose a different name!";
-    public static final String BOARD_ALREADY_EXISTS = "Board \"%s\" already exists in team \"%s\"!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member.";
     public static final String NO_LOGGED_IN_TEAM = "There is no logged in team.";
     public static final String NO_ELEMENT_NAME_FOUND = "No %s with name \"%s\" exists!";
@@ -99,30 +99,14 @@ public class TaskManagementSystemRepositoryImpl implements TaskManagementSystemR
         return new ArrayList<>(assignableTasks);
     }
 
-    @Override
-    public void addMemberToTeam(String teamName, Member memberToAdd) {
-        Team team = findTeamByName(teamName);
-        if (team.getMembers().stream().anyMatch(m -> m.getName().equalsIgnoreCase(memberToAdd.getName()))) {
-            throw new InvalidUserInputException(String.format(MEMBER_ALREADY_EXISTS, memberToAdd.getName()));
-        }
-        team.addMember(memberToAdd);
-    }
-
-    @Override
-    public void addBoardToTeam(String teamName, Board boardToAdd) {
-        Team team = findTeamByName(teamName);
-        if (team.getBoards().stream().anyMatch(b -> b.getName().equalsIgnoreCase(boardToAdd.getName()))) {
-            throw new InvalidUserInputException(String.format(BOARD_ALREADY_EXISTS, boardToAdd.getName(), teamName));
-        }
-        team.addBoard(boardToAdd);
-    }
-
-    @Override
-    public Comment createComment(String content, String author) {
-       // findTaskById(task id);
-        findMemberByName(author);
-        return new CommentImpl(content, author);
-    }
+//    @Override
+//    public void addMemberToTeam(String teamName, Member memberToAdd) {
+//        Team team = findTeamByName(teamName);
+//        if (team.getMembers().stream().anyMatch(m -> m.getName().equalsIgnoreCase(memberToAdd.getName()))) {
+//            throw new InvalidUserInputException(String.format(MEMBER_ALREADY_EXISTS, memberToAdd.getName()));
+//        }
+//        team.addMember(memberToAdd);
+//    }
 
     @Override
     public Feedback createFeedback(String title, String description, int rating) {

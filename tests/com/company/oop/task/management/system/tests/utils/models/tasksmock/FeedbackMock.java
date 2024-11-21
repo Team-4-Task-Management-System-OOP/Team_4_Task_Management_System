@@ -1,7 +1,6 @@
 package com.company.oop.task.management.system.tests.utils.models.tasksmock;
 
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
-import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 
 import static com.company.oop.task.management.system.models.tasks.FeedbackImpl.RATING_MIN;
@@ -15,7 +14,6 @@ public class FeedbackMock {
 
     public static final int INVALID_FEEDBACK_RATING = RATING_MIN - 1;
     public static final TaskType INVALID_FEEDBACK_TASK_TYPE = TaskType.STORY;
-    public static final FeedbackStatus NULL_FEEDBACK_STATUS = null;
 
     public static FeedbackImpl getValidFeedbackMock() {
         return new FeedbackImpl(1,

@@ -5,6 +5,7 @@ import com.company.oop.task.management.system.models.teams.BoardImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.company.oop.task.management.system.models.teams.BoardImpl.CANNOT_ADD_AN_EMPTY_TASK_BOARD;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardImplTests {
@@ -40,7 +41,7 @@ public class BoardImplTests {
     @Test
     void testAddTask_NullTask_ShouldThrowException() {
         InvalidUserInputException exception = assertThrows(InvalidUserInputException.class, () -> board.addTask(null));
-        assertEquals("Task not found", exception.getMessage());
+        assertEquals(CANNOT_ADD_AN_EMPTY_TASK_BOARD, exception.getMessage());
     }
 
     @Test
