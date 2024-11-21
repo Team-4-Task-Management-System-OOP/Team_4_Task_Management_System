@@ -102,11 +102,6 @@ public class BugImpl extends TaskBase implements Bug {
         return TaskType.BUG;
     }
 
-    //ToDo For enhancement
-    private void logChange(String messageTemplate, Object oldValue, Object newValue) {
-        super.historyLogger(format(messageTemplate, oldValue, newValue));
-    }
-
     @Override
     public void changeBugStatus(BugStatus bugStatusNew) {
         if (bugStatusNew == null) {

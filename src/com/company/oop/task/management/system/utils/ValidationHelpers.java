@@ -7,6 +7,7 @@ import java.util.List;
 public class ValidationHelpers {
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. " +
             "Expected: %d, received: %d.";
+    public static final String VALUE_CANNOT_BE_EMPTY = "Value cannot be empty!";
 
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {
@@ -16,6 +17,13 @@ public class ValidationHelpers {
 
     public static void validateStringLength(String stringToValidate, double minLength, double maxLength, String errorMessage) {
         validateDecimalRange(stringToValidate.length(), minLength, maxLength, errorMessage);
+    }
+
+    public static void validateNotNull(Object value) {
+        if (value == null) {
+            throw new InvalidUserInputException(
+                    VALUE_CANNOT_BE_EMPTY);
+        }
     }
 
     public static void validateDecimalRange(double value, double min, double max, String message) {

@@ -1,24 +1,23 @@
 package com.company.oop.task.management.system.tests.models.tasks;
 
 import com.company.oop.task.management.system.exceptions.InvalidUserInputException;
+import com.company.oop.task.management.system.models.tasks.CommentImpl;
 import com.company.oop.task.management.system.models.tasks.FeedbackImpl;
 import com.company.oop.task.management.system.models.tasks.contracts.Feedback;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.tasks.enums.FeedbackStatus;
-import com.company.oop.task.management.system.models.tasks.enums.StoryStatus;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
 import com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.getInvalidContentCommentMock;
+import static com.company.oop.task.management.system.tests.utils.models.tasksmock.CommentMock.*;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.FeedbackMock.*;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_DESCRIPTION;
 import static com.company.oop.task.management.system.tests.utils.models.tasksmock.TaskBaseConstants.VALID_TASK_TITLE;
-import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FeedbackImplTests {
 
@@ -154,6 +153,29 @@ public class FeedbackImplTests {
         Assertions.assertThrows(InvalidUserInputException.class,
                 () -> feedback.changeFeedbackRating(120));
 
+    }
+
+    @Test
+     void addComment_Should_AddCommentsCorrectly() {
+        CommentImpl comment = getValidCommentMock();
+        CommentImpl comment2 = getValidCommentMock();
+
+        feedback.addComment(comment);
+        feedback.addComment(comment2);
+
+        Assertions.assertEquals(feedback.getComments().size(), 2);
+    }
+
+    @Test
+    void addComment_Should_ThrowException_When_CommentIsInvalid() {
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> feedback.addComment(getInvalidCommentMock()));
+    }
+
+    @Test
+    void addComment_Should_ThrowException_When_CommentIsNull() {
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> feedback.addComment(getNullCommentMock()));
     }
 
 

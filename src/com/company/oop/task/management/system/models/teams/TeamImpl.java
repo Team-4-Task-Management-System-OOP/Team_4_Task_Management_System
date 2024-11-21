@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
+import static com.company.oop.task.management.system.utils.ValidationHelpers.validateNotNull;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
@@ -54,6 +55,7 @@ public class TeamImpl implements Team {
     }
 
     private void setName(String name) {
+        validateNotNull(name);
         validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERR);
         this.name = name;
     }

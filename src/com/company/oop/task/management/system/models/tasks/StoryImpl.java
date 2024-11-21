@@ -81,11 +81,6 @@ public class StoryImpl extends TaskBase implements Story {
         return TaskType.STORY;
     }
 
-    //ToDo For enhancement
-    private void logChange(String messageTemplate, Object oldValue, Object newValue) {
-        super.historyLogger(format(messageTemplate, oldValue, newValue));
-    }
-
     @Override
     public void changePriority(PriorityType priorityNew) {
         if (priorityNew == null) {

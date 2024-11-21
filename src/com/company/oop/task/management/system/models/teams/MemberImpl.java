@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.MEMBER_CREATION_SUCCESSFUL_MESSAGE;
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
+import static com.company.oop.task.management.system.utils.ValidationHelpers.validateNotNull;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
@@ -47,6 +48,7 @@ public class MemberImpl implements Member {
     }
 
     private void setName(String name) {
+        validateNotNull(name);
         validateStringLength(name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH,
                 format(NAME_ERR, name, MEMBER_NAME_MIN_LENGTH, MEMBER_NAME_MAX_LENGTH));
         this.name = name;

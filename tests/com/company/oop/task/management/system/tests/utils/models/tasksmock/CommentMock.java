@@ -44,18 +44,12 @@ public class CommentMock {
         );
     }
 
-    public static CommentImpl getNullContentCommentMock() {
+    public static CommentImpl getNullCommentMock() {
         return new CommentImpl(
                 NULL_CONTENT,
-                VALID_AUTHOR
-        );
-    }
-
-    public static CommentImpl getNullAuthorCommentMock() {
-        return new CommentImpl(
-                VALID_CONTENT,
                 NULL_AUTHOR
         );
     }
+
 }
 

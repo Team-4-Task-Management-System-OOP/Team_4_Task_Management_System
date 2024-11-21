@@ -2,6 +2,7 @@ package com.company.oop.task.management.system.models.tasks;
 
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 
+import static com.company.oop.task.management.system.utils.ValidationHelpers.validateNotNull;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
@@ -31,11 +32,13 @@ public class CommentImpl implements Comment {
     }
 
     private void setAuthor(String author) {
+        validateNotNull(author);
         validateStringLength(author, AUTHOR_LEN_MIN, AUTHOR_LEN_MAX, AUTHOR_LEN_ERR);
         this.author = author;
     }
 
     private void setContent(String content) {
+        validateNotNull(content);
         validateStringLength(content, CONTENT_LEN_MIN, CONTENT_LEN_MAX, CONTENT_LEN_ERR);
         this.content = content;
     }

@@ -4,13 +4,12 @@ import com.company.oop.task.management.system.exceptions.InvalidUserInputExcepti
 import com.company.oop.task.management.system.models.tasks.contracts.Comment;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 import com.company.oop.task.management.system.models.tasks.enums.TaskType;
-import com.company.oop.task.management.system.models.teams.contracts.Member;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
+import static com.company.oop.task.management.system.utils.ValidationHelpers.validateNotNull;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
 import static java.lang.String.format;
 
@@ -29,7 +28,7 @@ public abstract class TaskBase implements Task {
             "Description must be between %d and %d!",
             DESCRIPTION_MIN_LENGTH,
             DESCRIPTION_MAX_LENGTH);
-    private static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
+    public static final String CANNOT_ADD_A_NULL_COMMENT = "Cannot add an empty comment.";
     private static final String COMMENT_ADDED = "A comment was added to item with ID: %d.";
     private static final String NO_LOG_HISTORY = "---NO LOG HISTORY IN TASK TO DISPLAY---";
     private static final String NO_COMMENTS = "---NO COMMENTS ADDED TO TASK TO DISPLAY---";
@@ -59,6 +58,7 @@ public abstract class TaskBase implements Task {
     }
 
     private void setTitle(String title) {
+        validateNotNull(title);
         validateStringLength(title, TITLE_MIN_LENGTH, TITLE_MAX_LENGTH, TITLE_VAL_ERR);
         this.title = title;
     }
@@ -69,6 +69,7 @@ public abstract class TaskBase implements Task {
     }
 
     private void setDescription(String description) {
+        validateNotNull(description);
         validateStringLength(description, DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH, DESCRIPTION_VAL_ERR);
         this.description = description;
     }
