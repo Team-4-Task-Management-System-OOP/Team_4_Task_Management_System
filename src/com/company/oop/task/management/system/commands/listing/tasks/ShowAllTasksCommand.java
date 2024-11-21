@@ -1,4 +1,4 @@
-package com.company.oop.task.management.system.commands.listing;
+package com.company.oop.task.management.system.commands.listing.tasks;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;

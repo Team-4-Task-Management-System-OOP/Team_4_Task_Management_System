@@ -1,5 +1,6 @@
 package com.company.oop.task.management.system.utils;
 import com.company.oop.task.management.system.models.contracts.Printable;
+import com.company.oop.task.management.system.models.tasks.contracts.Assignable;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
 
 import java.util.Comparator;
@@ -51,6 +52,15 @@ public class ListingHelpers {
                         .filter(task -> task.getTitle().toLowerCase().contains(targetTitle))
                         .sorted(Comparator.comparing(Task::getTitle))
                         .map(Task::printImportantInfo)
+                        .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
+                        .trim();
+    }
+
+    public static <T extends Assignable> String listAllAssignedTasksFilteredByAssignee(List<T> elements, String assigneeName) {
+        return elements.isEmpty() ? EMPTY_LIST :
+                elements.stream()
+                        .filter(task -> task.getAssignee().getName().equalsIgnoreCase(assigneeName))
+                        .map(Assignable::printImportantInfo)
                         .collect(Collectors.joining(JOIN_DELIMITER + System.lineSeparator()))
                         .trim();
     }

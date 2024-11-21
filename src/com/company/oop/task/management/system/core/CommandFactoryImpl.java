@@ -4,6 +4,7 @@ import com.company.oop.task.management.system.commands.contracts.Command;
 import com.company.oop.task.management.system.commands.creation.*;
 import com.company.oop.task.management.system.commands.enums.CommandType;
 import com.company.oop.task.management.system.commands.listing.*;
+import com.company.oop.task.management.system.commands.listing.tasks.*;
 import com.company.oop.task.management.system.commands.modification.*;
 import com.company.oop.task.management.system.commands.security.LoginCommand;
 import com.company.oop.task.management.system.commands.security.LogoutCommand;
@@ -74,25 +75,27 @@ public class CommandFactoryImpl implements CommandFactory {
             case SHOWALLTASKS:
                 return new ShowAllTasksCommand(taskManagementSystemRepository);
             case SHOWALLTASKSFILTEREDBYTITLE:
-                return new FilterAllTasksByTitleCommand(taskManagementSystemRepository);
+                return new ShowAllTasksFilteredByTitleCommand(taskManagementSystemRepository);
             case SHOWALLBUGS:
                 return new ShowAllBugsCommand(taskManagementSystemRepository);
             case SHOWALLSTORIES:
                 return new ShowAllStoriesCommand(taskManagementSystemRepository);
             case SHOWALLFEEDBACKS:
                 return new ShowAllFeedbacksCommand(taskManagementSystemRepository);
-            case SHOWALLASSIGNEDTASKSSORTEBYTITLE:
-                return new ShowAllAssignedTasksSortedByTitle(taskManagementSystemRepository);
+            case SHOWALLASSIGNEDTASKSSORTEDBYTITLE:
+                return new ShowAllAssignedTasksSortedByTitleCommand(taskManagementSystemRepository);
+            case SHOWALLASSIGNEDTASKSFILTEREDBYASSIGNEE:
+                return new ShowAllAssignedTasksFilteredByAssigneeCommand(taskManagementSystemRepository);
             case SHOWALLASSIGNEDTASKS:
-                return new ShowAllAssignedTasks(taskManagementSystemRepository);
+                return new ShowAllAssignedTasksCommand(taskManagementSystemRepository);
             case FILTERTASKSBYSTATUS:
                 return new FilterTasksByStatusCommand(taskManagementSystemRepository);
             case FILTERTASKSBYASSIGNEE:
                 return new FilterTasksByAssigneeCommand(taskManagementSystemRepository);
             case SHOWALLTASKSSORTEDBYTITLE:
-                return new SortAllTasksByTitleCommand(taskManagementSystemRepository);
+                return new ShowAllTasksSortedByTitleCommand(taskManagementSystemRepository);
             case SHOWALLTASKSFILTEREDANDSORTEBYTITLE:
-                return new SortAndFilterAllTasksByTitleCommand(taskManagementSystemRepository);
+                return new ShowAllTasksFilteredAndSortedByTitleCommand(taskManagementSystemRepository);
             case LOGIN:
                 return new LoginCommand(taskManagementSystemRepository);
             case LOGOUT:

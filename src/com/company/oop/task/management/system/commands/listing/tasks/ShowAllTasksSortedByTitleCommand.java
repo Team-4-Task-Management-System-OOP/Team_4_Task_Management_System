@@ -1,23 +1,20 @@
-package com.company.oop.task.management.system.commands.listing;
+package com.company.oop.task.management.system.commands.listing.tasks;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 import com.company.oop.task.management.system.exceptions.ElementNotFoundException;
 import com.company.oop.task.management.system.models.tasks.contracts.Task;
-import com.company.oop.task.management.system.utils.ValidationHelpers;
 
 import java.util.List;
 
 import static com.company.oop.task.management.system.commands.utils.CommandsConstants.NO_REGISTERED_TASKS;
-import static com.company.oop.task.management.system.utils.ListingHelpers.listAllTasksSortedAndFilteredByTitle;
+import static com.company.oop.task.management.system.utils.ListingHelpers.listAllTasksSortedByTitle;
 
-public class SortAndFilterAllTasksByTitleCommand extends BaseCommand {
-
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+public class ShowAllTasksSortedByTitleCommand extends BaseCommand {
 
     private final List<Task> tasks;
 
-    public SortAndFilterAllTasksByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public ShowAllTasksSortedByTitleCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
         tasks = taskManagementSystemRepository.getTasks();
     }
@@ -29,12 +26,9 @@ public class SortAndFilterAllTasksByTitleCommand extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String targetTitle = parameters.get(0);
-        if (tasks.isEmpty() || tasks.stream().noneMatch(t -> t.getTitle().toLowerCase().contains(targetTitle.toLowerCase()))) {
+        if (tasks.isEmpty()) {
             throw new ElementNotFoundException(NO_REGISTERED_TASKS);
         }
-        return listAllTasksSortedAndFilteredByTitle(tasks,targetTitle);
+        return listAllTasksSortedByTitle(tasks);
     }
-
 }
