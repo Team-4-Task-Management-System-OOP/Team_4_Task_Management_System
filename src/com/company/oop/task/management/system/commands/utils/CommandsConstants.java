@@ -124,6 +124,9 @@ public class CommandsConstants {
     public static final String NO_TEAMS_FOUND = "There are no teams to be shown. " +
             "Please add a team first.";
 
+    public static final String NO_TEAM_FOUND = "There are no team with name \"%s\" to be shown. " +
+            "Please add a team first.";
+
     public static final String NO_MEMBERS_FOUND_IN_TEAM = "There are no members in team \"%s\" to be shown. " +
             "Please add a team first.";
 

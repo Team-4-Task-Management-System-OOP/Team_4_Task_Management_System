@@ -44,7 +44,7 @@ public class ChangeSizeOfStoryCommand extends BaseCommand {
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new ElementNotFoundException(NO_TEAMS_FOUND);
+            throw new ElementNotFoundException(String.format(NO_TEAM_FOUND, teamName));
         }
 
         Story story = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getStories(), storyId);
