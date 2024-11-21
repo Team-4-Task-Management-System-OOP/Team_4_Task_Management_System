@@ -46,15 +46,15 @@ public class CommandsConstants {
 
     public final static String MEMBER_NOT_LOGGED = "You are not logged in! Please login first!";
 
-    public static final String COMMENT_ADDED = "Comment was added successfully to task with title \"%s\" and ID %d. " +
+    public static final String COMMENT_ADDED = "Comment was added successfully to task with title \"%s\" and ID \"%d\". " +
             "Author of comment: \"%s\"";
 
     public static final String BOARD_CREATED_AND_ADDED = "Board with name \"%s\" " +
             "has been successfully created and added to team \"%s!\"";
 
-    public static final String TASK_ASSIGNED = "Task with ID %d was assigned to \"%s\"";
+    public static final String TASK_ASSIGNED = "Task with ID \"%d\" was assigned to \"%s\"";
 
-    public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from \"%s\"";
+    public static final String TASK_UNASSIGNED = "Task with ID \"%d\" was unassigned from \"%s\"";
 
     public static final String BUG_PRIORITY_CHANGED = "Bug priority changed";
 
@@ -62,50 +62,50 @@ public class CommandsConstants {
 
     public static final String INVALID_RATING_VALUE = "Invalid rating value. It must be an integer.";
 
-    public static final String INVALID_SEVERITY_VALUE = "Invalid severity value: '%s'. " +
+    public static final String INVALID_SEVERITY_VALUE = "Invalid severity value: \"%s\". " +
             "Valid values are: MINOR, MAJOR, CRITICAL.";
 
-    public static final String INVALID_SIZE_VALUE = "Invalid size value: '%s'. " +
+    public static final String INVALID_SIZE_VALUE = "Invalid size value: \"%s\". " +
             "Valid values are: SMALL, MEDIUM, LARGE.";
 
-    public static final String RATING_ERROR = "Rating must be between \"1\" and \"10\".";
+    public static final String RATING_ERROR = "Feedback rating must be between \"1\" and \"10\".";
 
     public static final String FEEDBACK_RATING_CHANGED = "Feedback rating changed from \"%d\" " +
             "to \"%d\" for Feedback with ID \"%s\".";
 
     public static final String SUCCESSFULLY_CHANGED_THE_RATING_OF_FEEDBACK = "Successfully changed " +
-            "the rating of feedback '%s' to %d.";
+            "the rating of feedback with ID \"%s\" to \"%d\".";
 
-    public static final String SIZE_CHANGED = "Story size changed from %s to %s for Story with ID %s.";
+    public static final String SIZE_CHANGED = "Story size changed from \"%s\" to \"%s\" for Story with ID \"%s\".";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_SIZE = "Successfully changed the size of story '%s' to %s.";
+    public static final String SUCCESSFULLY_CHANGED_THE_SIZE = "Successfully changed the size of story \"%s\" to \"%s\".";
 
     public static final String ENUM_CHANGED = "The priority of task ID \"%d\" was changed " +
             "from \"%s\" to \"%s\" successfully.";
 
     public static final String BUG_SEVERITY_CHANGED_FROM = "Bug severity changed from \"%s\" " +
-            "to \"%s\" for Bug with ID %s.";
+            "to \"%s\" for Bug with ID \"%s\".";
 
     public static final String SUCCESSFULLY_CHANGED_THE_SEVERITY_OF_BUG = "Successfully changed " +
             "the severity of bug \"%s\" to %s.\"";
 
-    public static final String INVALID_BUG_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: ACTIVE, FIXED.";
+    public static final String INVALID_BUG_STATUS_VALUE = "Invalid status value: \"%s\". Valid values are: ACTIVE, FIXED.";
 
-    public static final String INVALID_FEEDBACK_STATUS_VALUE = "Invalid status value: '%s'. Valid values are: NEW, UNSCHEDULED, SCHEDULED, DONE.";
+    public static final String INVALID_FEEDBACK_STATUS_VALUE = "Invalid status value: \"%s\". Valid values are: NEW, UNSCHEDULED, SCHEDULED, DONE.";
 
-    public static final String BUG_STATUS_CHANGED = "Bug status changed from %s to %s for Bug with ID %s.";
+    public static final String BUG_STATUS_CHANGED = "Bug status changed from \"%s\" to \"%s\" for Bug with ID \"%s\".";
 
-    public static final String FEEDBACK_STATUS_CHANGED = "Feedback status changed from %s to %s for Feedback with ID %s.";
+    public static final String FEEDBACK_STATUS_CHANGED = "Feedback status changed from \"%s\" to %s\" for Feedback with ID \"%s\".";
 
-    public static final String INVALID_STORY_STATUS_VALUE = "Invalid story status value: '%s'. Valid values are: NOT_DONE, IN_PROGRESS, DONE.";
+    public static final String INVALID_STORY_STATUS_VALUE = "Invalid story status value: \"%s\". Valid values are: NOT_DONE, IN_PROGRESS, DONE.";
 
-    public static final String STORY_STATUS_CHANGED = "Story status changed from %s to %s for Story with ID %s.";
+    public static final String STORY_STATUS_CHANGED = "Story status changed from \"%s\" to \"%s\" for Story with ID \"%s\".";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_STORY = "Successfully changed the status of story '%s' to %s.";
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_STORY = "Successfully changed the status of story with ID \"%s\" to \"%s\".";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_BUG = "Successfully changed the status of bug '%s' to %s.";
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_BUG = "Successfully changed the status of bug with ID \"%s\" to \"%s\".";
 
-    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_FEEDBACK = "Successfully changed the status of feedback '%s' to %s.";
+    public static final String SUCCESSFULLY_CHANGED_THE_STATUS_OF_FEEDBACK = "Successfully changed the status of feedback with ID \"%s\" to \"%s\".";
 
     public static final String BOARD_DOES_NOT_EXIST_IN_TEAM = "Board with name \"%s\" " +
             "doesn't exist in team \"%s\"";

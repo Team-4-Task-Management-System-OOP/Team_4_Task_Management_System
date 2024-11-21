@@ -133,7 +133,7 @@ public class FeedbackImplTests {
     }
 
     @Test
-    void changeRating_Should_ChangeCorrectlyRating_When_ParametersAreCorrect() {
+    void changeFeedbackRating_Should_ChangeCorrectlyRating_When_ParametersAreCorrect() {
         feedback.changeFeedbackRating(5);
         assertEquals(5, feedback.getFeedbackRating());
 
@@ -142,7 +142,7 @@ public class FeedbackImplTests {
     }
 
     @Test
-    void changeRating_Should_ThrowException_When_RatingIsAlreadySet() {
+    void changeFeedbackRating_Should_ThrowException_When_RatingNewIsAlreadySet() {
         feedback.changeFeedbackRating(5);
         Assertions.assertThrows(InvalidUserInputException.class,
                 () -> feedback.changeFeedbackRating(5));
@@ -150,10 +150,12 @@ public class FeedbackImplTests {
     }
 
     @Test
-    void changeRating_Should_ThrowException_When_RatingIsInvalidNumber() {
+    void changeFeedbackRating_Should_ThrowException_When_RatingNewIsInvalidNumber() {
         Assertions.assertThrows(InvalidUserInputException.class,
                 () -> feedback.changeFeedbackRating(120));
 
     }
+
+
 
 }
