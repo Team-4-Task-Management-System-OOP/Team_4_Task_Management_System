@@ -43,7 +43,7 @@ public class ChangeRatingOfFeedbackCommand extends BaseCommand {
 
         Team team = getTaskManagementSystemRepository().findTeamByName(teamName);
         if (team == null) {
-            throw new ElementNotFoundException(String.format(NO_TEAMS_FOUND));
+            throw new ElementNotFoundException(String.format(NO_TEAM_FOUND, teamName));
         }
 
         Feedback feedback = getTaskManagementSystemRepository().findTaskById(getTaskManagementSystemRepository().getFeedbacks(), feedbackId);

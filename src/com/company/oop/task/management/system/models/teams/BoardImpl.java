@@ -8,7 +8,6 @@ import com.company.oop.task.management.system.models.teams.contracts.Board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.company.oop.task.management.system.utils.ParsingHelpers.formatTime;
 import static com.company.oop.task.management.system.utils.ValidationHelpers.validateStringLength;
@@ -18,6 +17,7 @@ public class BoardImpl implements Board {
 
     private static final int BOARD_NAME_MIN_LENGTH = 5;
     private static final int BOARD_NAME_MAX_LENGTH = 10;
+
     private static final String BOARD_NAME_LENGTH_ERR = format(
             "Board's name must be between %d and %d symbols long!",
             BOARD_NAME_MIN_LENGTH,
