@@ -132,6 +132,8 @@ public class CommandsConstants {
 
     public static final String NO_TASK_FOUND = "There is no task with id \"%d\" found!";
 
+    public static final String UNASSIGNED = "UNASSIGNED";
+
     public static final String NO_REGISTERED_TASKS = "There are no registered tasks.";
 
     public static final String NO_REGISTERED_TASKS_WITH_PARTICULAR_TITLE = "There are no registered tasks with \"%s\".";

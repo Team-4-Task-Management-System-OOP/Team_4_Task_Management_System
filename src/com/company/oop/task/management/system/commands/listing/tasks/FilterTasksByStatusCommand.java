@@ -1,13 +1,13 @@
-package com.company.oop.task.management.system.commands.listing;
+package com.company.oop.task.management.system.commands.listing.tasks;
 
 import com.company.oop.task.management.system.commands.BaseCommand;
 import com.company.oop.task.management.system.core.contracts.TaskManagementSystemRepository;
 
 import java.util.List;
 
-public class FilterTasksByAssigneeCommand extends BaseCommand {
+public class FilterTasksByStatusCommand extends BaseCommand {
 
-    public FilterTasksByAssigneeCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
+    public FilterTasksByStatusCommand(TaskManagementSystemRepository taskManagementSystemRepository) {
         super(taskManagementSystemRepository);
     }
 
