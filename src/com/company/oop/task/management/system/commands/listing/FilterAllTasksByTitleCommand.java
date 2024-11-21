@@ -32,7 +32,7 @@ public class FilterAllTasksByTitleCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String targetTitle = parameters.get(0);
-        if (tasks.isEmpty() || tasks.stream().noneMatch(t -> t.getTitle().contains(targetTitle))) {
+        if (tasks.isEmpty() || tasks.stream().noneMatch(t -> t.getTitle().toLowerCase().contains(targetTitle.toLowerCase()))) {
             throw new ElementNotFoundException(format(NO_REGISTERED_TASKS_WITH_PARTICULAR_TITLE, targetTitle));
         }
         return listAllTasksFilteredByTitle(tasks, targetTitle);

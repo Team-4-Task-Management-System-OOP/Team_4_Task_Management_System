@@ -89,7 +89,7 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new FilterTasksByStatusCommand(taskManagementSystemRepository);
             case FILTERTASKSBYASSIGNEE:
                 return new FilterTasksByAssigneeCommand(taskManagementSystemRepository);
-            case SHOWALLTASKSSORTEBYTITLE:
+            case SHOWALLTASKSSORTEDBYTITLE:
                 return new SortAllTasksByTitleCommand(taskManagementSystemRepository);
             case SHOWALLTASKSFILTEREDANDSORTEBYTITLE:
                 return new SortAndFilterAllTasksByTitleCommand(taskManagementSystemRepository);
